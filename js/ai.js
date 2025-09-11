@@ -7,7 +7,7 @@ const { OpenAI } = require("openai");
 const baseURL = "https://api.aimlapi.com/v1";
 
 // Insert your AIML API Key in the quotation marks instead of my_key:
-const apiKey = "<81d97fa9106b4df38dc5fb30182d4e75>"; 
+const apiKey = "81d97fa9106b4df38dc5fb30182d4e75"; 
 
 const systemPrompt = "You are a travel agent. Be descriptive and helpful";
 const userPrompt = "Tell me about San Francisco";
@@ -40,9 +40,16 @@ const main = async () => {
   console.log("AI:", response);
 };
 
-main();
 
-       chatContainer.innerHTML += `<p><strong>SGAI:</strong> ${aiResponse}</p>`;
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        let aiResponse = data.choices[0].message.content;
+
+        chatContainer.innerHTML += `<p><strong>SGAI:</strong> ${aiResponse}</p>`;
         chatContainer.scrollTop = chatContainer.scrollHeight;
     } catch (error) {
         console.error('Error:', error);
@@ -67,3 +74,4 @@ function appendMessage(text, sender) {
 }
 
   
+main();
