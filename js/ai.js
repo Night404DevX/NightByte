@@ -1,3 +1,7 @@
+const chatContainer = document.getElementById('chat-container');
+const userInput = document.getElementById('user-input');
+const sendButton = document.getElementById('send-button');
+
 const { OpenAI } = require("openai");
 
 const baseURL = "https://api.aimlapi.com/v1";
