@@ -37,3 +37,29 @@ const main = async () => {
 };
 
 main();
+
+       chatContainer.innerHTML += `<p><strong>SGAI:</strong> ${aiResponse}</p>`;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    } catch (error) {
+        console.error('Error:', error);
+        chatContainer.innerHTML += `<p><strong>Error:</strong> Failed to get AI response. Error details: ${error.message}</p>`;
+    }
+}
+
+sendButton.addEventListener('click', sendMessage);
+userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+function appendMessage(text, sender) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', sender);
+    messageElement.innerHTML = `<p>${text}</p>`;
+    chatContainer.appendChild(messageElement);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+  
