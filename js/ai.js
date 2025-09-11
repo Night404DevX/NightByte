@@ -23,6 +23,7 @@ const api = new OpenAI({
     
     try {
               const completion = await api.chat.completions.create({
+                   body: JSON.stringify({
     model: "mistralai/Mistral-7B-Instruct-v0.2",
     messages: [
       {
