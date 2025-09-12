@@ -13,6 +13,7 @@
   border-radius: 5rem;
   transition: 0.5s;
   animation: gradient_301 5s ease infinite;
+  margin: 4px 2px;
   border: double 4px transparent;
   background-image: linear-gradient(#161a25, #161a25),
     linear-gradient(
