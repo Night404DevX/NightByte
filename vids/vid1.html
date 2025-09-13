@@ -49,16 +49,16 @@
 <html>
 <body>
 
-    .video {
-  display: block;
-  margin: 0 auto;
-}
+ <script type="module" src="https://cdn.jsdelivr.net/npm/player.style/demuxed-2022/+esm"></script>
 
-<video width="560px" height="315px" controls class="video">
-  <source src="/assets/vids/vid.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
+<media-theme-demuxed-2022 style="width:100%">
+  <video
+    slot="media"
+    src="/assets/vids/vid1.mp4"
+    playsinline
+    crossorigin="anonymous"
+  ></video>
+</media-theme-demuxed-2022>
 </body>
 </html>
 
