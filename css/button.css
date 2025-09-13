@@ -11,7 +11,7 @@
   background-size: 300% 300%;
   backdrop-filter: blur(1rem);
   border-radius: 5rem;
-  margin: 10%;
+  margin: 0 auto;
   transition: 0.5s;
   animation: gradient_301 5s ease infinite;
   border: double 4px transparent;
