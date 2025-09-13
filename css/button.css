@@ -1,5 +1,8 @@
 /* From Uiverse.io by rubyreapergaming */ 
 @import url("s://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
+@import url('https://fonts.cdnfonts.com/css/reddit-sans');
+
+
 
 .btn {
   display: flex;
@@ -25,7 +28,7 @@
     );
   background-origin: border-box;
   background-clip: content-box, border-box;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
 }
 
 #container-stars {
@@ -41,7 +44,7 @@
 
 strong {
   z-index: 2;
-  font-family: 'notitle', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
   font-size: 12px;
   letter-spacing: 5px;
   color: #ffffff;
