@@ -7,9 +7,9 @@ body {
   background-size: cover; /* Resize the background image to cover the entire container */
 
     
-   /* background-color: #171722;
+   /* background-color: #171722;*/
     font-family: 'Montserrat', sans-serif;
-    cursor: url('/assets/normal.cur'), auto;*/
+    cursor: url('/assets/normal.cur'), auto;
 }
 
 #particles-js{
@@ -622,6 +622,7 @@ cursor: url('/assets/select.cur'), auto;
   font-family: title;
   src: url(assets/ClashDisplayBold.otf)
 }
+
 
 
 
