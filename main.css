@@ -22,6 +22,13 @@ canvas {
   z-index:-1;
 }
 
+canvas {
+    display:block;
+    position: fixed;
+    z-index: -1;
+    vertical-align: bottom;
+}
+
 nav {
     position: fixed;
     top: 0;
@@ -623,6 +630,7 @@ cursor: url('/assets/select.cur'), auto;
   font-family: title;
   src: url(assets/ClashDisplayBold.otf)
 }
+
 
 
 
