@@ -6,7 +6,14 @@ body {
     cursor: url('/assets/normal.cur'), auto;
 }
 
-#particles-js{
+canvas {
+    display:block;
+    background: rgb(33,36,50);
+    position: fixed;
+    z-index: -1;
+}
+
+particles-js{
   width: 100%;
   height: 100%;
   background-position: 50% 50%;
@@ -616,6 +623,7 @@ cursor: url('/assets/select.cur'), auto;
   font-family: title;
   src: url(assets/ClashDisplayBold.otf)
 }
+
 
 
 
