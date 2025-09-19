@@ -2,6 +2,11 @@
 
 body {
     background-color: #171722;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 60px;
+    z-index: 900;
+    position:relative;
     font-family: 'Montserrat', sans-serif;
     cursor: url('/assets/normal.cur'), auto;
 }
@@ -10,7 +15,7 @@ body {
   width: 100%;
   height: 100%;
   background-position: 50% 50%;
-  position: fixed;
+  position: absolute;
   top: 0px;
   z-index:-1;
 }
@@ -623,6 +628,7 @@ cursor: url('/assets/select.cur'), auto;
   font-family: title;
   src: url(assets/ClashDisplayBold.otf)
 }
+
 
 
 
