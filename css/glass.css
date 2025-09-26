@@ -1336,12 +1336,12 @@ cursor: url('/assets/select.cur'), auto;
 
 @font-face {
   font-family: notitle;
-  src: url(assets/RedditSans-Medium.ttf);
+  src: url(/assets/RedditSans-Medium.ttf);
 }
 
 @font-face {
   font-family: title;
-  src: url(assets/ClashDisplayBold.otf)
+  src: url(/assets/ClashDisplayBold.otf)
 }
 
 
