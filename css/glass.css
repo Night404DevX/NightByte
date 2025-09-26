@@ -749,12 +749,11 @@ https://templatemo.com/tm-597-neural-glass
 
  
 #games img:hover {
-    transform: scale(1.01);
-    border-color: #7a7a9e;
-  border-radius: 0.26vw;
-    cursor: url('/assets/select.cur'), auto;
+     transform: translateY(-8px) scale(1.05);
+     border-color: rgba(255, 105, 180, 0.3);
+     box-shadow: 0 20px 40px rgba(224, 163, 255, 0.1);
 }
-/* Section 2: Diagonal Features */
+
  .features {
      padding: 150px 0;
      position: relative;
