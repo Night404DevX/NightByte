@@ -750,8 +750,17 @@ https://templatemo.com/tm-597-neural-glass
  
 #games img:hover {
      transform: translateY(-8px) scale(1.05);
-     border-color: rgba(255, 105, 180, 0.3);
-     box-shadow: 0 20px 40px rgba(224, 163, 255, 0.1);
+     background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 3px, transparent 3px) 0% 0%/8px 8px no-repeat,
+            radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 3px, transparent 3px) 100% 0%/8px 8px no-repeat,
+            radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 3px, transparent 3px) 0% 100%/8px 8px no-repeat,
+            radial-gradient(circle at 0 0, #ffffff 0, #ffffff 3px, transparent 3px) 100% 100%/8px 8px no-repeat,
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 10px) calc(100% - 16px) no-repeat,
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 16px) calc(100% - 10px) no-repeat,
+            linear-gradient(131deg, rgba(234,100,22,0.9) 0%, rgba(230,16,199,0.25) 33.619%, rgba(233,42,104,0.71) 33.619%, transparent 100%),
+            radial-gradient(at 79% 46%, #c110fe 0%, #cc531a 17.744%, #eab329 27.562%, #f03418 90.841%, #e31d09 100%) 82% 43%/131% 190%;
+border-radius: 8px;
+padding: 9px;
+box-sizing: border-box;
 }
 
  .features {
