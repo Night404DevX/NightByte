@@ -760,7 +760,7 @@ https://templatemo.com/tm-597-neural-glass
             linear-gradient(14deg, transparent 0%, rgba(254, 106, 9, 0.8) 100%),
             linear-gradient(324deg, #ea2dce 0%, #f12756 31.615%, #fd10ba 31.615%, #d31d97 84.994%, #ed10ad 100%);
 border-radius: 8px;
-padding: 0px;
+padding:3px;
 box-sizing: border-box;
 }
 
