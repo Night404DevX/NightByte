@@ -870,6 +870,35 @@ padding:3px;
 box-sizing: border-box;
 }
 
+#title, .hometitle {
+  top: 40px;
+  bottom: 40px;
+  color: #e6e6f0;
+  font-family: title;
+  font-size: 75px;
+  text-align: center;
+  position: relative;
+}
+
+.hometitle {
+  margin-top: 20vh;
+}
+
+.smallahhtext, #output {
+  color: #e6e6f0;
+  font-family: notitle;
+  font-size: 30px;
+  text-align: center;
+}
+
+.motd {
+  margin-bottom: -20px;
+  color: #e6e6f0;
+  font-family: notitle;
+  font-size: 45px;
+  text-align: center;
+}
+
  .features {
      padding: 150px 0;
      position: relative;
