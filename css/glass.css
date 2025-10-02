@@ -6,6 +6,8 @@ https://templatemo.com/tm-597-neural-glass
 
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600&display=swap');
+
 
 @charset "utf-8";
 /* CSS Document */
@@ -13,27 +15,6 @@ https://templatemo.com/tm-597-neural-glass
      margin: 0;
      padding: 0;
      box-sizing: border-box;
-}
-
-:root {
-  --base-hue: 260;
-  --font-family: Inter;
-  --leading: 1.5;
-  
-  --bg-color: hsl(var(--base-hue) 25% 25%);
-  --bg-img-url: url(https://i.ibb.co/Qjt7TJn/milad-fakurian-E8-Ufcyxz514-unsplash-1.jpg);
-  --text-color: hsl(var(--base-hue) 40% 25%);
-  
-  --card-width: 500px;
-  --card-height: 200px;
-  --card-padding: 2.25rem;
-  --card-corner-radius: 1.5rem;
-  --card-bg-blur-amount: 1rem;
-  --card-shadow:     
-    0 0 0.5rem 2px hsl(var(--base-hue) 25% 25% / 35%),
-    inset 0 0 0.1rem hsl(var(--base-hue) 75% 40% / 20%),
-    inset 0 0 0.2rem 0.1rem hsl(var(--base-hue) 75% 40% / 15%),
-    inset 0 0 0.3rem 0.2rem hsl(var(--base-hue) 75% 40% / 10%);
 }
 
 
@@ -923,46 +904,35 @@ box-sizing: border-box;
 }
 
 
-* {
-  &,
-  &:before,
-  &:after {
-    box-sizing: border-box;
-  }
+
+
+.glass {
+  min-height: 250px;
+  width: 450px;
+  border-radius: 1rem;
+  background: rgb(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  color: #fff;
 }
 
-p {
-  margin: 0;
-  &:not(:last-child) {
-    margin-bottom: 1.5rem;
-  }
+.btn {
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  background: #fc466b;
+  border-radius: 10px;
 }
 
-.site-container {
-  min-height: 100vh;
-  padding: 2rem;
-  display: grid;
-  place-items: center;
+.glass > p {
+  margin-bottom: 2rem;
+font-family: 'Poppins', sans-serif;
+  font-weight: 200;
 }
-
-.card {
-  max-width: var(--card-width);
-  min-height: var(--card-height);
-  padding: var(--card-padding);
-  border-radius: var(--card-corner-radius);
-  background-color: hsl(var(--base-hue) 25% 95% / 45%);
-}
-
-.card--glass {
-  font-size: 125%;
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(var(--card-bg-blur-amount));
-}
-
-.card-footer {
-  margin-top: 10rem;
-  font-size: 0.75rem;
-  opacity: 75%;
+.glass > h1 {
+font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
  .features {
