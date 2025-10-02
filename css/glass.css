@@ -911,6 +911,7 @@ box-sizing: border-box;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  position: relative:
   min-height: 250px;
   width: 450px;
   border-radius: 1rem;
