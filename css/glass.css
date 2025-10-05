@@ -252,6 +252,8 @@ https://templatemo.com/tm-597-neural-glass
      border: 1px solid rgba(224, 163, 255, 0.3);
      text-shadow: 0 0 10px rgba(224, 163, 255, 0.8);
      transform: translateY(-1px);
+	  transition: opacity 0.3s;
+
 }
  .nav-links a:hover::after {
      content: '';
@@ -263,6 +265,7 @@ https://templatemo.com/tm-597-neural-glass
      background: linear-gradient(45deg, #e0a3ff, #ff69b4, #9370db, #e0a3ff);
      background-size: 400% 400%;
      border-radius: 17px;
+	   opacity: 1;
      z-index: -2;
      animation: borderGlow 3s ease infinite;
 }
