@@ -29,6 +29,20 @@ https://templatemo.com/tm-597-neural-glass
      -webkit-font-smoothing: antialiased;
      -moz-osx-font-smoothing: grayscale;
 }
+
+#sub {
+ max-width: 700px;
+ margin: 40px auto 50px;
+ opacity: 0;
+ animation: fadeInScale 1.2s ease 0.9s forwards;
+ text-align: center;
+ font-size: 1.2rem;
+ color: #d1d1d1;
+ line-height: 1.7;
+ margin-bottom: 0;
+ font-weight: 300;
+}
+
 /* Enhanced background colors - Purple/Pink/Green palette */
  .neural-background {
      position: fixed;
