@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const randomQuote = data[Math.floor(Math.random() * data.length)];
       document.getElementById("sub").innerHTML = randomQuote;
 
-      document.getElementById("hero-description").addEventListener("click", function () {
+      document.getElementById("sub").addEventListener("click", function () {
         const randomQuote = data[Math.floor(Math.random() * data.length)];
         document.getElementById("sub").innerHTML = randomQuote;
       });
