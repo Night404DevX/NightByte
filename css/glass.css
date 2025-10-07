@@ -928,14 +928,14 @@ box-sizing: border-box;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  position: relative:
   min-height: 250px;
   width: 450px;
   border-radius: 1rem;
   background: rgb(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 1.5rem;
+  padding: 20px;
+  padding-top: 80px;
   color: #fff;
 }
 
