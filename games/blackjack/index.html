@@ -25,6 +25,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/css/loader.css" rel="stylesheet">
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('https://sz-games.github.io/service-worker.js')
@@ -264,43 +265,12 @@
     </style>
 
     
-    <script>
-      window.addEventListener('load', function () {
-        //document.getElementById('loadingcontainer').style.opacity = 0
-        setTimeout(() => {
-          //  document.getElementById('loadingcontainer').style.display = 'none'
-        }, 800)
-        donewithload()
-      })
-      function skipload() {
-        donewithload()
-      }
-
-      function donewithload() {
-        const elements = document.querySelectorAll('.cover-row')
-        elements.forEach((element, index) => {
-          setTimeout(() => {
-            element.style.animation = 'downan 0.5s'
-
-            setTimeout(() => {
-              element.style.opacity = 0
-            }, 450)
-          }, index * 200)
-        })
-        setTimeout(() => {
-          document.getElementById('leftside').style.transform = 'translateX(-200%)'
-          setTimeout(() => {
-            document.getElementById('leftside').style.opacity = 0
-          }, 500)
-          setTimeout(() => {
-            document.getElementById('loadingcontainer').style.animation = 'closeload 0.5s'
-            setTimeout(() => {
-              document.getElementById('loadingcontainer').style.display = 'none'
-            }, 450)
-          }, 300)
-        }, 500)
-      }
-    </script>
+<div class="container">
+  <div class="loader-container">
+    <div class="loader"></div>
+    <div class="loading-text">Loading Game...</div>
+  </div>
+</div>
 
     <style>
       .game-container {
