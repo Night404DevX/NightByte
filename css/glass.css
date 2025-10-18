@@ -886,19 +886,16 @@ https://templatemo.com/tm-597-neural-glass
 
  
 #games img:hover {
-     transform: translateY(-8px) scale(1.05);
-     background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 4px, transparent 4px) 0% 0%/8px 8px no-repeat,
-            radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 4px, transparent 4px) 100% 0%/8px 8px no-repeat,
-            radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 4px, transparent 4px) 0% 100%/8px 8px no-repeat,
-            radial-gradient(circle at 0 0, #ffffff 0, #ffffff 4px, transparent 4px) 100% 100%/8px 8px no-repeat,
-            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 8px) calc(100% - 16px) no-repeat,
-            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 16px) calc(100% - 8px) no-repeat,
-            conic-gradient(from 65deg at 17% 56%, transparent 0%, #f51079 100%) 22% 47%/137% 132%,
-            linear-gradient(14deg, transparent 0%, rgba(254, 106, 9, 0.8) 100%),
-            linear-gradient(324deg, #ea2dce 0%, #f12756 31.615%, #fd10ba 31.615%, #d31d97 84.994%, #ed10ad 100%);
-border-radius: 8px;
-padding:3px;
-box-sizing: border-box;
+  transform: translateY(-8px) scale(1.05);
+  background: 
+  radial-gradient(circle at 15% 85%, rgba(0, 25, 50, 0.7) 0%, transparent 50%),
+  radial-gradient(circle at 85% 15%, rgba(10, 30, 60, 0.8) 0%, transparent 50%),
+  radial-gradient(circle at 45% 60%, rgba(0, 20, 40, 0.6) 0%, transparent 50%),
+  radial-gradient(circle at 70% 40%, rgba(15, 25, 45, 0.4) 0%, transparent 50%),
+  linear-gradient(135deg, #000000 0%, #001122 50%, #000000 100%);
+  border-radius: 8px;
+  padding:3px;
+  box-sizing: border-box;
 }
 
 #title, .hometitle {
