@@ -887,17 +887,13 @@ https://templatemo.com/tm-597-neural-glass
  
 #games img:hover {
   transform: translateY(-8px) scale(1.05);
-  background: 
-  radial-gradient(circle at 15% 85%, rgba(0, 25, 50, 0.7) 0%, transparent 50%),
-  radial-gradient(circle at 85% 15%, rgba(10, 30, 60, 0.8) 0%, transparent 50%),
-  radial-gradient(circle at 45% 60%, rgba(0, 20, 40, 0.6) 0%, transparent 50%),
-  radial-gradient(circle at 70% 40%, rgba(15, 25, 45, 0.4) 0%, transparent 50%),
-  linear-gradient(135deg, #000000 0%, #001122 50%, #000000 100%);
+  background: #020024;
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
   border-radius: 8px;
   padding:3px;
   box-sizing: border-box;
 }
-
+	
 #title, .hometitle {
   top: 40px;
   bottom: 40px;
