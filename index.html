@@ -71,6 +71,20 @@ https://templatemo.com/tm-597-neural-glass
     line-height: 1.6;
 }
 
+
+.popup-active .page-content {
+    filter: blur(5px);
+    transition: filter 0.4s ease-in-out; /* Add transition for a smooth blur effect */
+    pointer-events: none; /* Prevents interaction with the blurred background */
+    user-select: none; /* Prevents text selection in the background */
+}
+
+/* Add a transition to the .page-content for a smoother animation */
+.page-content {
+    transition: filter 0.4s ease-in-out;
+}
+
+        
 /* --- Enhanced close button styles --- */
 #close-btn {
     position: absolute; /* Position it relative to the glass-popup */
@@ -376,6 +390,7 @@ document.addEventListener('keydown', (e) => {
 <script src="/js/main.js"></script>
 </body>
 </html>
+
 
 
 
