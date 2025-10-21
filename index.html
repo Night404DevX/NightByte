@@ -19,111 +19,6 @@ https://templatemo.com/tm-597-neural-glass
 -->
     <style>
 
-        .glass-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.7);
-    /* Change the background color to a dark blue with transparency */
-    background: rgba(4, 30, 66, 0.4); 
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* A lighter border for contrast */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    text-align: center;
-    width: 80%;
-    max-width: 350px;
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-in-out, visibility 0.4s;
-    z-index: 1000;
-}
-
-/* ... (rest of the CSS code remains unchanged) ... */
-
-/* Content inside the window */
-.popup-content h2 {
-    font-size: 2em; /* Adjusted font size to fit better */
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* ... (rest of the CSS code remains unchanged) ... */
-
-
-/* The "show" class triggers the pop-up animation */
-.glass-popup.show {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Content inside the window */
-.popup-content h2 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.popup-content p {
-    line-height: 1.6;
-}
-
-
-.popup-active .page-content {
-    filter: blur(5px);
-    transition: filter 0.4s ease-in-out; /* Add transition for a smooth blur effect */
-    pointer-events: none; /* Prevents interaction with the blurred background */
-    user-select: none; /* Prevents text selection in the background */
-}
-
-/* Add a transition to the .page-content for a smoother animation */
-.page-content {
-    transition: filter 0.4s ease-in-out;
-}
-
-        
-/* --- Enhanced close button styles --- */
-#close-btn {
-    position: absolute; /* Position it relative to the glass-popup */
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%; /* Make it a circle */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-#close-btn span {
-    font-size: 24px;
-    line-height: 1; /* Center the 'x' vertically */
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Hover effects */
-#close-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-#close-btn:hover span {
-    transform: rotate(90deg); /* Spin the 'x' on hover */
-}
-
-       
     </style>
 </head>
 <body>
@@ -203,45 +98,6 @@ https://templatemo.com/tm-597-neural-glass
         </div>
     </header>
 
-    <!-- The glass window is now a direct child of the body -->
-    <div class="glass-popup" id="glass-popup">
-        <div class="popup-content">
-            <h2>Come Later!</h2>
-            <p>Game Tab is down RN Because of GoGuardian, I'm Trying to fix the problem, come later.</p>
-            <button id="close-btn">
-    <span aria-hidden="true">&times;</span>
-</button>
-        </div>
-    </div>
-
-    <script>
-        const closeBtn = document.getElementById('close-btn');
-const glassPopup = document.getElementById('glass-popup');
-
-// Function to show the window
-function showPopup() {
-    glassPopup.classList.add('show'); // Add the 'show' class to trigger the animation
-}
-
-// Function to hide the window
-function hidePopup() {
-    glassPopup.classList.remove('show'); // Remove the 'show' class to hide the animation
-}
-
-// Trigger the pop-up immediately when the page finishes loading
-document.addEventListener('DOMContentLoaded', () => {
-    // A small delay makes the animation feel more deliberate, but it's optional.
-    setTimeout(showPopup, 500);
-});
-
-// Event listeners for the close button and Escape key
-closeBtn.addEventListener('click', hidePopup);
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        hidePopup();
-    }
-});
-    </script>
 
     <!-- Section 1: Hero -->
     <section class="hero" id="home">
@@ -390,6 +246,7 @@ document.addEventListener('keydown', (e) => {
 <script src="/js/main.js"></script>
 </body>
 </html>
+
 
 
 
