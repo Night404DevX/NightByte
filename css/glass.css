@@ -50,13 +50,13 @@ https://templatemo.com/tm-597-neural-glass
      left: 0;
      width: 100%;
      height: 100%;
-     z-index: -2;
-	 background: 
+     z-index: -2; 
+     background: 
      radial-gradient(circle at 15% 85%, rgba(0, 25, 50, 0.7) 0%, transparent 50%),
-  	 radial-gradient(circle at 85% 15%, rgba(255, 165, 0, 0.8) 0%, transparent 50%),
+  	 radial-gradient(circle at 85% 15%, rgba(10, 30, 60, 0.8) 0%, transparent 50%),
   	 radial-gradient(circle at 45% 60%, rgba(0, 20, 40, 0.6) 0%, transparent 50%),
-  	 radial-gradient(circle at 70% 40%, rgba(255, 140, 0, 0.4) 0%, transparent 50%),
-  	 linear-gradient(135deg, #000000 0%, #FF4500 50%, #000000 100%);
+  	 radial-gradient(circle at 70% 40%, rgba(15, 25, 45, 0.4) 0%, transparent 50%),
+  	 linear-gradient(135deg, #000000 0%, #001122 50%, #000000 100%);
      animation: backgroundPulse 14s ease-in-out infinite;
 }
  @keyframes backgroundPulse {
