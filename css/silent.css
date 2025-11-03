@@ -580,3 +580,13 @@ cursor: url('/assets/select.cur'), auto;
   font-family: 'title';
   margin: 0;
 }
+
+@font-face {
+  font-family: notitle;
+  src: url(/assets/RedditSans-Medium.ttf);
+}
+
+@font-face {
+  font-family: title;
+  src: url(/assets/ClashDisplayBold.otf)
+}
