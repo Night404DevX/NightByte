@@ -194,6 +194,11 @@ section.visible {
 }
 
 .title {
+  top: 40px;
+  bottom: 40px;
+  color: #e6e6f0;
+  text-align: center;
+  position: relative;
   font-size: 48px;
   margin-bottom: 16px;
 }
