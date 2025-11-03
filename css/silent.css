@@ -539,14 +539,13 @@ cursor: url('/assets/select.cur'), auto;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #3F5EFB;
-  background: 
-  radial-gradient(circle at 15% 85%, rgba(0, 25, 50, 0.7) 0%, transparent 50%),
-  radial-gradient(circle at 85% 15%, rgba(10, 30, 60, 0.8) 0%, transparent 50%),
-  radial-gradient(circle at 45% 60%, rgba(0, 20, 40, 0.6) 0%, transparent 50%),
-  radial-gradient(circle at 70% 40%, rgba(15, 25, 45, 0.4) 0%, transparent 50%),
-  linear-gradient(135deg, #000000 0%, #001122 50%, #000000 100%);
-  color: #e6e6f0;
+  background:
+    radial-gradient(circle at 15% 85%, var(--accent-1) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, var(--accent-1) 0%, transparent 50%),
+    radial-gradient(circle at 45% 60%, var(--accent-1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 40%, var(--accent-1) 0%, transparent 50%),
+    linear-gradient(135deg, #000000 0%, var(--accent-1) 50%, #000000 100%);
+  color: var(--text);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -556,6 +555,7 @@ cursor: url('/assets/select.cur'), auto;
   visibility: visible;
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
+
 
 #loading-spinner {
   width: 60px;
