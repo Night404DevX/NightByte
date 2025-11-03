@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nova — Updates</title>
+<title>Home | Schoology</title>
+<link rel="icon" type="image/x-icon" href="https://www.powerschool.com/favicon.ico" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="/css/silent.css">
 </head>
@@ -13,13 +14,14 @@
       <div class="logo"><div class="mark">SG</div>Silent Games</div>
       <div class="nav-links">
         <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="/pages/lausd.html"><i class="fa-solid fa-gamepad"></i> Changelog</a>
-        <a href=""><i class="fa-solid fa-hourglass-half"></i> Upcoming</a>
+        <a href="/pages/lausd.html"><i class="fa-solid fa-gamepad"></i> Games</a>
+        <a href="/pages/c.html"><i class="fa-solid fa-circle-user"></i> Credits</a>
+        <a href="/pages/u.html"><i class="fa-solid fa-list"></i> Updates</a>
       </div>
     </nav>
   </header>
-
-  <section id="changelog" class="fade-in">
+  <main>
+    <section id="changelog" class="fade-in">
       <h1 class="title">Changelog</h1>
       <div class="features">
         <div class="feature-card">
@@ -38,14 +40,28 @@
         <ul>
           <li>More interactive cards</li>
           <li>Customizable particle effects</li>
-          <li>Dark/Light mode enhancements</li>
-          <li>Additional page templates</li>
+          <li>Additional games</li>
         </ul>
       </div>
     </section>
+  </main>
   <footer>
-    <p>© Nova • Built with care • <span>hello@nova.example</span></p>
+    <p>© Silent Games • Built with care • <span>refinesilent@gmail.com</span></p>
   </footer>
   <script src="/js/silent.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section.fade-in');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      sections.forEach(sec => observer.observe(sec));
+    });
+  </script>
 </body>
 </html>
