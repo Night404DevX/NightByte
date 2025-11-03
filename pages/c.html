@@ -1,18 +1,18 @@
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Nova — Credits</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/css/silent.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <nav>
       <div class="logo"><div class="mark">SG</div>Silent Games</div>
       <div class="nav-links">
-        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/"><i class="fa-solid fa-house"></i> Home</a>
         <a href="#team"><i class="fa-solid fa-users"></i> Team</a>
         <a href="#special-thanks"><i class="fa-solid fa-heart"></i> Special Thanks</a>
       </div>
@@ -46,6 +46,20 @@
   <footer>
     <p>© Nova • Built with care • <span>hello@nova.example</span></p>
   </footer>
-  <script src="js/silent.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section.fade-in');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      sections.forEach(sec => observer.observe(sec));
+    });
+  </script>
 </body>
 </html>
