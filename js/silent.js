@@ -1,118 +1,191 @@
-// Load theme from localStorage if available
-const savedColor = localStorage.getItem('themeColor');
-const savedBg = localStorage.getItem('themeBg');
-if (savedColor && savedBg) {
-  document.documentElement.style.setProperty('--accent-1', savedColor);
-  document.documentElement.style.setProperty('--accent-2', savedColor);
-  document.getElementById('particles').style.background = savedBg;
+// script.js — improved theme + particles handling
+
+// helper: convert hex to rgba string with alpha
+function hexToRgba(hex, alpha = 1) {
+  if (!hex) return `rgba(100,210,255,${alpha})`; // fallback
+  hex = hex.replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  const bigint = parseInt(hex, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
-const themeBtn = document.getElementById('theme-toggle');
-const themeMenu = document.getElementById('theme-menu');
-themeBtn.addEventListener('click', () => {
-  themeMenu.style.display = themeMenu.style.display === 'flex' ? 'none' : 'flex';
-});
+document.addEventListener('DOMContentLoaded', () => {
+  // --- THEME LOADING & PERSISTENCE ---
+  const savedColor = localStorage.getItem('themeColor'); // hex like '#64d2ff'
+  const savedBg = localStorage.getItem('themeBg');
+  const savedText = localStorage.getItem('themeText');
 
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particles = [];
-const count = 100;
-let particleColor = 'rgba(100,210,255,0.7)';
-let bgColor = savedBg || '#05060a';
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resize);
-resize();
-
-for (let i = 0; i < count; i++) {
-  particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, dx: (Math.random() - 0.5) * 0.8, dy: (Math.random() - 0.5) * 0.8, size: Math.random() * 2 + 1 });
-}
-
-function draw() {
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = particleColor;
-  for (const p of particles) {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-1', savedColor);
+    document.documentElement.style.setProperty('--accent-2', savedColor);
   }
-}
-
-function update() {
-  for (const p of particles) {
-    p.x += p.dx;
-    p.y += p.dy;
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  if (savedText) {
+    document.documentElement.style.setProperty('--text', savedText);
   }
-}
+  // we keep bg handling for the particle canvas; CSS var --bg can be overridden too
+  if (savedBg) {
+    document.documentElement.style.setProperty('--bg', savedBg);
+  }
 
-function loop() {
-  draw();
-  update();
-  requestAnimationFrame(loop);
-}
-loop();
+  // --- PARTICLES SETUP ---
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const COUNT = 100;
 
-const themeOptions = document.querySelectorAll('.theme-option');
-themeOptions.forEach(opt => {
-  opt.addEventListener('click', () => {
-    const color = opt.dataset.color;
-    const bg = opt.dataset.bg;
-    document.documentElement.style.setProperty('--accent-1', color);
-    document.documentElement.style.setProperty('--accent-2', color);
-    particleColor = color + 'b3';
-    bgColor = bg;
-    themeMenu.style.display = 'none';
+  // Determine initial colors (fall back to CSS var)
+  const getComputedAccent = () => {
+    const v = getComputedStyle(document.documentElement).getPropertyValue('--accent-1').trim();
+    return v || '#64d2ff';
+  };
+  const getComputedBg = () => {
+    const v = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+    return v || '#05060a';
+  };
 
-    themeOptions.forEach(o => o.classList.remove('active'));
-    opt.classList.add('active');
+  let particleColor = hexToRgba(savedColor || getComputedAccent(), 0.7);
+  let bgColor = savedBg || getComputedBg();
 
-    // Save theme to localStorage for persistence across pages
-    localStorage.setItem('themeColor', color);
-    localStorage.setItem('themeBg', bg);
-  });
-});
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
 
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+  // init particles
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < COUNT; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: (Math.random() - 0.5) * 0.8,
+        dy: (Math.random() - 0.5) * 0.8,
+        size: Math.random() * 2 + 1
+      });
     }
+  }
+  initParticles();
+
+  function draw() {
+    // fill background (use bgColor)
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // draw particles using particleColor
+    ctx.fillStyle = particleColor;
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function update() {
+    for (const p of particles) {
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    }
+  }
+
+  function loop() {
+    draw();
+    update();
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // --- THEME MENU / PRESET THEME HANDLING ---
+  const themeMenu = document.getElementById('theme-menu');
+  const themeBtn = document.getElementById('theme-toggle');
+  themeBtn && themeBtn.addEventListener('click', () => {
+    themeMenu.style.display = themeMenu.style.display === 'flex' ? 'none' : 'flex';
   });
-}, { threshold: 0.2 });
-sections.forEach(sec => observer.observe(sec));
 
-// Custom Theme Creator
-const customThemeBtn = document.getElementById("custom-theme-btn");
-const customPopup = document.getElementById("custom-theme-popup");
-const applyCustomThemeBtn = document.getElementById("apply-custom-theme");
+  function applyTheme(hexColor, bg) {
+    if (!hexColor) return;
+    document.documentElement.style.setProperty('--accent-1', hexColor);
+    document.documentElement.style.setProperty('--accent-2', hexColor);
+    if (bg) {
+      document.documentElement.style.setProperty('--bg', bg);
+      bgColor = bg;
+    } else {
+      // refresh bgColor from CSS variable
+      bgColor = getComputedBg();
+    }
+    particleColor = hexToRgba(hexColor, 0.7);
 
-customThemeBtn.addEventListener("click", () => {
-  // Toggle popup
-  customPopup.style.display = customPopup.style.display === "flex" ? "none" : "flex";
-});
+    // persist
+    localStorage.setItem('themeColor', hexColor);
+    if (bg) localStorage.setItem('themeBg', bg);
+  }
 
-applyCustomThemeBtn.addEventListener("click", () => {
-  const accent = document.getElementById("custom-accent").value;
-  const bg = document.getElementById("custom-bg").value;
-  const text = document.getElementById("custom-text").value;
+  // wire up preset theme options
+  const themeOptions = document.querySelectorAll('.theme-option');
+  themeOptions.forEach(opt => {
+    opt.addEventListener('click', () => {
+      const color = opt.dataset.color;
+      const bg = opt.dataset.bg;
+      applyTheme(color, bg);
 
-  document.documentElement.style.setProperty("--accent-1", accent);
-  document.documentElement.style.setProperty("--accent-2", accent);
-  document.documentElement.style.setProperty("--bg", bg);
-  document.documentElement.style.setProperty("--text", text);
-  particleColor = accent + "b3";
-  bgColor = bg;
+      // active state
+      themeOptions.forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
 
-  localStorage.setItem("themeColor", accent);
-  localStorage.setItem("themeBg", bg);
-  localStorage.setItem("themeText", text);
+      // close menu
+      if (themeMenu) themeMenu.style.display = 'none';
+    });
+  });
 
-  customPopup.style.display = "none";
+  // Custom Theme Creator (if you added elements)
+  const customBtn = document.getElementById('custom-theme-btn');
+  const customPopup = document.getElementById('custom-theme-popup');
+  const applyCustomBtn = document.getElementById('apply-custom-theme');
+  if (customBtn && customPopup && applyCustomBtn) {
+    customBtn.addEventListener('click', () => {
+      customPopup.style.display = customPopup.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    applyCustomBtn.addEventListener('click', () => {
+      const accent = document.getElementById('custom-accent').value;
+      const bg = document.getElementById('custom-bg').value;
+      const text = document.getElementById('custom-text').value;
+
+      document.documentElement.style.setProperty('--accent-1', accent);
+      document.documentElement.style.setProperty('--accent-2', accent);
+      document.documentElement.style.setProperty('--bg', bg);
+      document.documentElement.style.setProperty('--text', text);
+
+      particleColor = hexToRgba(accent, 0.7);
+      bgColor = bg;
+
+      localStorage.setItem('themeColor', accent);
+      localStorage.setItem('themeBg', bg);
+      localStorage.setItem('themeText', text);
+
+      customPopup.style.display = 'none';
+    });
+  }
+
+  // If themeColor changes elsewhere (e.g., other scripts), keep particles in sync:
+  // Observe changes to the --accent-1 CSS variable using a MutationObserver on documentElement.style would be brittle.
+  // Instead, provide a small API function window.setThemeFromHex to update both CSS vars and particles:
+  window.setThemeFromHex = function(hexColor, bg) {
+    applyTheme(hexColor, bg);
+  };
+
+  // --- Fade-in IntersectionObserver (sections) ---
+  const sections = document.querySelectorAll('section.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  sections.forEach(sec => observer.observe(sec));
 });
