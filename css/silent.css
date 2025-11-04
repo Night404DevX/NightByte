@@ -124,7 +124,28 @@ nav {
   flex-direction: column;
   gap: 8px;
   box-shadow: var(--shadow);
+
+  /* New Scroll Styling */
+  max-height: 300px; /* Limit height so it won’t go off-screen */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-1) rgba(255,255,255,0.1);
 }
+
+/* Optional – better-looking scrollbar for WebKit browsers */
+.theme-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.theme-menu::-webkit-scrollbar-thumb {
+  background: var(--accent-1);
+  border-radius: 4px;
+}
+
+.theme-menu::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
 
 .theme-option {
   display: flex;
