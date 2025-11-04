@@ -126,8 +126,36 @@
     <p>© Silent Games • Built with care • <span id="contact">refinesilent@gmail.com</span></p>
   </footer>
   <script src="/js/silent.js"></script>
+  
+  <script 
+    document.addEventListener("DOMContentLoaded", () => {
+  const timeline = document.querySelector(".timeline");
+  const items = document.querySelectorAll(".timeline-item");
+
+  // Observer for timeline line
+  const timelineObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) timeline.classList.add("visible");
+    });
+  }, { threshold: 0.3 });
+
+  if (timeline) timelineObserver.observe(timeline);
+
+  // Observer for individual items
+  const itemObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  items.forEach(item => itemObserver.observe(item));
+});
+  </script>
 </body>
 </html>
+
 
 
 
