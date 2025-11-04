@@ -210,15 +210,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Theme Search ---
 
+// === Theme search + keyboard navigation (robust) ===
+const allThemeOptions = Array.from(document.querySelectorAll('.theme-option'));
 const themeSearch = document.getElementById('theme-search');
+let selectedIndex = -1;
+
+function getVisibleThemes() {
+  return allThemeOptions.filter(opt => opt.style.display !== 'none');
+}
+
+function clearFocusFromThemes() {
+  allThemeOptions.forEach(o => o.classList.remove('focused'));
+  selectedIndex = -1;
+}
 
 if (themeSearch) {
+  // Make sure placeholder color and focus styles are applied via CSS, not inline JS.
   themeSearch.addEventListener('input', () => {
-    const query = themeSearch.value.toLowerCase();
-    themeOptions.forEach(option => {
-      const name = option.textContent.toLowerCase();
+    const query = themeSearch.value.trim().toLowerCase();
+    allThemeOptions.forEach(option => {
+      const name = option.textContent.trim().toLowerCase();
       option.style.display = name.includes(query) ? 'flex' : 'none';
     });
+
+    // Reset keyboard selection after filtering
+    clearFocusFromThemes();
   });
+
+  // Optional: focus the search input when menu opens
+  const themeBtn = document.getElementById('theme-toggle');
+  const themeMenu = document.getElementById('theme-menu');
+  if (themeBtn && themeMenu) {
+    themeBtn.addEventListener('click', () => {
+      // small delay to ensure menu is visible before focusing
+      setTimeout(() => themeSearch.focus(), 100);
+    });
+  }
 }
+
+// Keyboard navigation for visible themes
+document.addEventListener('keydown', (e) => {
+  // only active when menu is visible
+  const themeMenuEl = document.getElementById('theme-menu');
+  if (!themeMenuEl || getComputedStyle(themeMenuEl).display !== 'flex') return;
+
+  const visible = getVisibleThemes();
+  if (visible.length === 0) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    selectedIndex = (selectedIndex + 1) % visible.length;
+    // apply focus class only to the visible element
+    visible.forEach((opt, i) => opt.classList.toggle('focused', i === selectedIndex));
+    visible[selectedIndex].scrollIntoView({ block: 'nearest' });
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    selectedIndex = (selectedIndex - 1 + visible.length) % visible.length;
+    visible.forEach((opt, i) => opt.classList.toggle('focused', i === selectedIndex));
+    visible[selectedIndex].scrollIntoView({ block: 'nearest' });
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (selectedIndex >= 0) {
+      visible[selectedIndex].click();
+    }
+  } else if (e.key === 'Escape') {
+    // optional: close menu on Escape
+    themeMenuEl.style.display = 'none';
+    clearFocusFromThemes();
+  }
+});
+
+// Ensure clicking a theme clears focus and resets index
+allThemeOptions.forEach(opt => {
+  opt.addEventListener('click', () => {
+    clearFocusFromThemes();
+  });
+});
 
