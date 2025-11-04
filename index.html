@@ -35,6 +35,24 @@
       <div class="theme-option" data-color="#ffff00" data-bg="#1a1a00"><div class="color-circle" style="background:#ffff00;"></div>Yellow</div>
       <div class="theme-option" data-color="#ff00ff" data-bg="#1a001a"><div class="color-circle" style="background:#ff00ff;"></div>Magenta</div>
       <div class="theme-option" data-color="#00ff00" data-bg="#001a00"><div class="color-circle" style="background:#00ff00;"></div>Lime</div>
+      <div class="theme-option custom-theme" id="custom-theme-btn">
+  <i class="fa-solid fa-pen-to-square"></i> Create Custom Theme
+</div>
+
+<div id="custom-theme-popup" class="custom-theme-popup">
+  <h3>Create Your Theme</h3>
+  <label>Accent Color:</label>
+  <input type="color" id="custom-accent" value="#64d2ff">
+  
+  <label>Background Color:</label>
+  <input type="color" id="custom-bg" value="#05060a">
+
+  <label>Text Color:</label>
+  <input type="color" id="custom-text" value="#e9eef8">
+
+  <button id="apply-custom-theme">Apply Theme</button>
+</div>
+
     </div>
   </header>
   <main>
@@ -155,6 +173,7 @@
   </script>
 </body>
 </html>
+
 
 
 
