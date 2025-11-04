@@ -798,7 +798,8 @@ cursor: url('/assets/select.cur'), auto;
 
 /* Dropdown content */
 .dropdown-content {
-  display: none;
+  max-height: 0; /* start collapsed */
+  opacity: 0;
   position: absolute;
   right: 0;
   top: 100%;
@@ -811,13 +812,17 @@ cursor: url('/assets/select.cur'), auto;
   box-shadow: var(--shadow);
   z-index: 101;
   overflow: hidden;
+
+  /* Transition for smooth effect */
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
 /* Show on hover */
 .dropdown:hover .dropdown-content {
-  display: flex;
-  flex-direction: column;
+  max-height: 500px; /* large enough to show all items */
+  opacity: 1;
 }
+
 
 .dropdown-content a {
   padding: 10px 16px;
