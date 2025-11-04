@@ -188,20 +188,6 @@ nav {
   background: rgba(255, 255, 255, 0.08);
 }
 
-#theme-search::placeholder {
-  color: rgba(255,255,255,0.5);
-}
-
-#theme-search:focus {
-  background: rgba(255,255,255,0.08);
-  border-color: var(--accent-1);
-}
-
-.theme-option.focused {
-  outline: 2px solid var(--accent-1);
-  background: rgba(255,255,255,0.1);
-}
-
 
 
 main {
