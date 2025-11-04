@@ -693,6 +693,61 @@ cursor: url('/assets/select.cur'), auto;
   color: var(--accent-1);
 }
 
+/* Custom Theme Popup */
+.custom-theme-popup {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(15, 15, 25, 0.95);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  position: absolute;
+  top: 70px;
+  right: 260px;
+  z-index: 20;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  width: 220px;
+  color: var(--text);
+}
+
+.custom-theme-popup h3 {
+  text-align: center;
+  font-size: 16px;
+  color: var(--accent-1);
+}
+
+.custom-theme-popup label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.custom-theme-popup input[type="color"] {
+  width: 100%;
+  height: 35px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+}
+
+.custom-theme-popup button {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #041627;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.custom-theme-popup button:hover {
+  transform: scale(1.05);
+}
+
+
 
 @font-face {
   font-family: notitle;
