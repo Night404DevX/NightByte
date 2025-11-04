@@ -132,7 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // If background is dark → use white text; else → use black text
-  const textColor = brightness
+  const textColor = brightness < 128 ? '#ffffff' : '#111111';
+  document.documentElement.style.setProperty('--text', textColor);
+
+  // Update particles to match the accent color
+  particleColor = hexToRgba(hexColor, 0.7);
+
+  // Save everything
+  localStorage.setItem('themeColor', hexColor);
+  localStorage.setItem('themeBg', bgColor);
+  localStorage.setItem('themeText', textColor);
+}
 
   // wire up preset theme options
   const themeOptions = document.querySelectorAll('.theme-option');
