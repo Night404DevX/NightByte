@@ -207,3 +207,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.2 });
   sections.forEach(sec => observer.observe(sec));
 });
+
+// --- Theme Search ---
+
+const themeSearch = document.getElementById('theme-search');
+
+if (themeSearch) {
+  themeSearch.addEventListener('input', () => {
+    const query = themeSearch.value.toLowerCase();
+    themeOptions.forEach(option => {
+      const name = option.textContent.toLowerCase();
+      option.style.display = name.includes(query) ? 'flex' : 'none';
+    });
+  });
+}
+
