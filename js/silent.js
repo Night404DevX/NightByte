@@ -109,22 +109,30 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function applyTheme(hexColor, bg) {
-    if (!hexColor) return;
-    document.documentElement.style.setProperty('--accent-1', hexColor);
-    document.documentElement.style.setProperty('--accent-2', hexColor);
-    if (bg) {
-      document.documentElement.style.setProperty('--bg', bg);
-      bgColor = bg;
-    } else {
-      // refresh bgColor from CSS variable
-      bgColor = getComputedBg();
-    }
-    particleColor = hexToRgba(hexColor, 0.7);
+  if (!hexColor) return;
 
-    // persist
-    localStorage.setItem('themeColor', hexColor);
-    if (bg) localStorage.setItem('themeBg', bg);
+  // Apply accent color
+  document.documentElement.style.setProperty('--accent-1', hexColor);
+  document.documentElement.style.setProperty('--accent-2', hexColor);
+
+  // Handle background color
+  if (bg) {
+    document.documentElement.style.setProperty('--bg', bg);
+    bgColor = bg;
+  } else {
+    bgColor = getComputedBg();
   }
+
+  // Auto-adjust text color for readability
+  // Convert bg to RGB so we can estimate brightness
+  const rgb = bgColor.replace(/[^\d,]/g, '').split(',');
+  let brightness = 0;
+  if (rgb.length >= 3) {
+    brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+  }
+
+  // If background is dark → use white text; else → use black text
+  const textColor = brightness
 
   // wire up preset theme options
   const themeOptions = document.querySelectorAll('.theme-option');
