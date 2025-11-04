@@ -197,6 +197,12 @@ nav {
   border-color: var(--accent-1);
 }
 
+.theme-option.focused {
+  outline: 2px solid var(--accent-1);
+  background: rgba(255,255,255,0.1);
+}
+
+
 
 main {
   max-width: 1150px;
