@@ -87,3 +87,32 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.2 });
 sections.forEach(sec => observer.observe(sec));
+
+// Custom Theme Creator
+const customThemeBtn = document.getElementById("custom-theme-btn");
+const customPopup = document.getElementById("custom-theme-popup");
+const applyCustomThemeBtn = document.getElementById("apply-custom-theme");
+
+customThemeBtn.addEventListener("click", () => {
+  // Toggle popup
+  customPopup.style.display = customPopup.style.display === "flex" ? "none" : "flex";
+});
+
+applyCustomThemeBtn.addEventListener("click", () => {
+  const accent = document.getElementById("custom-accent").value;
+  const bg = document.getElementById("custom-bg").value;
+  const text = document.getElementById("custom-text").value;
+
+  document.documentElement.style.setProperty("--accent-1", accent);
+  document.documentElement.style.setProperty("--accent-2", accent);
+  document.documentElement.style.setProperty("--bg", bg);
+  document.documentElement.style.setProperty("--text", text);
+  particleColor = accent + "b3";
+  bgColor = bg;
+
+  localStorage.setItem("themeColor", accent);
+  localStorage.setItem("themeBg", bg);
+  localStorage.setItem("themeText", text);
+
+  customPopup.style.display = "none";
+});
