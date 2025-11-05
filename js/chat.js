@@ -37,7 +37,7 @@ const usernameInput = document.getElementById("username");
 // Constants for cleanup
 // ==============================
 const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hour
-const EXPIRATION_TIME = 12 * 60 * 60 * 1000; // 12 hours
+const EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 
 // ==============================
 // Function: Add message to chat
