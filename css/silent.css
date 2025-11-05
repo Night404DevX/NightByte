@@ -899,6 +899,53 @@ cursor: url('/assets/select.cur'), auto;
   background: #82e0ff;
 }
 
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.login-box {
+  background: rgba(10, 10, 20, 0.9);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 30px;
+  width: 300px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.login-box button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent-1, #64d2ff);
+  color: #111;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-box button:hover {
+  background: #82e0ff;
+}
+
 
 
 @font-face {
