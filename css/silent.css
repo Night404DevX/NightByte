@@ -110,7 +110,6 @@ nav {
 .nav-links a:hover::after {
   width: 100%;
 }
-
 .theme-container {
   position: relative;
   display: inline-block;
@@ -130,17 +129,19 @@ nav {
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
   overflow-y: auto;
-  max-height: 0;        /* start collapsed */
-  opacity: 0;           /* invisible */
+  max-height: 300px;       /* collapsed initially */
+  opacity: 0;
   transition: max-height 0.4s ease, opacity 0.4s ease;
   z-index: 101;
+  width: 180px;        /* optional width */
 }
 
-/* Show menu on hover */
-.theme-container:hover .theme-menu {
-  max-height: 500px; /* enough to show all options */
+/* Open state */
+.theme-menu.open {
+  max-height: 500px;   /* large enough to show all items */
   opacity: 1;
 }
+
 
 /* Optional – better-looking scrollbar for WebKit browsers */
 .theme-menu::-webkit-scrollbar {
