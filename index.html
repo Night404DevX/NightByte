@@ -196,14 +196,14 @@
 });
   </script>
 
-  <!-- Firebase + Popup -->
+<!-- Firebase Popup: Only show once per new announcement -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
-// --- Your Firebase config (same as admin.js) ---
+// --- Firebase config (same as admin page) ---
 const firebaseConfig = {
-  apiKey: "AIzaSyDqT79o5AxFMTUmfiyelG-mPX7axmu1TE4",
+ apiKey: "AIzaSyDqT79o5AxFMTUmfiyelG-mPX7axmu1TE4",
   authDomain: "silentgames-f9785.firebaseapp.com",
   databaseURL: "https://silentgames-f9785-default-rtdb.firebaseio.com",
   projectId: "silentgames-f9785",
@@ -216,18 +216,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Fetch the latest announcement
+// --- Fetch latest announcement ---
 async function loadAnnouncement() {
   const q = query(collection(db, "announcements"), orderBy("timestamp", "desc"), limit(1));
   const querySnapshot = await getDocs(q);
 
   if (!querySnapshot.empty) {
-    const latest = querySnapshot.docs[0].data();
-    showPopup(latest.title, latest.message);
+    const latestDoc = querySnapshot.docs[0];
+    const latest = latestDoc.data();
+    const announcementId = latestDoc.id;
+
+    const lastSeenId = localStorage.getItem("lastAnnouncementId");
+
+    // Only show if user hasn’t seen this one yet
+    if (announcementId !== lastSeenId) {
+      showPopup(latest.title, latest.message);
+      localStorage.setItem("lastAnnouncementId", announcementId);
+    }
   }
 }
 
-// --- Show the popup ---
+// --- Show popup with smooth blur background ---
 function showPopup(title, message) {
   const popup = document.createElement("div");
   popup.className = "announcement-popup";
@@ -246,15 +255,19 @@ function showPopup(title, message) {
     setTimeout(() => popup.remove(), 400);
   });
 
+  // Slight delay for fade-in animation
   setTimeout(() => popup.classList.add("visible"), 100);
 }
 
+// --- Run on load ---
 loadAnnouncement();
 </script>
+
 
   
 </body>
 </html>
+
 
 
 
