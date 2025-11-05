@@ -82,14 +82,25 @@
   </nav>
   </header>
   <main>
-   <!-- Iframe Window -->
-<div class="iframe-window" id="iframe-window">
+<!-- Iframe Window (hidden by default) -->
+<div class="iframe-window" id="iframe-window" aria-hidden="true" role="dialog" aria-label="Embedded window">
   <div class="iframe-header">
-    <span class="iframe-title" id="iframe-title">Loading...</span>
-    <button class="iframe-close"><i class="fa-solid fa-xmark"></i></button>
+    <div class="iframe-left">
+      <button class="iframe-back" id="iframe-back" title="Close"><i class="fa-solid fa-chevron-left"></i></button>
+      <span class="iframe-title" id="iframe-title">Window</span>
+    </div>
+    <div class="iframe-controls">
+      <a id="iframe-open-tab" class="iframe-open-tab" target="_blank" rel="noopener noreferrer" hidden>Open in new tab</a>
+      <button class="iframe-close" id="iframe-close" aria-label="Close window"><i class="fa-solid fa-xmark"></i></button>
+    </div>
   </div>
-  <iframe id="iframe-frame" src="/games/slowroads" frameborder="0"></iframe>
+
+  <div class="iframe-body">
+    <div class="iframe-loader" id="iframe-loader">Loading…</div>
+    <iframe id="iframe-frame" src="/pages/slowroads" frameborder="0" title="Embedded content"></iframe>
+  </div>
 </div>
+
 
   </main>
   <footer>
