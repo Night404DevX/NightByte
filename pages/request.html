@@ -81,34 +81,30 @@
     </div>
   </nav>
   </header>
-  <main>
-<!-- Iframe Window (hidden by default) -->
-<div class="iframe-window" id="iframe-window" aria-hidden="false" role="dialog" aria-label="Embedded window">
-  <div class="iframe-header">
-    <div class="iframe-left">
-      <button class="iframe-back" id="iframe-back" title="Close"><i class="fa-solid fa-chevron-left"></i></button>
-      <span class="iframe-title" id="iframe-title">Window</span>
+  <h1>Iframe Test</h1>
+
+  <!-- Buttons to open iframe -->
+  <button onclick="openIframe('https://example.com','Example')">Open example.com</button>
+  <!-- YouTube embed (works with /embed/VIDEOID) -->
+  <button onclick="openIframe('https://www.youtube.com/embed/dQw4w9WgXcQ','YouTube')">Open YouTube (embed)</button>
+
+  <!-- Iframe Window (same as provided earlier) -->
+  <div class="iframe-window" id="iframe-window" aria-hidden="true" role="dialog">
+    <div class="iframe-header">
+      <div class="iframe-left">
+        <button class="iframe-back" id="iframe-back" title="Close">←</button>
+        <span class="iframe-title" id="iframe-title">Window</span>
+      </div>
+      <div class="iframe-controls">
+        <a id="iframe-open-tab" class="iframe-open-tab" target="_blank" rel="noopener noreferrer" hidden>Open in new tab</a>
+        <button class="iframe-close" id="iframe-close" aria-label="Close window">✕</button>
+      </div>
     </div>
-    <div class="iframe-controls">
-      <a id="iframe-open-tab" class="iframe-open-tab" target="_blank" rel="noopener noreferrer" hidden>Open in new tab</a>
-      <button class="iframe-close" id="iframe-close" aria-label="Close window"><i class="fa-solid fa-xmark"></i></button>
+
+    <div class="iframe-body">
+      <div class="iframe-loader" id="iframe-loader">Loading…</div>
+      <iframe id="iframe-frame" src="" frameborder="0" title="Embedded content"></iframe>
     </div>
   </div>
-
-  <div class="iframe-body">
-    <div class="iframe-loader" id="iframe-loader">Loading…</div>
-    <iframe id="iframe-frame" src="/pages/slowroads" frameborder="0" title="Embedded content"></iframe>
-  </div>
-</div>
-
-
-  </main>
-  <footer>
-    <p>© Silent Games • Built with care • <span id="contact">refinesilent@gmail.com</span></p>
-  </footer>
-  <script src="/js/silent.js"></script>
 </body>
 </html>
-
-
-
