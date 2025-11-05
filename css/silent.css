@@ -117,23 +117,26 @@ nav {
 
 /* Theme menu */
 .theme-menu {
-  display: flex;
+ position: absolute;
+  top: 60px;
+  right: 24px;
+  background: rgba(10, 10, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 10px;
+  display: none;
   flex-direction: column;
   gap: 8px;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: rgba(10,10,20,0.85);
-  backdrop-filter: blur(12px);
-  border-radius: var(--radius);
-  border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
-  overflow-y: auto;
-  max-height: 300px;       /* collapsed initially */
-  opacity: 0;
   transition: max-height 0.4s ease, opacity 0.4s ease;
-  z-index: 101;
-  width: 180px;        /* optional width */
+
+
+  /* New Scroll Styling */
+  max-height: 300px; /* Limit height so it won’t go off-screen */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-1) rgba(255,255,255,0.1);        /* optional width */
 }
 
 /* Open state */
