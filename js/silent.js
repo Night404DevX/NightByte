@@ -102,11 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
   loop();
 
   // --- THEME MENU / PRESET THEME HANDLING ---
-  const themeMenu = document.getElementById('theme-menu');
   const themeBtn = document.getElementById('theme-toggle');
-  themeBtn && themeBtn.addEventListener('click', () => {
-    themeMenu.style.display = themeMenu.style.display === 'flex' ? 'none' : 'flex';
-  });
+const themeMenu = document.getElementById('theme-menu');
+
+themeBtn.addEventListener('click', () => {
+  themeMenu.classList.toggle('open');
+});
 
   function applyTheme(hexColor, bg) {
   if (!hexColor) return;
