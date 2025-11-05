@@ -847,8 +847,8 @@ cursor: url('/assets/select.cur'), auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.25); /* softer background blur */
+  backdrop-filter: blur(5px);      /* subtle blur */
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 1000;
@@ -858,45 +858,51 @@ cursor: url('/assets/select.cur'), auto;
   opacity: 1;
 }
 
-.popup-content {
-  background: rgba(10, 10, 20, 0.85);
-  padding: 30px;
-  border-radius: 20px;
-  color: white;
+.popup-card {
+  background: linear-gradient(145deg, rgba(10,10,20,0.95), rgba(20,20,30,0.95));
+  padding: 30px 25px;
+  border-radius: 18px;
   max-width: 400px;
+  width: 90%;
   text-align: center;
-  box-shadow: 0 0 30px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.08);
   transform: translateY(20px);
   transition: transform 0.4s ease;
 }
 
-.announcement-popup.visible .popup-content {
+.announcement-popup.visible .popup-card {
   transform: translateY(0);
 }
 
-.popup-content h2 {
+.popup-card h2 {
+  font-size: 22px;
   color: var(--accent-1, #64d2ff);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
-.popup-content p {
+.popup-card p {
   font-size: 15px;
+  color: var(--text, #e9eef8);
   margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-.popup-content button {
+.popup-card button {
   background: var(--accent-1, #64d2ff);
   color: #111;
   border: none;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: all 0.3s;
 }
 
-.popup-content button:hover {
+.popup-card button:hover {
   background: #82e0ff;
+  transform: scale(1.05);
 }
 
 .login-overlay {
