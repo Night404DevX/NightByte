@@ -166,31 +166,7 @@
 
   
   <script src="/js/silent.js"></script>
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-  import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDqT79o5AxFMTUmfiyelG-mPX7axmu1TE4",
-  authDomain: "silentgames-f9785.firebaseapp.com",
-  databaseURL: "https://silentgames-f9785-default-rtdb.firebaseio.com",
-  projectId: "silentgames-f9785",
-  storageBucket: "silentgames-f9785.firebasestorage.app",
-  messagingSenderId: "114016702963",
-  appId: "1:114016702963:web:6d6e53e966e8b4de670286",
-  measurementId: "G-ECS8Z3WEZ3"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  // Example: log when announcements update
-  const announcementsRef = collection(db, "announcements");
-  onSnapshot(announcementsRef, (snapshot) => {
-    snapshot.forEach((doc) => console.log(doc.data()));
-  });
-</script>
-
+  
   <script>
     document.addEventListener("DOMContentLoaded", () => {
   const timeline = document.querySelector(".timeline");
@@ -217,8 +193,67 @@
   items.forEach(item => itemObserver.observe(item));
 });
   </script>
+
+  <!-- Firebase + Popup -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+// --- Your Firebase config (same as admin.js) ---
+const firebaseConfig = {
+  apiKey: "AIzaSyDqT79o5AxFMTUmfiyelG-mPX7axmu1TE4",
+  authDomain: "silentgames-f9785.firebaseapp.com",
+  databaseURL: "https://silentgames-f9785-default-rtdb.firebaseio.com",
+  projectId: "silentgames-f9785",
+  storageBucket: "silentgames-f9785.firebasestorage.app",
+  messagingSenderId: "114016702963",
+  appId: "1:114016702963:web:6d6e53e966e8b4de670286",
+  measurementId: "G-ECS8Z3WEZ3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Fetch the latest announcement
+async function loadAnnouncement() {
+  const q = query(collection(db, "announcements"), orderBy("timestamp", "desc"), limit(1));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const latest = querySnapshot.docs[0].data();
+    showPopup(latest.title, latest.message);
+  }
+}
+
+// --- Show the popup ---
+function showPopup(title, message) {
+  const popup = document.createElement("div");
+  popup.className = "announcement-popup";
+  popup.innerHTML = `
+    <div class="popup-content">
+      <h2>${title}</h2>
+      <p>${message}</p>
+      <button id="closePopup">Close</button>
+    </div>
+  `;
+  document.body.appendChild(popup);
+
+  const closeBtn = document.getElementById("closePopup");
+  closeBtn.addEventListener("click", () => {
+    popup.classList.remove("visible");
+    setTimeout(() => popup.remove(), 400);
+  });
+
+  setTimeout(() => popup.classList.add("visible"), 100);
+}
+
+loadAnnouncement();
+</script>
+
+  
 </body>
 </html>
+
 
 
 
