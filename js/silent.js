@@ -1,18 +1,19 @@
 // =======================
-// Variables
+// VARIABLES
 // =======================
 const themeBtn = document.getElementById('theme-toggle');
 const themeMenu = document.getElementById('theme-menu');
 const themeOptions = document.querySelectorAll('.theme-option');
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
+
 let particles = [];
 const count = 100;
 let particleColor = '#64d2ffB3';
 let bgColor = '#05060a';
 
 // =======================
-// Load saved theme
+// LOAD SAVED THEME
 // =======================
 const savedColor = localStorage.getItem('themeColor');
 const savedBg = localStorage.getItem('themeBg');
@@ -31,14 +32,14 @@ if (savedColor && savedBg) {
 }
 
 // =======================
-// Theme menu toggle
+// THEME MENU TOGGLE
 // =======================
 themeBtn.addEventListener('click', () => {
   themeMenu.classList.toggle('open');
 });
 
 // =======================
-// Close theme menu when clicking outside
+// CLOSE THEME MENU ON OUTSIDE CLICK
 // =======================
 document.addEventListener('click', (e) => {
   if (!themeBtn.contains(e.target) && !themeMenu.contains(e.target)) {
@@ -47,7 +48,7 @@ document.addEventListener('click', (e) => {
 });
 
 // =======================
-// Theme selection
+// THEME SELECTION
 // =======================
 themeOptions.forEach(opt => {
   opt.addEventListener('click', () => {
@@ -58,7 +59,7 @@ themeOptions.forEach(opt => {
     document.documentElement.style.setProperty('--accent-1', color);
     document.documentElement.style.setProperty('--accent-2', color);
 
-    // Change particle and background colors
+    // Update particles and background
     particleColor = color + 'B3';
     bgColor = bg;
     canvas.style.background = bg;
@@ -74,8 +75,10 @@ themeOptions.forEach(opt => {
 });
 
 // =======================
-// Particle setup
+// PARTICLE BACKGROUND
 // =======================
+
+// Resize canvas
 function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -123,3 +126,13 @@ function loop() {
   requestAnimationFrame(loop);
 }
 loop();
+
+  // --- Fade-in IntersectionObserver (sections) ---
+  const sections = document.querySelectorAll('section.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  sections.forEach(sec => observer.observe(sec));
+});
