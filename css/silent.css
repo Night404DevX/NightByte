@@ -129,7 +129,7 @@ nav {
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
   overflow-y: auto;
-  max-height: 300px;       /* collapsed initially */
+  max-height: 0px;       /* collapsed initially */
   opacity: 0;
   transition: max-height 0.4s ease, opacity 0.4s ease;
   z-index: 101;
@@ -138,7 +138,7 @@ nav {
 
 /* Open state */
 .theme-menu.open {
-  max-height: 500px;   /* large enough to show all items */
+  max-height: 300px;   /* large enough to show all items */
   opacity: 1;
 }
 
