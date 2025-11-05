@@ -120,30 +120,17 @@ nav {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: 10px;
-  display: none; /* start hidden */
+  display: none;
   flex-direction: column;
   gap: 8px;
   box-shadow: var(--shadow);
 
-  /* Smooth animation */
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-
-  /* Scrollable */
-  overflow-y: auto;
+  /* New Scroll Styling */
   max-height: 300px; /* Limit height so it won’t go off-screen */
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-1) rgba(255,255,255,0.1);
 }
-
-/* When open */
-.theme-menu.open {
-  display: flex;      /* make it visible */
-  max-height: 500px;  /* enough to show all items */
-  opacity: 1;
-}
-
 
 /* Optional – better-looking scrollbar for WebKit browsers */
 .theme-menu::-webkit-scrollbar {
@@ -811,8 +798,7 @@ cursor: url('/assets/select.cur'), auto;
 
 /* Dropdown content */
 .dropdown-content {
-  max-height: 0; /* start collapsed */
-  opacity: 0;
+  display: none;
   position: absolute;
   right: 0;
   top: 100%;
@@ -825,17 +811,13 @@ cursor: url('/assets/select.cur'), auto;
   box-shadow: var(--shadow);
   z-index: 101;
   overflow: hidden;
-
-  /* Transition for smooth effect */
-  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
 /* Show on hover */
 .dropdown:hover .dropdown-content {
-  max-height: 500px; /* large enough to show all items */
-  opacity: 1;
+  display: flex;
+  flex-direction: column;
 }
-
 
 .dropdown-content a {
   padding: 10px 16px;
