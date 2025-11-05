@@ -110,35 +110,37 @@ nav {
 .nav-links a:hover::after {
   width: 100%;
 }
-.theme-container {
-  position: relative;
-  display: inline-block;
-}
 
-/* Theme menu */
 .theme-menu {
-  display: flex;
+  position: absolute;
+  top: 60px;
+  right: 24px;
+  background: rgba(10, 10, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 10px;
+  display: none; /* start hidden */
   flex-direction: column;
   gap: 8px;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: rgba(10,10,20,0.85);
-  backdrop-filter: blur(12px);
-  border-radius: var(--radius);
-  border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
-  overflow-y: auto;
-  max-height: 0px;       /* collapsed initially */
+
+  /* Smooth animation */
+  max-height: 0;
   opacity: 0;
   transition: max-height 0.4s ease, opacity 0.4s ease;
-  z-index: 101;
-  width: 180px;        /* optional width */
+
+  /* Scrollable */
+  overflow-y: auto;
+  max-height: 300px; /* Limit height so it won’t go off-screen */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-1) rgba(255,255,255,0.1);
 }
 
-/* Open state */
+/* When open */
 .theme-menu.open {
-  max-height: 300px;   /* large enough to show all items */
+  display: flex;      /* make it visible */
+  max-height: 500px;  /* enough to show all items */
   opacity: 1;
 }
 
