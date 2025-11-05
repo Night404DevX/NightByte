@@ -841,84 +841,64 @@ cursor: url('/assets/select.cur'), auto;
   background: rgba(255,255,255,0.1);
 }
 
-/* === Announcement Popup === */
 .announcement-popup {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 3000;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
 }
 
-.announcement-popup.show {
+.announcement-popup.visible {
   opacity: 1;
-  pointer-events: auto;
 }
 
-/* Backdrop blur layer */
-.popup-blur {
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(18px);
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 0;
-  z-index: 0;
-}
-
-/* Glass content */
 .popup-content {
-  position: relative;
-  z-index: 1;
-  background: rgba(15, 15, 25, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 32px 36px;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 0 25px var(--accent-1);
-  color: var(--text);
+  background: rgba(10, 10, 20, 0.85);
+  padding: 30px;
+  border-radius: 20px;
+  color: white;
+  max-width: 400px;
   text-align: center;
-  transform: translateY(40px);
-  opacity: 0;
-  animation: popupSlide 0.5s ease forwards;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.announcement-popup.visible .popup-content {
+  transform: translateY(0);
 }
 
 .popup-content h2 {
-  margin-bottom: 12px;
-  color: var(--accent-1);
-  text-shadow: 0 0 8px var(--accent-1);
+  color: var(--accent-1, #64d2ff);
+  margin-bottom: 10px;
 }
 
 .popup-content p {
-  margin-bottom: 22px;
-  line-height: 1.6;
+  font-size: 15px;
+  margin-bottom: 20px;
 }
 
 .popup-content button {
-  background: var(--accent-1);
-  color: #fff;
+  background: var(--accent-1, #64d2ff);
+  color: #111;
   border: none;
+  padding: 10px 20px;
   border-radius: 10px;
-  padding: 10px 22px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px var(--accent-1);
+  transition: 0.3s;
 }
 
 .popup-content button:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 18px var(--accent-1);
+  background: #82e0ff;
 }
 
-/* Animations */
-@keyframes popupSlide {
-  from { opacity: 0; transform: translateY(40px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
 
 
 @font-face {
