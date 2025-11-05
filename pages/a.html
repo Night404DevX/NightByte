@@ -73,6 +73,68 @@
       min-height: 20px;
     }
 
+    .admin-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(10,10,20,0.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.admin-header nav {
+  max-width: 1150px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.admin-logo {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--accent-1, #64d2ff);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-nav-links a, .admin-nav-links button {
+  color: #e9eef8;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.admin-nav-links a:hover, .admin-nav-links button:hover {
+  background: var(--accent-1, #64d2ff);
+  color: #111;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(100,210,255,0.3);
+}
+
+#logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+}
+
+
     @keyframes fadeIn {
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
@@ -80,6 +142,20 @@
   </style>
 </head>
 <body>
+
+  <header class="admin-header">
+  <nav>
+    <div class="admin-logo">Silent Games</div>
+    <div class="admin-nav-links">
+      <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/pages/lausd.html"><i class="fa-solid fa-gamepad"></i> Games</a>
+        <a href="/pages/c.html"><i class="fa-solid fa-circle-user"></i> Credits</a>
+        <a href="/pages/u.html"><i class="fa-solid fa-list"></i> Updates</a>
+        <a href=""><i class="fa-solid fa-envelope"></i> Contact</a>
+    </div>
+  </nav>
+</header>
+
 
   <div id="admin-login" class="login-overlay">
   <div class="login-box">
