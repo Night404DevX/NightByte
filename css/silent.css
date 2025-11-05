@@ -841,6 +841,86 @@ cursor: url('/assets/select.cur'), auto;
   background: rgba(255,255,255,0.1);
 }
 
+/* === Announcement Popup === */
+.announcement-popup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.announcement-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Backdrop blur layer */
+.popup-blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(18px);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0;
+  z-index: 0;
+}
+
+/* Glass content */
+.popup-content {
+  position: relative;
+  z-index: 1;
+  background: rgba(15, 15, 25, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 32px 36px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 25px var(--accent-1);
+  color: var(--text);
+  text-align: center;
+  transform: translateY(40px);
+  opacity: 0;
+  animation: popupSlide 0.5s ease forwards;
+}
+
+.popup-content h2 {
+  margin-bottom: 12px;
+  color: var(--accent-1);
+  text-shadow: 0 0 8px var(--accent-1);
+}
+
+.popup-content p {
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+
+.popup-content button {
+  background: var(--accent-1);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px var(--accent-1);
+}
+
+.popup-content button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 18px var(--accent-1);
+}
+
+/* Animations */
+@keyframes popupSlide {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
 @font-face {
   font-family: notitle;
   src: url(/assets/RedditSans-Medium.ttf);
