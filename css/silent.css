@@ -777,14 +777,6 @@ cursor: url('/assets/select.cur'), auto;
 }
 
 
-.chat-message.own-message .message-bubble {
-  background: rgba(var(--accent-rgb, 255, 255, 255), 0.2);
-  border-color: rgba(var(--accent-rgb, 255, 255, 255), 0.5);
-  align-self: flex-end;
-  color: #fff;
-}
-
-
 .message-text {
   font-size: 0.95rem;
   line-height: 1.3;
