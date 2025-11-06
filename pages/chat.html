@@ -80,15 +80,16 @@
   </nav>
   </header>
   
-  <main class="chat-container">
+  <main 
+     <section class="chat-section">
     <h1>Silent Chat</h1>
-  <div id="chat-box"></div>
-  <div id="chat-controls">
-    <input id="username" placeholder="Enter username" />
-    <textarea id="message" placeholder="Type a message..."></textarea>
-    <button id="sendBtn">Send</button>
-  </div>
-</div>
+    <div id="chat-box"></div>
+    <div class="chat-input-area">
+      <input type="text" id="username" placeholder="Enter Username">
+      <textarea id="message" placeholder="Type your message..."></textarea>
+      <button id="sendBtn">Send</button>
+    </div>
+  </section>
 
 <script type="module" src="chat.js"></script>
 
