@@ -34,41 +34,62 @@ const messageInput = document.getElementById("message");
 const usernameInput = document.getElementById("username");
 
 // ==============================
-// Constants for cleanup
+// Time constants
 // ==============================
-const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hour
-const EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
+const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hour, keeps checking for old messages
+const EXPIRATION_TIME = 6 * 60 * 60 * 1000;  // 6 hours (messages older than this will be removed)
+
 
 // ==============================
-// Function: Add message to chat
+// Convert hex to RGB for CSS variable
 // ==============================
-function addMessageToChat(username, message, timestamp, isOwnMessage) {
+function hexToRgb(hex) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  const bigint = parseInt(hex, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `${r},${g},${b}`;
+}
+
+// ==============================
+// Apply theme color to chat bubbles
+// ==============================
+function updateAccentRgb() {
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-1').trim() || '#64d2ff';
+  document.documentElement.style.setProperty('--accent-rgb', hexToRgb(accent));
+}
+
+// Initial call
+updateAccentRgb();
+
+// ==============================
+// Add message to chat box
+// ==============================
+function addMessageToChat(username, message, timestamp, isOwn = false) {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("chat-message");
-  if (isOwnMessage) msgDiv.classList.add("own-message");
+  if (isOwn) msgDiv.classList.add("own-message");
 
-  const time = new Date(timestamp).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+  const date = new Date(timestamp);
+  const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   msgDiv.innerHTML = `
     <div class="message-bubble">
       <div class="message-header">
-        <span class="username">${username}</span>
-        <span class="timestamp">${time}</span>
+        <strong>${username}</strong>
+        <span class="message-time">${timeString}</span>
       </div>
       <div class="message-text">${message}</div>
     </div>
   `;
-
-  msgDiv.classList.add("fade-in");
   chatBox.appendChild(msgDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 // ==============================
-// Function: Cleanup old messages
+// Cleanup old messages from Firebase
 // ==============================
 function cleanupOldMessages() {
   const now = Date.now();
@@ -82,7 +103,7 @@ function cleanupOldMessages() {
   });
 }
 
-// Run cleanup on load and hourly
+// Run cleanup on load and schedule hourly
 cleanupOldMessages();
 setInterval(cleanupOldMessages, CLEANUP_INTERVAL);
 
@@ -95,11 +116,7 @@ onChildAdded(messagesRef, (snapshot) => {
     snapshot.ref.remove();
     return;
   }
-
-  const currentUser = usernameInput.value.trim() || "Guest";
-  const isOwnMessage = data.username === currentUser;
-
-  addMessageToChat(data.username, data.message, data.timestamp, isOwnMessage);
+  addMessageToChat(data.username, data.message, data.timestamp);
 });
 
 // ==============================
@@ -116,29 +133,15 @@ function sendMessage() {
   messageInput.value = "";
 }
 
-// Button click
+// ==============================
+// Event listeners
+// ==============================
 sendBtn.addEventListener("click", sendMessage);
 
-// Press Enter
+// Enter to send, Shift+Enter for newline
 messageInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendMessage();
   }
 });
-
-function setAccentRGB(accentColor) {
-  const rgb = hexToRgb(accentColor);
-  document.documentElement.style.setProperty('--accent-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`);
-}
-
-function hexToRgb(hex) {
-  const cleaned = hex.replace('#', '');
-  const bigint = parseInt(cleaned, 16);
-  return {
-    r: (bigint >> 16) & 255,
-    g: (bigint >> 8) & 255,
-    b: bigint & 255
-  };
-}
-
