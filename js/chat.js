@@ -152,37 +152,30 @@ function applyTheme(hexColor, bg) {
   document.documentElement.style.setProperty('--accent-rgb', rgb.join(','));
 
   // Handle background
-  if (bg) document.documentElement.style.setProperty('--bg', bg);
+  if (bg) {
+    document.documentElement.style.setProperty('--bg', bg);
 
-  // Text color for readability
-  const brightness = (rgb[0]*299 + rgb[1]*587 + rgb[2]*114)/1000;
-  const textColor = brightness < 128 ? '#ffffff' : '#111111';
-  document.documentElement.style.setProperty('--text', textColor);
+    // Auto adjust text color based on background
+    const brightness = (rgb[0]*299 + rgb[1]*587 + rgb[2]*114)/1000;
+    const textColor = brightness < 128 ? '#ffffff' : '#111111';
+    document.documentElement.style.setProperty('--text', textColor);
 
-  // Update existing bubbles
+    // Save to localStorage
+    localStorage.setItem('themeBg', bg);
+    localStorage.setItem('themeText', textColor);
+  } else {
+    // Keep text white by default if no background
+    if (!localStorage.getItem('themeText')) {
+      document.documentElement.style.setProperty('--text', '#ffffff');
+    }
+  }
+
+  // Update existing chat bubbles
   document.querySelectorAll('.message-bubble').forEach(bubble => {
     bubble.style.background = `rgba(${rgb.join(',')},0.25)`;
     bubble.style.border = `1px solid rgba(${rgb.join(',')},0.4)`;
   });
 
-  // Save to localStorage
+  // Save accent color
   localStorage.setItem('themeColor', hexColor);
-  if (bg) localStorage.setItem('themeBg', bg);
-  localStorage.setItem('themeText', textColor);
-}
-
-// Wire up preset theme options
-themeOptions.forEach(opt => {
-  opt.addEventListener('click', () => {
-    const color = opt.dataset.color;
-    const bg = opt.dataset.bg;
-    applyTheme(color, bg);
-  });
-});
-
-// Load saved theme
-const savedColor = localStorage.getItem('themeColor');
-const savedBg = localStorage.getItem('themeBg');
-if (savedColor) {
-  applyTheme(savedColor, savedBg);
 }
