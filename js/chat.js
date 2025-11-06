@@ -9,13 +9,13 @@ import { getDatabase, ref, push, onChildAdded, get } from "https://www.gstatic.c
 // ==============================
 const firebaseConfig = {
   apiKey: "AIzaSyDqT79o5AxFMTUmfiyelG-mPX7axmu1TE4",
-    authDomain: "silentgames-f9785.firebaseapp.com",
-    databaseURL: "https://silentgames-f9785-default-rtdb.firebaseio.com",
-    projectId: "silentgames-f9785",
-    storageBucket: "silentgames-f9785.firebasestorage.app",
-    messagingSenderId: "114016702963",
-    appId: "1:114016702963:web:11573d14ef695c81670286",
-    measurementId: "G-7M1W2RMNHE"
+  authDomain: "silentgames-f9785.firebaseapp.com",
+  databaseURL: "https://silentgames-f9785-default-rtdb.firebaseio.com",
+  projectId: "silentgames-f9785",
+  storageBucket: "silentgames-f9785.firebasestorage.app",
+  messagingSenderId: "114016702963",
+  appId: "1:114016702963:web:11573d14ef695c81670286",
+  measurementId: "G-7M1W2RMNHE"
 };
 
 // ==============================
@@ -42,10 +42,27 @@ const EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 // ==============================
 // Function: Add message to chat
 // ==============================
-function addMessageToChat(username, message) {
+function addMessageToChat(username, message, timestamp, isOwnMessage) {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("chat-message");
-  msgDiv.innerHTML = `<strong>${username}:</strong> ${message}`;
+  if (isOwnMessage) msgDiv.classList.add("own-message");
+
+  const time = new Date(timestamp).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  msgDiv.innerHTML = `
+    <div class="message-bubble">
+      <div class="message-header">
+        <span class="username">${username}</span>
+        <span class="timestamp">${time}</span>
+      </div>
+      <div class="message-text">${message}</div>
+    </div>
+  `;
+
+  msgDiv.classList.add("fade-in");
   chatBox.appendChild(msgDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
@@ -65,9 +82,8 @@ function cleanupOldMessages() {
   });
 }
 
-// Run cleanup on load
+// Run cleanup on load and hourly
 cleanupOldMessages();
-// Schedule hourly cleanup
 setInterval(cleanupOldMessages, CLEANUP_INTERVAL);
 
 // ==============================
@@ -75,16 +91,19 @@ setInterval(cleanupOldMessages, CLEANUP_INTERVAL);
 // ==============================
 onChildAdded(messagesRef, (snapshot) => {
   const data = snapshot.val();
-  // Skip expired messages
   if (Date.now() - data.timestamp > EXPIRATION_TIME) {
     snapshot.ref.remove();
     return;
   }
-  addMessageToChat(data.username, data.message);
+
+  const currentUser = usernameInput.value.trim() || "Guest";
+  const isOwnMessage = data.username === currentUser;
+
+  addMessageToChat(data.username, data.message, data.timestamp, isOwnMessage);
 });
 
 // ==============================
-// Send message function
+// Send message
 // ==============================
 function sendMessage() {
   const username = usernameInput.value.trim() || "Guest";
@@ -97,12 +116,10 @@ function sendMessage() {
   messageInput.value = "";
 }
 
-// ==============================
-// Event listeners
-// ==============================
+// Button click
 sendBtn.addEventListener("click", sendMessage);
 
-// Press Enter to send
+// Press Enter
 messageInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
