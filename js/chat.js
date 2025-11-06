@@ -34,52 +34,47 @@ const messageInput = document.getElementById("message");
 const usernameInput = document.getElementById("username");
 
 // ==============================
-// Time constants
+// Constants for cleanup
 // ==============================
-const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hour, keeps checking for old messages
-const EXPIRATION_TIME = 6 * 60 * 60 * 1000;  // 6 hours (messages older than this will be removed)
+const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hour
+const EXPIRATION_TIME = 6 * 60 * 60 * 1000; // 6 hours
 
-
 // ==============================
-// Convert hex to RGB for CSS variable
+// Helper: convert hex to rgba
 // ==============================
-function hexToRgb(hex) {
-  hex = hex.replace('#', '');
-  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+function hexToRgba(hex, alpha = 0.5) {
+  if (!hex) hex = "#64d2ff";
+  hex = hex.replace("#", "");
+  if (hex.length === 3) hex = hex.split("").map(c => c + c).join("");
   const bigint = parseInt(hex, 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
-  return `${r},${g},${b}`;
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
 // ==============================
-// Apply theme color to chat bubbles
+// Function: Add message to chat
 // ==============================
-function updateAccentRgb() {
-  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-1').trim() || '#64d2ff';
-  document.documentElement.style.setProperty('--accent-rgb', hexToRgb(accent));
-}
-
-// Initial call
-updateAccentRgb();
-
-// ==============================
-// Add message to chat box
-// ==============================
-function addMessageToChat(username, message, timestamp, isOwn = false) {
+function addMessageToChat(username, message, timestamp) {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("chat-message");
-  if (isOwn) msgDiv.classList.add("own-message");
 
-  const date = new Date(timestamp);
-  const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  // Time handling
+  let timeString = "";
+  if (timestamp && !isNaN(timestamp)) {
+    const date = new Date(timestamp);
+    timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  // Create glass-like bubble
+  const bubbleColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-1') || "#64d2ff";
 
   msgDiv.innerHTML = `
-    <div class="message-bubble">
+    <div class="message-bubble" style="background:${hexToRgba(bubbleColor,0.25)}; border:1px solid ${hexToRgba(bubbleColor,0.4)};">
       <div class="message-header">
         <strong>${username}</strong>
-        <span class="message-time">${timeString}</span>
+        ${timeString ? `<span class="message-time">${timeString}</span>` : ""}
       </div>
       <div class="message-text">${message}</div>
     </div>
@@ -89,14 +84,14 @@ function addMessageToChat(username, message, timestamp, isOwn = false) {
 }
 
 // ==============================
-// Cleanup old messages from Firebase
+// Function: Cleanup old messages
 // ==============================
 function cleanupOldMessages() {
   const now = Date.now();
   get(messagesRef).then(snapshot => {
     snapshot.forEach(childSnap => {
       const data = childSnap.val();
-      if (now - data.timestamp > EXPIRATION_TIME) {
+      if (!data.timestamp || now - data.timestamp > EXPIRATION_TIME) {
         childSnap.ref.remove();
       }
     });
@@ -112,7 +107,7 @@ setInterval(cleanupOldMessages, CLEANUP_INTERVAL);
 // ==============================
 onChildAdded(messagesRef, (snapshot) => {
   const data = snapshot.val();
-  if (Date.now() - data.timestamp > EXPIRATION_TIME) {
+  if (!data.timestamp || Date.now() - data.timestamp > EXPIRATION_TIME) {
     snapshot.ref.remove();
     return;
   }
@@ -138,7 +133,6 @@ function sendMessage() {
 // ==============================
 sendBtn.addEventListener("click", sendMessage);
 
-// Enter to send, Shift+Enter for newline
 messageInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
