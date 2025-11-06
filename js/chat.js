@@ -42,7 +42,7 @@ const EXPIRATION_TIME = 6 * 60 * 60 * 1000; // 6 hours
 // ==============================
 // Helper: convert hex to rgba
 // ==============================
-function hexToRgba(hex, alpha = 0.5) {
+function hexToRgba(hex, alpha = 0.25) {
   if (!hex) hex = "#64d2ff";
   hex = hex.replace("#", "");
   if (hex.length === 3) hex = hex.split("").map(c => c + c).join("");
@@ -54,7 +54,7 @@ function hexToRgba(hex, alpha = 0.5) {
 }
 
 // ==============================
-// Function: Add message to chat
+// Add message to chat
 // ==============================
 function addMessageToChat(username, message, timestamp) {
   const msgDiv = document.createElement("div");
@@ -67,11 +67,8 @@ function addMessageToChat(username, message, timestamp) {
     timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
-  // Create glass-like bubble
-  const bubbleColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-1') || "#64d2ff";
-
   msgDiv.innerHTML = `
-    <div class="message-bubble" style="background:${hexToRgba(bubbleColor,0.25)}; border:1px solid ${hexToRgba(bubbleColor,0.4)};">
+    <div class="message-bubble">
       <div class="message-header">
         <strong>${username}</strong>
         ${timeString ? `<span class="message-time">${timeString}</span>` : ""}
@@ -84,7 +81,7 @@ function addMessageToChat(username, message, timestamp) {
 }
 
 // ==============================
-// Function: Cleanup old messages
+// Cleanup old messages
 // ==============================
 function cleanupOldMessages() {
   const now = Date.now();
@@ -132,10 +129,60 @@ function sendMessage() {
 // Event listeners
 // ==============================
 sendBtn.addEventListener("click", sendMessage);
-
 messageInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendMessage();
   }
 });
+
+// ==============================
+// Theme handling
+// ==============================
+const themeOptions = document.querySelectorAll('.theme-option');
+function applyTheme(hexColor, bg) {
+  if (!hexColor) return;
+
+  // Apply accent color
+  document.documentElement.style.setProperty('--accent-1', hexColor);
+  document.documentElement.style.setProperty('--accent-2', hexColor);
+
+  // Convert hex to RGB for CSS variable
+  const rgb = hexColor.replace('#','').match(/.{2}/g).map(x => parseInt(x,16));
+  document.documentElement.style.setProperty('--accent-rgb', rgb.join(','));
+
+  // Handle background
+  if (bg) document.documentElement.style.setProperty('--bg', bg);
+
+  // Text color for readability
+  const brightness = (rgb[0]*299 + rgb[1]*587 + rgb[2]*114)/1000;
+  const textColor = brightness < 128 ? '#ffffff' : '#111111';
+  document.documentElement.style.setProperty('--text', textColor);
+
+  // Update existing bubbles
+  document.querySelectorAll('.message-bubble').forEach(bubble => {
+    bubble.style.background = `rgba(${rgb.join(',')},0.25)`;
+    bubble.style.border = `1px solid rgba(${rgb.join(',')},0.4)`;
+  });
+
+  // Save to localStorage
+  localStorage.setItem('themeColor', hexColor);
+  if (bg) localStorage.setItem('themeBg', bg);
+  localStorage.setItem('themeText', textColor);
+}
+
+// Wire up preset theme options
+themeOptions.forEach(opt => {
+  opt.addEventListener('click', () => {
+    const color = opt.dataset.color;
+    const bg = opt.dataset.bg;
+    applyTheme(color, bg);
+  });
+});
+
+// Load saved theme
+const savedColor = localStorage.getItem('themeColor');
+const savedBg = localStorage.getItem('themeBg');
+if (savedColor) {
+  applyTheme(savedColor, savedBg);
+}
