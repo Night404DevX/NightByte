@@ -80,14 +80,18 @@
   </nav>
   </header>
   
-  <main class="chat-container glass">
-    <h1>🌍 Global Chat</h1>
-    <div id="chat-box" class="chat-box"></div>
-    <div class="chat-input">
-      <input type="text" id="username" placeholder="Enter your name..." />
-      <input type="text" id="message" placeholder="Type your message..." />
-      <button id="sendBtn">Send</button>
-    </div>
+  <main class="chat-container">
+    <h1>Silent Chat</h1>
+  <div id="chat-box"></div>
+  <div id="chat-controls">
+    <input id="username" placeholder="Enter username" />
+    <textarea id="message" placeholder="Type a message..."></textarea>
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script type="module" src="chat.js"></script>
+
   </main>
 
   <!-- Firebase & Script -->
