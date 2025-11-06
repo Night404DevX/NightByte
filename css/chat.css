@@ -125,3 +125,11 @@
 .chat-input-area button:hover {
   transform: scale(1.05);
 }
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px; /* optional spacing below the title */
+  color: var(--text, #fff); /* ensures it adapts to your theme text color */
+  font-size: 2rem; /* adjust size as needed */
+}
+
