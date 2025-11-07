@@ -60,6 +60,15 @@ function addMessageToChat(username, message, timestamp) {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("chat-message");
 
+    
+  // Compare to decide alignment
+  if (username === currentUser) {
+    msgDiv.classList.add("chat-message", "own-message");
+  } else {
+    msgDiv.classList.add("chat-message", "other-message");
+  }
+
+
   // Time handling
   let timeString = "";
   if (timestamp && !isNaN(timestamp)) {
