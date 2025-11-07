@@ -125,3 +125,32 @@ h1 {
   color: var(--text, #fff); /* ensures it adapts to your theme text color */
   font-size: 2rem; /* adjust size as needed */
 }
+
+/* ==============================
+   Message image handling
+   ============================== */
+.message-text img {
+  max-width: 200px;        /* limit how wide the image can be */
+  max-height: 200px;       /* limit how tall the image can be */
+  border-radius: 8px;      /* rounded corners for a clean look */
+  object-fit: cover;       /* crop large images neatly */
+  margin-top: 6px;
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+/* Hover effect for clarity */
+.message-text img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb, 255, 255, 255), 0.4);
+}
+
+/* Optional: Make image layout responsive on small screens */
+@media (max-width: 600px) {
+  .message-text img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
