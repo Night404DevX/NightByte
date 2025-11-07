@@ -83,15 +83,17 @@
   </header>
   
   <main 
-    <div id="chat-container">
-        <h1>Silent Chat</h1>
-      <div id="chat-box"></div>
-      <div class="chat-input-area">
-        <input type="text" id="username" placeholder="Enter Username">
-        <textarea id="message" placeholder="Type a message..."></textarea>
-        <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i> Send</button>
-      </div>
+    <div class="chat-container">
+    <h1 class="chat-title">Global Chat</h1>
+    <div id="chat-box" class="chat-box"></div>
+
+    <!-- Input Area -->
+    <div class="chat-input">
+      <input id="username" type="text" placeholder="Enter your name..." />
+      <input id="message" type="text" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
     </div>
+  </div>
 
 <script type="module" src="chat.js"></script>
 
