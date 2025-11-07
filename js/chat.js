@@ -59,25 +59,21 @@ function hexToRgba(hex, alpha = 0.25) {
 function addMessageToChat(username, message, timestamp) {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("chat-message");
-
-  // Time handling
-  let timeString = "";
-  if (timestamp && !isNaN(timestamp)) {
-    const date = new Date(timestamp);
-    timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }
-
   msgDiv.innerHTML = `
-    <div class="message-bubble">
-      <div class="message-header">
-        <strong>${username}</strong>
-        ${timeString ? `<span class="message-time">${timeString}</span>` : ""}
-      </div>
-      <div class="message-text">${message}</div>
+    <div class="chat-header">
+      <strong>${username}</strong>
+      <span class="chat-time">${timestamp ? new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span>
     </div>
+    <div class="message-bubble">${message}</div>
   `;
+
+  const isAtBottom = chatBox.scrollHeight - chatBox.scrollTop <= chatBox.clientHeight + 50;
   chatBox.appendChild(msgDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Only auto-scroll if the user is already near the bottom
+  if (isAtBottom) {
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
 }
 
 // ==============================
