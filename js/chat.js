@@ -76,8 +76,17 @@ function addMessageToChat(username, message, timestamp) {
       <div class="message-text">${message}</div>
     </div>
   `;
+  
+   // Check if user is near the bottom before appending
+  const isNearBottom =
+    chatBox.scrollHeight - chatBox.scrollTop - chatBox.clientHeight < 50;
+
   chatBox.appendChild(msgDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Only scroll if the user was near the bottom
+  if (isNearBottom) {
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
 }
 
 // ==============================
