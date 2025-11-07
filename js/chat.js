@@ -188,3 +188,22 @@ function applyTheme(hexColor, bg) {
   // Save accent color
   localStorage.setItem('themeColor', hexColor);
 }
+
+// ==============================
+// Image Preview Functionality
+// ==============================
+const imagePreviewOverlay = document.getElementById("image-preview-overlay");
+const previewImg = document.getElementById("preview-img");
+
+chatBox.addEventListener("click", (e) => {
+  if (e.target.tagName === "IMG" && e.target.closest(".message-text")) {
+    previewImg.src = e.target.src;
+    imagePreviewOverlay.style.display = "flex";
+  }
+});
+
+imagePreviewOverlay.addEventListener("click", () => {
+  imagePreviewOverlay.style.display = "none";
+  previewImg.src = "";
+});
+
