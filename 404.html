@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Home | Schoology</title>
+<link rel="icon" type="image/x-icon" href="https://www.powerschool.com/favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/silent.css">
+  <script src="https://kit.fontawesome.com/a2e0f1f0bb.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .error-container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 50px 60px;
+      box-shadow: var(--shadow);
+      max-width: 450px;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .error-code {
+      font-size: 6rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .error-message {
+      font-size: 1.3rem;
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: #041627;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+   
+  </style>
+</head>
+
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <div class="error-message">Oops! The page you're looking for doesn't exist.</div>
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-house"></i> Go Home</a>
+  </div>
+
+ 
+  <script src="/js/silent.js"></script>
+</body>
+</html>
