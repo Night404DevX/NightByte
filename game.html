@@ -158,20 +158,6 @@ body {
 
   <script>
 
-// ====== Get Base64 URL from query parameter ======
-const params = new URLSearchParams(window.location.search);
-const encodedUrl = params.get('b64'); // ?b64=BASE64URL
-let iframeUrl = "https://example.com"; // fallback
-
-if (encodedUrl) {
-  try {
-    iframeUrl = atob(encodedUrl);
-  } catch(e) {
-    console.warn("Invalid Base64 URL");
-  }
-}
-iframe.src = iframeUrl;
-
 const iframe = document.getElementById("myIframe");
   const refreshBtn = document.getElementById("refreshBtn");
   const fullscreenBtn = document.getElementById("fullscreenBtn");
