@@ -11,89 +11,62 @@
     <script src="/js/admin.js"></script>
   <style>
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  font-family: inherit;
-  overflow: hidden; /* optional */
+   margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-/* Wrapper for iframe to center it */
-.iframe-wrapper {
-  position: relative;
-  width: 90vw;
-  max-width: 1400px;
-  margin: 2rem auto; /* centers horizontally with some spacing from top */
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
-}
+/* ===== IFRAME WINDOW ===== */
+  .iframe-window {
+    position: relative;
+    width: 85vw;
+    height: 82vh;
+    border-radius: 20px;
+    background: rgba(var(--accent-rgb), 0.05);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+  }
 
-.iframe-container {
-  width: 100%;
-  height: 80vh;
-  border-radius: var(--radius);
-  overflow: hidden;
-}
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 20px;
+    background: #000;
+  }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: var(--radius);
-}
+  /* ===== ICON CONTROLS ===== */
+  .iframe-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    width: 85vw;
+  }
 
-.controls {
-  position: absolute;
-  bottom: -50px;
-  right: 0;
-  display: flex;
-  gap: 12px;
-  z-index: 2;
-}
+  .iframe-controls button {
+    background: rgba(var(--accent-rgb), 0.15);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+    color: var(--text);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 8px 10px;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
 
-.control-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  color: var(--accent-1);
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 6px var(--accent-1);
-}
-
-.control-btn:hover {
-  transform: scale(1.2);
-  color: var(--accent-2);
-}
-
-.iframe-wrapper.fullscreen {
-  width: 100vw !important;
-  height: 100vh !important;
-  max-width: 100vw !important;
-  max-height: 100vh !important;
-  border-radius: 0 !important;
-}
-
-.iframe-wrapper.fullscreen .iframe-container {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 0;
-}
+  .iframe-controls button:hover {
+    background: rgba(var(--accent-rgb), 0.25);
+  }
 </style>
 </head>
 <body>
@@ -168,127 +141,22 @@ iframe {
   </header>
   <main>
 
-<div class="iframe-wrapper" id="iframeWrapper">
-  <div class="iframe-container" id="iframeContainer">
-    <iframe id="myIframe"></iframe>
+ <div class="iframe-window">
+    <iframe id="myIframe" src="https://silentgames.netlify.app/games/whg4/"></iframe>
   </div>
 
-  <div class="controls">
-    <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
-      <i class="fas fa-expand"></i>
-    </button>
-    <button class="control-btn" id="refreshBtn" title="Refresh">
-      <i class="fas fa-sync-alt"></i>
-    </button>
-    <button class="control-btn" id="openBtn" title="Open in new tab">
-      <i class="fas fa-external-link-alt"></i>
-    </button>
+  <div class="iframe-controls">
+    <button id="refreshBtn" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button>
+    <button id="fullscreenBtn" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+    <button id="openBlankBtn" title="Open in New Tab"><i class="fa-solid fa-up-right-from-square"></i></button>
   </div>
-</div>
   </main>
   
-  <footer>
-    <p>© Silent Games • Built with care • <span id="contact">refinesilent@gmail.com</span></p>
-  </footer>
 
   
   <script src="/js/silent.js"></script>
-  
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-  const timeline = document.querySelector(".timeline");
-  const items = document.querySelectorAll(".timeline-item");
-
-  // Observer for timeline line
-  const timelineObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) timeline.classList.add("visible");
-    });
-  }, { threshold: 0.3 });
-
-  if (timeline) timelineObserver.observe(timeline);
-
-  // Observer for individual items
-  const itemObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, { threshold: 0.2 });
-
-  items.forEach(item => itemObserver.observe(item));
-});
-  </script>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-
-// --- Firebase config ---
-const firebaseConfig = {
-  apiKey: "AIzaSyDqT79o5AxFMTUmfiyelG-mPX7axmu1TE4",
-  authDomain: "silentgames-f9785.firebaseapp.com",
-  databaseURL: "https://silentgames-f9785-default-rtdb.firebaseio.com",
-  projectId: "silentgames-f9785",
-  storageBucket: "silentgames-f9785.firebasestorage.app",
-  messagingSenderId: "114016702963",
-  appId: "1:114016702963:web:6d6e53e966e8b4de670286",
-  measurementId: "G-ECS8Z3WEZ3"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// Fetch latest announcement
-async function loadAnnouncement() {
-  const q = query(collection(db, "announcements"), orderBy("timestamp", "desc"), limit(1));
-  const snapshot = await getDocs(q);
-
-  if (!snapshot.empty) {
-    const latestDoc = snapshot.docs[0];
-    const latest = latestDoc.data();
-    const announcementId = latestDoc.id;
-    const lastSeenId = localStorage.getItem("lastAnnouncementId");
-
-    if (announcementId !== lastSeenId) {
-      showPopup(latest.title, latest.message);
-      localStorage.setItem("lastAnnouncementId", announcementId);
-    }
-  }
-}
-
-// Show popup with cleaner design
-function showPopup(title, message) {
-  const popup = document.createElement("div");
-  popup.className = "announcement-popup";
-  popup.innerHTML = `
-    <div class="popup-card">
-      <h2>${title}</h2>
-      <p>${message}</p>
-      <button id="closePopup">Got it</button>
-    </div>
-  `;
-  document.body.appendChild(popup);
-
-  document.getElementById("closePopup").addEventListener("click", () => {
-    popup.classList.remove("visible");
-    setTimeout(() => popup.remove(), 400);
-  });
-
-  setTimeout(() => popup.classList.add("visible"), 100);
-}
-
-loadAnnouncement();
-</script>
 
   <script>
-const wrapper = document.getElementById('iframeWrapper');
-const container = document.getElementById('iframeContainer');
-const iframe = document.getElementById('myIframe');
-const fullscreenBtn = document.getElementById('fullscreenBtn');
-const refreshBtn = document.getElementById('refreshBtn');
-const openBtn = document.getElementById('openBtn');
 
 // ====== Get Base64 URL from query parameter ======
 const params = new URLSearchParams(window.location.search);
@@ -304,56 +172,22 @@ if (encodedUrl) {
 }
 iframe.src = iframeUrl;
 
-function exitFullscreenSmooth() {
-  wrapper.style.transition = 'none';
-  container.style.transition = 'none';
-  document.exitFullscreen?.() || document.webkitExitFullscreen?.() || document.msExitFullscreen?.();
-  wrapper.classList.remove('fullscreen');
-  void wrapper.offsetWidth;
-  wrapper.style.transition = '';
-  container.style.transition = '';
-}
+const iframe = document.getElementById("myIframe");
+  const refreshBtn = document.getElementById("refreshBtn");
+  const fullscreenBtn = document.getElementById("fullscreenBtn");
+  const openBlankBtn = document.getElementById("openBlankBtn");
 
-fullscreenBtn.addEventListener('click', () => {
-  if (!document.fullscreenElement) {
-    wrapper.style.transition = 'none';
-    container.style.transition = 'none';
-    wrapper.requestFullscreen?.() || wrapper.webkitRequestFullscreen?.() || wrapper.msRequestFullscreen?.();
-    wrapper.classList.add('fullscreen');
-    void wrapper.offsetWidth;
-    wrapper.style.transition = '';
-    container.style.transition = '';
-  } else exitFullscreenSmooth();
-});
+  refreshBtn.addEventListener("click", () => iframe.src = iframe.src);
 
-document.addEventListener('fullscreenchange', () => {
-  if (!document.fullscreenElement) exitFullscreenSmooth();
-});
-
-refreshBtn.addEventListener('click', () => {
-  iframe.src = iframe.src;
-});
-
-openBtn.addEventListener('click', () => {
-  const newTab = window.open('about:blank', '_blank');
-  if (!newTab) return;
-  try {
-    newTab.document.write(`<iframe src="${iframe.src}" style="width:100vw;height:100vh;border:none;"></iframe>`);
-    newTab.document.close();
-  } catch (e) {
-    newTab.location.href = iframe.src;
-  }
-});
-
-// Match control color to theme
-function updateControlTheme() {
-  const color = getComputedStyle(document.documentElement).getPropertyValue('--accent-1').trim() || '#64d2ff';
-  document.querySelectorAll('.control-btn').forEach(btn => {
-    btn.style.color = color;
-    btn.style.boxShadow = `0 0 6px ${color}`;
+  fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) iframe.requestFullscreen().catch(()=>{});
+    else document.exitFullscreen();
   });
-}
-updateControlTheme();
+
+  openBlankBtn.addEventListener("click", () => {
+    const newTab = window.open("about:blank", "_blank");
+    newTab.document.write(`<iframe src="${iframe.src}" style="width:100vw;height:100vh;border:none;"></iframe>`);
+  });
 </script>
 
   
