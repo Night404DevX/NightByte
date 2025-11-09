@@ -10,64 +10,61 @@
   <script src="/js/randomSentence.js"></script>
     <script src="/js/admin.js"></script>
   <style>
- main {
-      margin-top: 60px; /* closer to navbar */
+main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
     }
 
-    .iframe-container {
+    .iframe-wrapper {
       position: relative;
-      width: 85%;
+      width: 90%;
       height: 75vh;
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
+      border: 2px solid var(--accent-1);
+      border-radius: 14px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(var(--glass-blur));
-      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     iframe {
       width: 100%;
       height: 100%;
       border: none;
-      border-radius: var(--radius);
+      border-radius: inherit;
     }
 
-    /* Control buttons outside the iframe */
     .iframe-controls {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
       display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      width: 85%;
+      gap: 10px;
+      z-index: 10;
     }
 
     .iframe-btn {
-      width: 40px;
-      height: 40px;
+      background: var(--accent-1);
+      color: #111;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.25s ease, background 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #041627;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
 
     .iframe-btn:hover {
       transform: scale(1.1);
-      opacity: 0.85;
-    }
-
-    .iframe-btn i {
-      font-size: 16px;
+      background: var(--accent-2);
     }
 </style>
 </head>
@@ -142,22 +139,19 @@
   </nav>
   </header>
   <main>
+    <div class="iframe-wrapper">
+      <iframe id="game-frame" src="https://silentgames.netlify.app/games/whg4/" allowfullscreen></iframe>
 
- <div class="iframe-wrapper">
-      <div class="iframe-container">
-        <iframe id="gameFrame" src="https://silentgames.netlify.app/games/whg4/"></iframe>
-
-        <div class="iframe-controls">
-          <button class="iframe-btn" id="refreshBtn" title="Refresh">
-            <i class="fas fa-redo"></i>
-          </button>
-          <button class="iframe-btn" id="fullscreenBtn" title="Fullscreen">
-            <i class="fas fa-expand"></i>
-          </button>
-          <button class="iframe-btn" id="openBlankBtn" title="Open in New Tab">
-            <i class="fas fa-external-link-alt"></i>
-          </button>
-        </div>
+      <div class="iframe-controls">
+        <button class="iframe-btn" onclick="refreshIframe()" title="Refresh">
+          <i class="fas fa-rotate-right"></i>
+        </button>
+        <button class="iframe-btn" onclick="openInNewTab()" title="Open in New Tab">
+          <i class="fas fa-up-right-from-square"></i>
+        </button>
+        <button class="iframe-btn" onclick="toggleFullScreen()" title="Fullscreen">
+          <i class="fas fa-expand"></i>
+        </button>
       </div>
     </div>
   </main>
@@ -167,16 +161,23 @@
   <script src="/js/silent.js"></script>
 
   <script>
- const iframe = document.getElementById("gameFrame");
-    document.getElementById("refreshBtn").onclick = () => {
+  const iframe = document.getElementById('game-frame');
+
+    function refreshIframe() {
       iframe.src = iframe.src;
-    };
-    document.getElementById("fullscreenBtn").onclick = () => {
-      if (iframe.requestFullscreen) iframe.requestFullscreen();
-    };
-    document.getElementById("openBlankBtn").onclick = () => {
-      window.open(iframe.src, "_blank");
-    };
+    }
+
+    function openInNewTab() {
+      window.open(iframe.src, '_blank');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        iframe.requestFullscreen().catch(err => console.error(err));
+      } else {
+        document.exitFullscreen();
+      }
+    }
 </script>
 
   
