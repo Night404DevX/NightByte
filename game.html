@@ -19,7 +19,7 @@
       align-items: center;
     }
 
-    .iframe-wrapper {
+    .game-wrapper {
       position: relative;
       width: 90%;
       height: 75vh;
@@ -38,7 +38,7 @@
       border-radius: inherit;
     }
 
-    .iframe-controls {
+    .game-controls {
       position: absolute;
       bottom: 10px;
       right: 14px;
@@ -47,7 +47,7 @@
       z-index: 10;
     }
 
-    .iframe-btn {
+    .game-btn {
       background: var(--accent-1);
       color: #111;
       border: none;
@@ -62,7 +62,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
 
-    .iframe-btn:hover {
+    .game-btn:hover {
       transform: scale(1.1);
       background: var(--accent-2);
     }
@@ -140,17 +140,17 @@
   </nav>
   </header>
   <main>
-    <div class="iframe-wrapper">
+    <div class="game-wrapper">
       <iframe id="game-frame" src="" allowfullscreen></iframe>
 
-      <div class="iframe-controls">
+      <div class="game-controls">
         <button class="iframe-btn" onclick="refreshIframe()" title="Refresh">
           <i class="fas fa-rotate-right"></i>
         </button>
-        <button class="iframe-btn" onclick="openInNewTab()" title="Open in New Tab">
+        <button class="game-btn" onclick="openInNewTab()" title="Open in New Tab">
           <i class="fas fa-up-right-from-square"></i>
         </button>
-        <button class="iframe-btn" onclick="toggleFullScreen()" title="Fullscreen">
+        <button class="game-btn" onclick="toggleFullScreen()" title="Fullscreen">
           <i class="fas fa-expand"></i>
         </button>
       </div>
@@ -180,7 +180,7 @@
     const decodedUrl = encodedUrl ? decodeBase64(encodedUrl) : null;
 
     // Load decoded URL or fallback
-    iframe.src = decodedUrl || "https://silentgames.netlify.app/games/whg4/";
+    iframe.src = decodedUrl || "https://silentgames.netlify.app/404.html/";
 
     function refreshIframe() {
       iframe.src = iframe.src;
