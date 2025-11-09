@@ -10,7 +10,7 @@
   <script src="/js/randomSentence.js"></script>
     <script src="/js/admin.js"></script>
   <style>
-main {
+ main {
       max-width: 1100px;
       margin: 40px auto;
       padding: 0 20px;
@@ -66,6 +66,7 @@ main {
       transform: scale(1.1);
       background: var(--accent-2);
     }
+
 </style>
 </head>
 <body>
@@ -140,7 +141,7 @@ main {
   </header>
   <main>
     <div class="iframe-wrapper">
-      <iframe id="game-frame" src="https://silentgames.netlify.app/games/whg4/" allowfullscreen></iframe>
+      <iframe id="game-frame" src="" allowfullscreen></iframe>
 
       <div class="iframe-controls">
         <button class="iframe-btn" onclick="refreshIframe()" title="Refresh">
@@ -163,12 +164,30 @@ main {
   <script>
   const iframe = document.getElementById('game-frame');
 
+    // Get Base64-encoded URL (?url=...)
+    const params = new URLSearchParams(window.location.search);
+    const encodedUrl = params.get("url");
+
+    function decodeBase64(str) {
+      try {
+        return atob(str);
+      } catch (e) {
+        console.error("Invalid Base64:", e);
+        return null;
+      }
+    }
+
+    const decodedUrl = encodedUrl ? decodeBase64(encodedUrl) : null;
+
+    // Load decoded URL or fallback
+    iframe.src = decodedUrl || "https://silentgames.netlify.app/games/whg4/";
+
     function refreshIframe() {
       iframe.src = iframe.src;
     }
 
     function openInNewTab() {
-      window.open(iframe.src, '_blank');
+      window.open(iframe.src, "_blank");
     }
 
     function toggleFullScreen() {
