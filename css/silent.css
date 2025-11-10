@@ -351,7 +351,7 @@ footer {
 }
 
 .search-bar:focus-within {
-  background-color: #222533;
+  background-color: var(--accent-1);
   border-color: #00ff99;
   box-shadow: 0 4px 15px rgba(0, 255, 153, 0.35);
 }
