@@ -150,7 +150,10 @@ function normalizeText(text) {
 function containsBannedWord(text) {
   const normalized = normalizeText(text);
   return bannedWords.some(word => normalized.includes(normalizeText(word)));
+}
 
+function isBadUsername(name) {
+  return containsBannedWord(name);
 }
 
 function showWarning(msg, color = "var(--accent-1)") {
@@ -239,6 +242,14 @@ function sendMessage() {
   const username = usernameInput.value.trim() || "Guest";
   const message = messageInput.value.trim();
   if (!message) return;
+
+  // 🛑 Check username for bad words
+  if (isBadUsername(username)) {
+    showWarning("🚫 Your username contains inappropriate language. Please change it.", "rgba(255,100,100,0.8)");
+    usernameInput.focus();
+    return;
+  }
+
 
   const now = Date.now();
 
