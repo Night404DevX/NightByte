@@ -236,8 +236,21 @@ function normalizeText(text) {
 }
 
 function containsBannedWord(text) {
-  const normalized = normalizeText(text);
-  return bannedWords.some(word => normalized.includes(normalizeText(word)));
+  const normalized = text
+    .toLowerCase()
+    .replace(/[0-9@*$%&!^#]/g, (c) => {
+      const map = { '0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's', '@': 'a', '$': 's' };
+      return map[c] || c;
+    });
+
+  // build regex for word boundaries — \bword\b means "whole word only"
+  return bannedWords.some(word => {
+    const cleanWord = word.replace(/[^\w]/g, '');
+    const regex = new RegExp(`\\b${cleanWord}\\b`, "i");
+    return regex.test(normalized);
+  });
+}
+
 }
 
 function isBadUsername(name) {
