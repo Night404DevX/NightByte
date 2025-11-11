@@ -466,6 +466,56 @@ footer {
   transition: transform 0.3s, background 0.4s;
 }
 
+#games a {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin: 0.5vw;
+  border-radius: 1vw;
+  overflow: hidden;
+}
+
+#games a img {
+  width: 15.6vw;
+  height: 15.6vw;
+  border-radius: 1vw;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: block;
+}
+
+/* Hover effect: lift and glow */
+#games a:hover img {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 0 25px var(--accent-1);
+}
+
+/* Label below the image using ::after and alt text */
+#games a::after {
+  content: attr(alt);
+  position: absolute;
+  bottom: -40px; /* initially hidden below */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 20, 0.8);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+
+/* Show name smoothly on hover */
+#games a:hover::after {
+  bottom: -25px;
+  opacity: 1;
+}
+
+
 #sub {
  max-width: 700px;
  margin: 40px auto 50px;
