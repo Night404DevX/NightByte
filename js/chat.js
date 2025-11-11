@@ -251,7 +251,6 @@ function containsBannedWord(text) {
   });
 }
 
-}
 
 function isBadUsername(name) {
   return containsBannedWord(name);
