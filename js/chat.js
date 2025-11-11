@@ -121,10 +121,15 @@ onChildAdded(messagesRef, (snapshot) => {
 });
 
 // ==============================
-// Chat Filter + Timeout (Persistent)
+// Chat Filter + Timeout + Visual Timer
 // ==============================
+
+// 🔒 Comprehensive bad word list (sanitized version, add/remove as needed)
 const bannedWords = [
-  "badword1", "badword2", "slur1", "slur2", "offensiveword", "curseword"
+  "fuck", "shit", "bitch", "asshole", "bastard", "dick", "pussy", "slut",
+  "whore", "nigger", "faggot", "retard", "cunt", "cock", "penis", "vagina",
+  "blowjob", "handjob", "cum", "rape", "kill yourself", "nazi", "hitler",
+  "stfu", "kys", "die", "nigga", "simp", "suck", "idiot", "dumbass"
 ];
 
 let userWarnings = parseInt(localStorage.getItem("userWarnings")) || 0;
@@ -152,21 +157,23 @@ function showWarning(msg, color = "var(--accent-1)") {
   if (!warning) {
     warning = document.createElement("div");
     warning.id = "chat-warning";
-    warning.style.position = "fixed";
-    warning.style.bottom = "70px";
-    warning.style.left = "50%";
-    warning.style.transform = "translateX(-50%)";
-    warning.style.padding = "12px 18px";
-    warning.style.borderRadius = "14px";
-    warning.style.background = "rgba(20,20,30,0.6)";
-    warning.style.backdropFilter = "blur(10px)";
-    warning.style.border = `1px solid ${color}`;
-    warning.style.boxShadow = `0 0 20px ${color}55`;
-    warning.style.color = "var(--text)";
-    warning.style.fontSize = "14px";
-    warning.style.fontWeight = "500";
-    warning.style.zIndex = "9999";
-    warning.style.transition = "opacity 0.4s ease";
+    Object.assign(warning.style, {
+      position: "fixed",
+      bottom: "80px",
+      left: "50%",
+      transform: "translateX(-50%)",
+      padding: "12px 18px",
+      borderRadius: "14px",
+      background: "rgba(20,20,30,0.6)",
+      backdropFilter: "blur(10px)",
+      border: `1px solid ${color}`,
+      boxShadow: `0 0 20px ${color}55`,
+      color: "var(--text)",
+      fontSize: "14px",
+      fontWeight: "500",
+      zIndex: "9999",
+      transition: "opacity 0.4s ease"
+    });
     document.body.appendChild(warning);
   }
   warning.textContent = msg;
@@ -174,17 +181,55 @@ function showWarning(msg, color = "var(--accent-1)") {
   setTimeout(() => (warning.style.opacity = 0), 3000);
 }
 
-// On load, show mute status if still muted
+// --- Visual mute timer bar ---
+function createMuteBar(durationMs) {
+  let bar = document.getElementById("mute-timer");
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.id = "mute-timer";
+    Object.assign(bar.style, {
+      position: "fixed",
+      bottom: "55px",
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: "300px",
+      height: "6px",
+      borderRadius: "6px",
+      background: "rgba(255,255,255,0.1)",
+      overflow: "hidden",
+      zIndex: "9998",
+      backdropFilter: "blur(6px)",
+      border: "1px solid rgba(255,255,255,0.1)"
+    });
+    const fill = document.createElement("div");
+    fill.id = "mute-fill";
+    Object.assign(fill.style, {
+      width: "100%",
+      height: "100%",
+      background: "var(--accent-1)",
+      boxShadow: "0 0 10px var(--accent-1)",
+      transition: `width ${durationMs}ms linear`
+    });
+    bar.appendChild(fill);
+    document.body.appendChild(bar);
+    setTimeout(() => {
+      fill.style.width = "0%";
+    }, 100);
+    setTimeout(() => bar.remove(), durationMs);
+  }
+}
+
+// On load: resume mute if active
 document.addEventListener("DOMContentLoaded", () => {
   const now = Date.now();
   if (muteUntil > now) {
-    const remaining = Math.ceil((muteUntil - now) / 1000);
-    showWarning(`⏳ You are still muted for ${remaining}s`, "rgba(255,100,100,0.8)");
+    const remaining = muteUntil - now;
+    showWarning(`⏳ You’re still muted for ${(remaining / 1000).toFixed(0)}s`, "rgba(255,100,100,0.8)");
+    createMuteBar(remaining);
   } else {
     localStorage.removeItem("muteUntil");
   }
 });
-
 
 // ==============================
 // Send message
@@ -196,29 +241,29 @@ function sendMessage() {
 
   const now = Date.now();
 
-  // Check mute status
+  // Check mute
   if (now < muteUntil) {
     const remaining = Math.ceil((muteUntil - now) / 1000);
     showWarning(`⏳ You’re muted for ${remaining}s`, "rgba(255,100,100,0.8)");
     return;
   }
 
-  // Filter for bad words
+  // Filter check
   if (containsBannedWord(message)) {
     userWarnings++;
     localStorage.setItem("userWarnings", userWarnings);
 
     let muteTime = 0;
     if (userWarnings >= 3) {
-      // Escalating mute durations
-      if (userWarnings === 3) muteTime = 1 * 60 * 1000;       // 1 min
-      else if (userWarnings === 4) muteTime = 2 * 60 * 1000;  // 2 min
-      else if (userWarnings === 5) muteTime = 5 * 60 * 1000;  // 5 min
-      else muteTime = 10 * 60 * 1000;                         // 10+ min
+      if (userWarnings === 3) muteTime = 60 * 1000;
+      else if (userWarnings === 4) muteTime = 2 * 60 * 1000;
+      else if (userWarnings === 5) muteTime = 5 * 60 * 1000;
+      else muteTime = 10 * 60 * 1000;
 
       muteUntil = now + muteTime;
       localStorage.setItem("muteUntil", muteUntil);
       showWarning(`🚫 You’ve been muted for ${muteTime / 60000} minutes`, "rgba(255,80,80,0.8)");
+      createMuteBar(muteTime);
     } else {
       showWarning("⚠️ Message blocked — inappropriate language detected", "rgba(255,150,100,0.9)");
     }
@@ -227,7 +272,7 @@ function sendMessage() {
     return;
   }
 
-  // If allowed, send the message
+  // Send message if clean
   const timestamp = Date.now();
   push(messagesRef, { username, message, timestamp });
   messageInput.value = "";
