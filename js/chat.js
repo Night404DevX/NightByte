@@ -33,6 +33,60 @@ const sendBtn = document.getElementById("sendBtn");
 const messageInput = document.getElementById("message");
 const usernameInput = document.getElementById("username");
 
+// =====================
+// Mute system variables + live countdown
+// =====================
+let muteEndTime = parseInt(localStorage.getItem("muteEndTime")) || 0;
+let badWordCount = parseInt(localStorage.getItem("badWordCount")) || 0;
+let muteCount = parseInt(localStorage.getItem("muteCount")) || 0;
+let muteInterval;
+
+// Create and style countdown display
+const muteNotice = document.createElement("div");
+muteNotice.id = "muteNotice";
+Object.assign(muteNotice.style, {
+  display: "none",
+  textAlign: "center",
+  padding: "10px",
+  borderRadius: "10px",
+  background: "rgba(255, 80, 80, 0.2)",
+  border: "1px solid rgba(255, 80, 80, 0.4)",
+  color: "var(--text, #fff)",
+  fontSize: "14px",
+  fontWeight: "500",
+  marginBottom: "8px",
+  transition: "opacity 0.4s ease",
+});
+document.querySelector(".chat-input-area").insertAdjacentElement("beforebegin", muteNotice);
+
+function startMuteCountdown(duration) {
+  const end = Date.now() + duration;
+  muteEndTime = end;
+  localStorage.setItem("muteEndTime", end.toString());
+  muteNotice.style.display = "block";
+
+  if (muteInterval) clearInterval(muteInterval);
+  muteInterval = setInterval(() => {
+    const remaining = muteEndTime - Date.now();
+    if (remaining <= 0) {
+      clearInterval(muteInterval);
+      muteNotice.style.display = "none";
+      localStorage.removeItem("muteEndTime");
+      return;
+    }
+    const m = Math.floor(remaining / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
+    muteNotice.textContent = `⏳ You are muted for ${m}m ${s}s due to repeated bad words.`;
+  }, 1000);
+}
+
+// Resume mute countdown if page refreshes mid-mute
+if (Date.now() < muteEndTime) {
+  const remaining = muteEndTime - Date.now();
+  startMuteCountdown(remaining);
+}
+
+
 // ==============================
 // Constants for cleanup
 // ==============================
@@ -281,28 +335,24 @@ function sendMessage() {
   }
 
   // Filter check
-  if (containsBannedWord(message)) {
-    userWarnings++;
-    localStorage.setItem("userWarnings", userWarnings);
+if (containsBannedWord(message)) {
+  badWordCount++;
+  localStorage.setItem("badWordCount", badWordCount);
 
-    let muteTime = 0;
-    if (userWarnings >= 3) {
-      if (userWarnings === 3) muteTime = 60 * 1000;
-      else if (userWarnings === 4) muteTime = 2 * 60 * 1000;
-      else if (userWarnings === 5) muteTime = 5 * 60 * 1000;
-      else muteTime = 10 * 60 * 1000;
-
-      muteUntil = now + muteTime;
-      localStorage.setItem("muteUntil", muteUntil);
-      showWarning(`🚫 You’ve been muted for ${muteTime / 60000} minutes`, "rgba(255,80,80,0.8)");
-      createMuteBar(muteTime);
-    } else {
-      showWarning("⚠️ Message blocked — inappropriate language detected", "rgba(255,150,100,0.9)");
-    }
-
-    messageInput.value = "";
-    return;
+  if (badWordCount >= 3) {
+    muteCount++;
+    badWordCount = 0;
+    localStorage.setItem("muteCount", muteCount);
+    const duration = 30 * 1000 * Math.pow(2, muteCount - 1); // 30s → 1m → 2m → 4m...
+    startMuteCountdown(duration);
+  } else {
+    showWarning("⚠️ Inappropriate language detected. Continued use will result in a mute.", "rgba(255,150,100,0.9)");
   }
+
+  messageInput.value = "";
+  return;
+}
+
 
   // Send message if clean
   const timestamp = Date.now();
