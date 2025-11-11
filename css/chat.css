@@ -183,7 +183,6 @@ h1 {
   animation: popIn 0.25s ease forwards;
 }
 
-/* Popup overlay */
 .rules-popup {
   position: fixed;
   inset: 0;
@@ -205,19 +204,19 @@ h1 {
 
 .rules-card {
   background: rgba(20, 20, 30, 0.95);
-  border: 1px solid var(--accent-1);
+  border: 1px solid var(--accent-1, #64d2ff);
   border-radius: 16px;
   padding: 25px 30px;
-  color: var(--text);
+  color: var(--text, #fff);
   text-align: center;
   width: 90%;
   max-width: 400px;
-  box-shadow: 0 0 30px var(--accent-1);
+  box-shadow: 0 0 30px var(--accent-1, #64d2ff);
   animation: popIn 0.4s ease;
 }
 
 .rules-card h2 {
-  color: var(--accent-1);
+  color: var(--accent-1, #64d2ff);
   margin-bottom: 10px;
 }
 
@@ -227,7 +226,7 @@ h1 {
   margin: 15px 0;
   text-align: left;
   font-size: 15px;
-  color: var(--text);
+  color: var(--text, #e9eef8);
 }
 
 .rules-card li {
@@ -235,7 +234,7 @@ h1 {
 }
 
 .rules-card button {
-  background: var(--accent-1);
+  background: var(--accent-1, #64d2ff);
   border: none;
   padding: 10px 20px;
   border-radius: 12px;
@@ -247,13 +246,7 @@ h1 {
 
 .rules-card button:hover {
   transform: scale(1.05);
-  background: var(--accent-2);
-}
-
-/* Animations */
-@keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  background: var(--accent-2, #a78bfa);
 }
 
 @keyframes popIn {
@@ -261,3 +254,8 @@ h1 {
   to { transform: scale(1); opacity: 1; }
 }
 
+/* Animations */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
