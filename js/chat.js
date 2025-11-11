@@ -352,3 +352,19 @@ imagePreviewOverlay.addEventListener("click", () => {
   previewImg.src = "";
 });
 
+// Friendly popup logic
+document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("rules-popup");
+  const agreeBtn = document.getElementById("agree-btn");
+  const hasSeenRules = localStorage.getItem("hasSeenRules");
+
+  if (!hasSeenRules) {
+    popup.classList.add("visible");
+  }
+
+  agreeBtn.addEventListener("click", () => {
+    localStorage.setItem("hasSeenRules", "true");
+    popup.classList.remove("visible");
+    setTimeout(() => popup.remove(), 500);
+  });
+});
