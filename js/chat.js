@@ -126,11 +126,31 @@ onChildAdded(messagesRef, (snapshot) => {
 
 // 🔒 Comprehensive bad word list (sanitized version, add/remove as needed)
 const bannedWords = [
-  "fuck", "shit", "bitch", "asshole", "bastard", "dick", "pussy", "slut",
-  "whore", "nigger", "faggot", "retard", "cunt", "cock", "penis", "vagina",
-  "blowjob", "handjob", "cum", "rape", "kill yourself", "nazi", "hitler",
-  "stfu", "kys", "die", "nigga", "simp", "suck", "idiot", "dumbass"
+  // General profanity
+  "fuck", "shit", "bitch", "asshole", "bastard", "dick", "pussy", "slut", "whore",
+  "cock", "penis", "vagina", "ballsack", "boobs", "boobies", "blowjob", "handjob",
+  "cunt", "wank", "jerkoff", "cum", "jizz", "dildo", "buttplug", "anal", "porn",
+  "hentai", "nudes", "sex", "horny", "orgasm", "fap", "masturbate",
+
+  // Insults / harassment
+  "idiot", "stupid", "dumb", "moron", "loser", "retard", "r3tard", "dumbass",
+  "fatass", "lazyass", "ugly", "kill yourself", "kys", "die", "die in a hole",
+  "stfu", "shut up", "loser", "worthless", "trash", "noob",
+
+  // Racist / hate speech (sanitized)
+  "nigger", "nigga", "chink", "spic", "beaner", "cracker", "faggot", "fag",
+  "dyke", "tranny", "retard", "mongoloid", "gook", "towelhead", "sandnigger",
+  "paki", "terrorist", "nazi", "hitler", "gas the jews", "white power",
+
+  // Self-harm / suicide encouragement
+  "kill yourself", "kys", "cut yourself", "hang yourself", "jump off", "end it",
+
+  // Coded / obfuscated versions
+  "f@ck", "f*ck", "sh1t", "b1tch", "a$$", "c0ck", "c0nt", "fucc", "fukk", "phuck",
+  "fuk", "fuc", "sht", "bich", "sl@t", "wh0re", "n1gga", "n1gger", "n!gger", "ret@rd",
+  "r3tard", "r3t@rd", "ni99a", "ni99er", "f@ggot", "f@g", "f@gg0t"
 ];
+
 
 let userWarnings = parseInt(localStorage.getItem("userWarnings")) || 0;
 let muteUntil = parseInt(localStorage.getItem("muteUntil")) || 0;
