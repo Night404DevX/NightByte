@@ -241,12 +241,6 @@ function sendMessage() {
   const message = messageInput.value.trim();
   if (!message) return;
 
-   if (isBadUsername(username)) {
-    showWarning("🚫 Your username contains inappropriate language. Please change it.", "rgba(255,100,100,0.8)");
-    usernameInput.focus();
-    return;
-  }
-
   const now = Date.now();
 
   // Check mute
