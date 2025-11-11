@@ -150,8 +150,7 @@ function normalizeText(text) {
 function containsBannedWord(text) {
   const normalized = normalizeText(text);
   return bannedWords.some(word => normalized.includes(normalizeText(word)));
-  function isBadUsername(name) {
-  return containsBannedWord(name);
+
 }
 
 function showWarning(msg, color = "var(--accent-1)") {
