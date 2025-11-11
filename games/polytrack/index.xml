@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<Module>
+<ModulePrefs title="google.com"/>
+<Content type="html">
+<![CDATA[ <!DOCTYPE html>
 <html>
 
 <head>
@@ -70,3 +73,6 @@
 </body>
 
 </html>
+ ]]>
+</Content>
+</Module>
