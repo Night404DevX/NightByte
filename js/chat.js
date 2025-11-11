@@ -121,6 +121,72 @@ onChildAdded(messagesRef, (snapshot) => {
 });
 
 // ==============================
+// Chat Filter + Timeout (Persistent)
+// ==============================
+const bannedWords = [
+  "badword1", "badword2", "slur1", "slur2", "offensiveword", "curseword"
+];
+
+let userWarnings = parseInt(localStorage.getItem("userWarnings")) || 0;
+let muteUntil = parseInt(localStorage.getItem("muteUntil")) || 0;
+
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .replace(/[\s._\-@#$%^&*()+=!~`|\\\/[\]{};:'",<>?]/g, "")
+    .replace(/0/g, "o")
+    .replace(/1/g, "i")
+    .replace(/3/g, "e")
+    .replace(/4/g, "a")
+    .replace(/5/g, "s")
+    .replace(/7/g, "t");
+}
+
+function containsBannedWord(text) {
+  const normalized = normalizeText(text);
+  return bannedWords.some(word => normalized.includes(normalizeText(word)));
+}
+
+function showWarning(msg, color = "var(--accent-1)") {
+  let warning = document.getElementById("chat-warning");
+  if (!warning) {
+    warning = document.createElement("div");
+    warning.id = "chat-warning";
+    warning.style.position = "fixed";
+    warning.style.bottom = "70px";
+    warning.style.left = "50%";
+    warning.style.transform = "translateX(-50%)";
+    warning.style.padding = "12px 18px";
+    warning.style.borderRadius = "14px";
+    warning.style.background = "rgba(20,20,30,0.6)";
+    warning.style.backdropFilter = "blur(10px)";
+    warning.style.border = `1px solid ${color}`;
+    warning.style.boxShadow = `0 0 20px ${color}55`;
+    warning.style.color = "var(--text)";
+    warning.style.fontSize = "14px";
+    warning.style.fontWeight = "500";
+    warning.style.zIndex = "9999";
+    warning.style.transition = "opacity 0.4s ease";
+    document.body.appendChild(warning);
+  }
+  warning.textContent = msg;
+  warning.style.opacity = 1;
+  setTimeout(() => (warning.style.opacity = 0), 3000);
+}
+
+// On load, show mute status if still muted
+document.addEventListener("DOMContentLoaded", () => {
+  const now = Date.now();
+  if (muteUntil > now) {
+    const remaining = Math.ceil((muteUntil - now) / 1000);
+    showWarning(`⏳ You are still muted for ${remaining}s`, "rgba(255,100,100,0.8)");
+  } else {
+    localStorage.removeItem("muteUntil");
+  }
+});
+
+
+// ==============================
 // Send message
 // ==============================
 function sendMessage() {
@@ -128,11 +194,45 @@ function sendMessage() {
   const message = messageInput.value.trim();
   if (!message) return;
 
+  const now = Date.now();
+
+  // Check mute status
+  if (now < muteUntil) {
+    const remaining = Math.ceil((muteUntil - now) / 1000);
+    showWarning(`⏳ You’re muted for ${remaining}s`, "rgba(255,100,100,0.8)");
+    return;
+  }
+
+  // Filter for bad words
+  if (containsBannedWord(message)) {
+    userWarnings++;
+    localStorage.setItem("userWarnings", userWarnings);
+
+    let muteTime = 0;
+    if (userWarnings >= 3) {
+      // Escalating mute durations
+      if (userWarnings === 3) muteTime = 1 * 60 * 1000;       // 1 min
+      else if (userWarnings === 4) muteTime = 2 * 60 * 1000;  // 2 min
+      else if (userWarnings === 5) muteTime = 5 * 60 * 1000;  // 5 min
+      else muteTime = 10 * 60 * 1000;                         // 10+ min
+
+      muteUntil = now + muteTime;
+      localStorage.setItem("muteUntil", muteUntil);
+      showWarning(`🚫 You’ve been muted for ${muteTime / 60000} minutes`, "rgba(255,80,80,0.8)");
+    } else {
+      showWarning("⚠️ Message blocked — inappropriate language detected", "rgba(255,150,100,0.9)");
+    }
+
+    messageInput.value = "";
+    return;
+  }
+
+  // If allowed, send the message
   const timestamp = Date.now();
   push(messagesRef, { username, message, timestamp });
-
   messageInput.value = "";
 }
+
 
 // ==============================
 // Event listeners
