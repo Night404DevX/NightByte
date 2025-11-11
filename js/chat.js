@@ -371,7 +371,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const hasSeenRules = localStorage.getItem("hasSeenRules");
 
   if (!hasSeenRules) {
-    popup.classList.add("visible");
+    // wait a moment for fade-in
+    setTimeout(() => popup.classList.add("visible"), 400);
   }
 
   agreeBtn.addEventListener("click", () => {
