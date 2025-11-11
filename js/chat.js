@@ -78,7 +78,7 @@ function startMuteCountdown(duration) {
 }
     const m = Math.floor(remaining / 60000);
     const s = Math.floor((remaining % 60000) / 1000);
-    muteNotice.textContent = `⏳ You are muted for ${m}m ${s}s due to repeated bad words.`;
+    muteNotice.textContent = `⏳ You are muted for ${m}m ${s}s due to inappropriate language.`;
   }, 1000);
 }
 
