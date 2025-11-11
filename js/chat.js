@@ -363,21 +363,3 @@ imagePreviewOverlay.addEventListener("click", () => {
   imagePreviewOverlay.style.display = "none";
   previewImg.src = "";
 });
-
-// Friendly popup logic
-document.addEventListener("DOMContentLoaded", () => {
-  const popup = document.getElementById("rules-popup");
-  const agreeBtn = document.getElementById("agree-btn");
-  const hasSeenRules = localStorage.getItem("hasSeenRules");
-
-  if (!hasSeenRules) {
-    // wait a moment for fade-in
-    setTimeout(() => popup.classList.add("visible"), 400);
-  }
-
-  agreeBtn.addEventListener("click", () => {
-    localStorage.setItem("hasSeenRules", "true");
-    popup.classList.remove("visible");
-    setTimeout(() => popup.remove(), 500);
-  });
-});
