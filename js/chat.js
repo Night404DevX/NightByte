@@ -64,16 +64,18 @@ function startMuteCountdown(duration) {
   muteEndTime = end;
   localStorage.setItem("muteEndTime", end.toString());
   muteNotice.style.display = "block";
+  disableChatInput(true);
 
   if (muteInterval) clearInterval(muteInterval);
   muteInterval = setInterval(() => {
     const remaining = muteEndTime - Date.now();
     if (remaining <= 0) {
-      clearInterval(muteInterval);
-      muteNotice.style.display = "none";
-      localStorage.removeItem("muteEndTime");
-      return;
-    }
+  clearInterval(muteInterval);
+  muteNotice.style.display = "none";
+  disableChatInput(false);
+  localStorage.removeItem("muteEndTime");
+  return;
+}
     const m = Math.floor(remaining / 60000);
     const s = Math.floor((remaining % 60000) / 1000);
     muteNotice.textContent = `⏳ You are muted for ${m}m ${s}s due to repeated bad words.`;
@@ -84,7 +86,19 @@ function startMuteCountdown(duration) {
 if (Date.now() < muteEndTime) {
   const remaining = muteEndTime - Date.now();
   startMuteCountdown(remaining);
+  disableChatInput(true);
 }
+
+
+function disableChatInput(disabled) {
+  messageInput.disabled = disabled;
+  sendBtn.disabled = disabled;
+  messageInput.style.opacity = disabled ? "0.6" : "1";
+  sendBtn.style.opacity = disabled ? "0.6" : "1";
+  messageInput.style.cursor = disabled ? "not-allowed" : "text";
+  sendBtn.style.cursor = disabled ? "not-allowed" : "pointer";
+}
+
 
 
 // ==============================
