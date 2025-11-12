@@ -988,13 +988,24 @@
 <script>
   document.getElementById("randomGame").addEventListener("click", (e) => {
   e.preventDefault();
-  const gameLinks = document.querySelectorAll("#games :not(#randomGame)");
-  if (gameLinks.length === 0) return alert("No games found!");
 
+  // Collect all valid game links except the random button
+  const gameLinks = Array.from(document.querySelectorAll("#games :not(#randomGame)"))
+    .map(a => a.getAttribute("href"))
+    .filter(href => href && href.trim() !== ""); // Only keep valid ones
+
+  if (gameLinks.length === 0) {
+    alert("⚠️ No valid games found!");
+    return;
+  }
+
+  // Pick random game
   const randomIndex = Math.floor(Math.random() * gameLinks.length);
-  const randomGame = gameLinks[randomIndex].href;
+  const randomGame = gameLinks[randomIndex];
 
-  window.location.href = randomGame;
+  // Ensure it navigates correctly even for relative URLs
+  const fullUrl = new URL(randomGame, window.location.origin).href;
+  window.location.href = fullUrl;
 });
 
 </script>
