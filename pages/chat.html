@@ -12,6 +12,7 @@
   <script src="/js/randomSentence.js"></script>
 </head>
 <body>
+
   <canvas id="particles"></canvas>
   <header>
     <nav>
@@ -83,37 +84,61 @@
   </header>
   
   <main 
-    <section id="special-thanks" class="fade-in">
-      <h1 class="title">Silent Chat Shutdown</h1>
-      <div class="glass-card">
-        <p>Dear Silent Members,<br>
-<br>
-I am writing to inform you that the general chat page feature will be disabled, effective at 2:00 PM November 7, 2025, and would be back on November 12, 2025.<br>
-<br>
-People have been telling me on how adding chat was a bad idea since anyone can impersonate other people and could get in trouble and how people were leaking other people personal information (including name, address, and phone number) <br>
-<br>          
-This was a difficult decision, but it is necessary due to a consistent pattern of behavior that violates our community guidelines and standards. Unfortunately, the chat environment has recently been host to inappropriate content, including doxxing, spam, harassment, bullying, or abusive language, which has created a negative and unwelcoming space for many members. <br>
-<br>
-My priority is to maintain a respectful, and positive environment for everyone. When a space consistently fails to meet these core principles, I must take action to protect our community.<br>
-<br>
-I appreciate the members who used the chat responsibly and productively, and I thank those who reported the strange activity. I apologize for any inconvenience this may cause to those who valued this feature.<br>
-<br>
-I encourage you to continue to play games, where I can better ensure that interactions remain positive and constructive.<br>
-<br>
-Thank you for your understanding and continued support in keeping our community a great place for everyone.<br>
-<br>
-Sincerely,<br>
-          <br>
-RefinedSilent</p>
-      </div>
-    </section>
 
+    <div id="chat-container">
+        <h1>Silent Chat</h1>
+      <div id="chat-box"></div>
+      <div class="chat-input-area">
+        <input type="text" id="username" placeholder="Enter Username">
+        <textarea id="message" placeholder="Type a message..."></textarea>
+        <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i> Send</button>
+      </div>
+    </div>
+
+<script type="module" src="/js/chat.js"></script>
 
   </main>
 
+  <!-- Friendly Rules Popup -->
+<div id="rules-popup" class="rules-popup hidden">
+  <div class="rules-card">
+    <h2>💫 Silent Chat Is Back!</h2>
+    <p>Welcome to the Silent Chat! Please remember:</p>
+    <ul>
+      <li>💬 Be friendly to others</li>
+      <li>🚫 No bullying or harassment</li>
+      <li>❌ No bad words or hate speech</li>
+      <li>🤝 Keep the chat positive for everyone</li>
+    </ul>
+    <button id="agree-btn">I Understand</button>
+  </div>
+</div>
+
   <!-- Firebase & Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("rules-popup");
+  const agreeBtn = document.getElementById("agree-btn");
+
+  // Check if user already saw the rules
+  const hasSeenRules = localStorage.getItem("hasSeenRules");
+
+  if (!hasSeenRules && popup) {
+    // Give it a slight delay for a nice fade-in
+    setTimeout(() => popup.classList.add("visible"), 400);
+  }
+
+  agreeBtn?.addEventListener("click", () => {
+    localStorage.setItem("hasSeenRules", "true");
+    popup.classList.remove("visible");
+    setTimeout(() => popup.remove(), 500);
+  });
+});
+  </script>
   <script type="module" src="/js/chat.js"></script>
   <script src="/js/silent.js"></script>
+
+  
 
 </body>
 </html>
