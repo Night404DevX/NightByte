@@ -466,58 +466,6 @@ footer {
   transition: transform 0.3s, background 0.4s;
 }
 
-#games a {
-  position: relative;
-  display: inline-block;
-  text-align: center;
-}
-
-.game-block {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  border-radius: 1vw;
-  transition: transform 0.3s ease;
-}
-
-.game-block img {
-  width: 15.6vw;
-  height: 15.6vw;
-  border-radius: inherit;
-  display: block;
-  object-fit: cover;
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.game-block:hover img {
-  filter: brightness(50%);
-  transform: scale(1.05);
-}
-
-.game-title {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(6px);
-  padding: 5px 12px;
-  border-radius: 10px;
-  color: var(--accent-1);
-  font-weight: 600;
-  font-size: 0.9vw;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.game-block:hover .game-title {
-  opacity: 1;
-  transform: translate(-50%, -2px);
-}
-
-
-
-
 #sub {
  max-width: 700px;
  margin: 40px auto 50px;
