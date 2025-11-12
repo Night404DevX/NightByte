@@ -945,6 +945,28 @@ cursor: url('/assets/select.cur'), auto;
   background: var(--accent-2, #a78bfa);
 }
 
+#randomGameBtn {
+  background: var(--accent-1);
+  color: var(--text);
+  border: none;
+  padding: 0.8vw 1.6vw;
+  font-size: 1vw;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: 0.3s;
+  position: fixed;
+  bottom: 2vw;
+  right: 2vw;
+  z-index: 999;
+}
+
+#randomGameBtn:hover {
+  transform: scale(1.05);
+  background: var(--accent-2);
+}
+
+
 @keyframes popIn {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
