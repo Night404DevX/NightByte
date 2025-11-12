@@ -966,6 +966,44 @@ cursor: url('/assets/select.cur'), auto;
   background: var(--accent-2);
 }
 
+#randomGame {
+  position: relative;
+}
+
+#randomGame img {
+  height: 15.6vw;
+  width: 15.6vw;
+  border-radius: 1vw;
+  margin: .5vw;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .2s, box-shadow .3s, background .4s;
+  box-shadow: 0 0 12px var(--accent-1);
+  border: 2px solid var(--accent-1);
+  animation: pulseGlow 2.5s infinite;
+}
+
+#randomGame:hover img {
+  transform: translateY(-8px) scale(1.05);
+}
+
+#randomGame .game-label {
+  display: block;
+  text-align: center;
+  margin-top: 0.4vw;
+  color: var(--accent-1);
+  font-weight: 600;
+  font-size: 1vw;
+  text-shadow: 0 0 10px var(--accent-1);
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 8px var(--accent-1); }
+  50% { box-shadow: 0 0 20px var(--accent-1); }
+  100% { box-shadow: 0 0 8px var(--accent-1); }
+}
+
+
 
 @keyframes popIn {
   from { transform: scale(0.9); opacity: 0; }
