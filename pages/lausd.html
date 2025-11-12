@@ -984,7 +984,19 @@
 
 
 </div>
+<script>
+  document.getElementById("randomGame").addEventListener("click", (e) => {
+  e.preventDefault();
+  const gameLinks = document.querySelectorAll("#games :not(#randomGame)");
+  if (gameLinks.length === 0) return alert("No games found!");
+  
+  const randomIndex = Math.floor(Math.random() * gameLinks.length);
+  const randomGame = gameLinks[randomIndex].href;
 
+  window.location.href = randomGame;
+});
+
+</script>
   <script src="/js/silent.js"></script>
         <script src="../js/loading.js"></script>
 <script src="/js/script.js"></script>
