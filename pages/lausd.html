@@ -137,10 +137,11 @@
 
         
     <div id="games">
-  <a id="randomGame" href="#">
-  <img src="/images/random-game.png" alt="Random Game">
-</a>
 
+  <a id="randomGame" href="#">
+    <img src="/images/random-game.png" alt="Random Game">
+    <span class="game-label">🎲 Random Game</span>
+  </a>
       
   <a href="/game.html?url=L2dhbWVzLzEwLW1pbnV0ZXMtdGlsbC1kYXduLw==">
     <img src="/games/10-minutes-till-dawn/splash.png" alt="10 minutes till dawn">
@@ -989,7 +990,7 @@
   e.preventDefault();
   const gameLinks = document.querySelectorAll("#games :not(#randomGame)");
   if (gameLinks.length === 0) return alert("No games found!");
-  
+
   const randomIndex = Math.floor(Math.random() * gameLinks.length);
   const randomGame = gameLinks[randomIndex].href;
 
