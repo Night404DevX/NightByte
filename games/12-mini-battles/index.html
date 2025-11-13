@@ -1,38 +1,6 @@
 <html lang="en">
 
 <head>
-    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <script type="text/javascript" id="analytics" async="" src="https://cdn.jsdelivr.net/gh/st39/sdk@main/ga.js"></script>
-    <script type="text/javascript" async="" src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-    <script id="gamemonetize-sdk" src="https://cdn.jsdelivr.net/gh/st39/sdk@main/sdk.js"></script>
-    <script src="//www.google.com/jsapi"></script>
-    <script>
-        window.parent.maeExportApis_();
-    </script>
-    <script type="text/javascript">
-        window.SDK_OPTIONS = {
-            gameId: "nuiyi3o2g6fktyjda55g42v3qe5a3hbq",
-            onEvent: function (a) {
-                switch (a.name) {
-                case "SDK_GAME_PAUSE":
-                    // pause game logic / mute audio
-                    gmonetize_pause()
-                    break;
-                case "SDK_GAME_START":
-                    // advertisement done, resume game logic and unmute audio
-                    gmonetize_resume()
-                    break;
-                case "SDK_READY":
-                    // when sdk is ready
-                    break;
-                }
-            }
-        };
-        (function (a, b, c) {
-            var d = a.getElementsByTagName(b)[0];
-            a.getElementById(c) || (a = a.createElement(b), a.id = c, a.src = "https://cdn.jsdelivr.net/gh/st39/sdk@main/sdk.js", d.parentNode.insertBefore(a, d))
-        })(document, "script", "gamemonetize-sdk");
-    </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="pragma" content="no-cache">
     <meta name="apple-mobile-web-app-capable" content="yes">
