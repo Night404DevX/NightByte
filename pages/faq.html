@@ -8,64 +8,77 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="/css/silent.css">
   <style>
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, system-ui, Roboto;
-      margin: 0;
-      padding: 0;
-    }
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, Roboto;
+  }
 
-    .faq-container {
-      max-width: 800px;
-      margin: 100px auto;
-      padding: 30px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--shadow);
-    }
+  .faq-container {
+    max-width: 800px;
+    margin: 120px auto;
+    padding: 20px;
+  }
 
-    h1 {
-      text-align: center;
-      color: var(--accent-1);
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-    }
+  h1 {
+    text-align: center;
+    color: var(--accent-1);
+    font-size: 2.6rem;
+    margin-bottom: 30px;
+  }
 
-    .faq-item {
-      margin-bottom: 25px;
-      padding: 15px 20px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  /* FAQ item */
+  .faq-item {
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    backdrop-filter: blur(var(--glass-blur));
+    transition: box-shadow .3s ease;
+  }
 
-    .faq-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 15px var(--accent-1);
-    }
+  .faq-item:hover {
+    box-shadow: 0 0 15px var(--accent-1);
+  }
 
-    .faq-item h2 {
-      font-size: 1.2rem;
-      color: var(--accent-1);
-      margin-bottom: 10px;
-    }
+  /* Question button */
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 18px 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--accent-1);
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    .faq-item p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 1rem;
-    }
+  .faq-question i {
+    transition: transform .3s ease;
+  }
 
-    footer {
-      text-align: center;
-      margin: 40px 0;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
+  .faq-item.open .faq-question i {
+    transform: rotate(180deg);
+  }
+
+  /* Answer content */
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    transition: max-height .35s ease;
+  }
+
+  .faq-answer p {
+    color: var(--muted);
+    line-height: 1.6;
+    padding: 15px 0 25px 0;
+  }
+
   </style>
 </head>
 <body>
@@ -140,40 +153,106 @@
   </header>
 
   <div class="faq-container">
-    <h1>Frequently Asked Questions</h1>
+  <h1>Silent Games — FAQ</h1>
 
-    <div class="faq-item">
-      <h2>🛡️ Is Silent Games safe?</h2>
-      <p>Yes! Silent Games is completely safe to use. It does not collect or share your personal data — it’s built purely for fun and accessibility.</p>
+  <!-- FAQ ITEMS -->
+
+  <div class="faq-item">
+    <button class="faq-question">
+      🛡️ Is Silent Games safe?
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Yes — Silent Games is fully safe. It does not collect personal data, track you, or require an account. Everything stays private on your device.</p>
     </div>
-
-    <div class="faq-item">
-      <h2>🔐 Does Silent Games steal your data?</h2>
-      <p>No. Silent Games does <strong>not</strong> track, collect, or steal any personal information. Everything you do stays private on your device.</p>
-    </div>
-
-    <div class="faq-item">
-      <h2>🏫 Does the school know?</h2>
-      <p>Only a little — some teachers may be aware of it, but Silent Games is harmless and just meant for entertainment.</p>
-    </div>
-
-    <div class="faq-item">
-      <h2>🚫 Am I going to get in trouble?</h2>
-      <p>No, you won’t get in trouble for using Silent Games. It’s completely safe and doesn’t break any rules when used responsibly.</p>
-    </div>
-
-    <div class="faq-item">
-      <h2>📣 Are the rumors true?</h2>
-      <p>No — the rumors that the school is investigating Silent Games are false. There’s nothing to worry about!</p>
-    </div>
-
-    <div class="faq-item">
-      <h2>💬 Is Silent Chat safe?</h2>
-      <p>Yes, Silent Chat is safe. Just remember to <strong>avoid using your real name</strong> and don’t use bad words to keep it friendly and positive.</p>
-    </div>
-
-    <footer>© 2025 Silent Games — Be kind, stay safe, and have fun 🎮</footer>
   </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      🔐 Does Silent Games steal your data?
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>No. Silent Games does <b>not</b> track, read, store, or spy on your data. Nothing is uploaded or monitored.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      ⚠️ Is Silent Games dangerous?
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>No — Silent Games is completely harmless. It is simply a website that displays games. There is nothing dangerous, illegal, or harmful about it.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      🏫 Can the school track if I use Silent Games?
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>No — Silent Games does not send any personal information anywhere.  
+      Schools only see that you visited a website, not what you do on it.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      🚫 Will I get in trouble for using Silent Games?
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>No — nothing on Silent Games breaks rules. It doesn’t hack anything or bypass anything harmful. You’re safe.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      📣 Are the rumors true? (School investigating Silent Games)
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>No — those rumors are false. Silent Games is harmless. There is nothing to “investigate.” It's just a fun site.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      💬 Is Silent Chat safe?
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Yes — Silent Chat is safe. Just don’t use your real name, avoid sharing personal info, and keep messages friendly.</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+<script>
+  // Toggle FAQ open/close
+  document.querySelectorAll(".faq-item").forEach(item => {
+    const btn = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+
+    btn.addEventListener("click", () => {
+      const isOpen = item.classList.contains("open");
+      document.querySelectorAll(".faq-item").forEach(i => {
+        i.classList.remove("open");
+        i.querySelector(".faq-answer").style.maxHeight = "0px";
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+</script>
+
+
   <script src="/js/silent.js"></script>
 
   
