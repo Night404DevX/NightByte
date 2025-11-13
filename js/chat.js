@@ -105,7 +105,7 @@ function disableChatInput(disabled) {
 // Constants for cleanup
 // ==============================
 const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hour
-const EXPIRATION_TIME = 6 * 60 * 60 * 1000; // 6 hours
+const EXPIRATION_TIME = 4 * 60 * 60 * 1000; // 4 hours More Safe
 
 // ==============================
 // Helper: convert hex to rgba
