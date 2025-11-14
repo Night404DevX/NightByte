@@ -198,7 +198,8 @@ const bannedWords = [
   "fuck", "shit", "bitch", "asshole", "bastard", "dick", "pussy", "slut", "whore",
   "cock", "penis", "vagina", "ballsack", "boobs", "boobies", "blowjob", "handjob",
   "cunt", "wank", "jerkoff", "cum", "jizz", "dildo", "buttplug", "anal", "porn",
-  "hentai", "nudes", "sex", "horny", "orgasm", "fap", "masturbate",
+  "hentai", "nudes", "sex", "horny", "orgasm", "fap", "masturbate", "beating my meat", "dildos",
+  "dih", "ejaculate",
 
   // Insults / harassment
   "idiot", "stupid", "dumb", "moron", "loser", "retard", "r3tard", "dumbass",
