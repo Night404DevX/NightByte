@@ -87,7 +87,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #4C4C4C;
+  background: #000;
   color: #e6e6f0;
   display: flex;
   flex-direction: column;
@@ -212,9 +212,7 @@
     const loadingScreen = document.getElementById('loading-screen');
     const h1Element = document.getElementById('ld');
 
-    const headings = [
-        "Loading Game...",
-    ];
+    
 
     if (loadingScreen) {
         document.body.classList.add('loading');
@@ -304,14 +302,7 @@
       "
       id="Menu"
     >
-      <span
-        class="material-icons buttonForMenu"
-        style="margin: 5px"
-        onclick="window.location = 'https://silentgames.netlify.app/'"
-      >
-        arrow_back
-      </span>
-      <span class="material-icons buttonForMenu" style="margin: 5px" onclick="makeFullScreen()"> fullscreen </span>
+      
       <script>
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
