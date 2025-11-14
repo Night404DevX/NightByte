@@ -23,7 +23,7 @@ html, body {
     /* BACKGROUND BEHIND UNITY CONTAINER */
     background-position: center center;
     background-size: cover;
-    background-image: url('../gameBackground.png');
+    background-color: #000;
 }
 
 img {
