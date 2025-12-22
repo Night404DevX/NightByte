@@ -22,23 +22,29 @@ style.textContent = `
     a, a:-webkit-any-link {
         cursor: var(--cursor-pointer) !important;
     }
+	button {
+        cursor: var(--cursor-pointer) !important;
+    }
+	.card {
+        cursor: var(--cursor-pointer) !important;
+    }
+	[contenteditable="true"] {
+        cursor: var(--cursor-text) !important;
+    }
+	.crosshair {
+        cursor: var(--cursor-crosshair) !important;
+    }
 	#games, #games a, #games img, #games a:hover, #games img:hover {
     	cursor: var(--cursor-pointer) !important;
 	}
+	input[disabled], button[disabled] {
+        cursor: var(--cursor-normal) !important;
+    }
     input[type="text"], textarea {
         cursor: var(--cursor-text) !important;
     }
-    .crosshair {
-        cursor: var(--cursor-crosshair) !important;
-    }
     .loading {
         cursor: var(--cursor-wait) !important;
-    }
-    input[disabled], button[disabled] {
-        cursor: var(--cursor-normal) !important;
-    }
-    [contenteditable="true"] {
-        cursor: var(--cursor-text) !important;
     }
 `;
 document.head.appendChild(style);
