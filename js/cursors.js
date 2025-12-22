@@ -37,7 +37,10 @@ style.textContent = `
 	#games, #games a, #games img, #games a:hover, #games img:hover {
     	cursor: var(--cursor-pointer) !important;
 	}
-	input[disabled], button[disabled] {
+	i {
+        cursor: var(--cursor-pointer) !important;
+    }
+    input[disabled], button[disabled] {
         cursor: var(--cursor-normal) !important;
     }
     input[type="text"], textarea {
@@ -45,6 +48,12 @@ style.textContent = `
     }
     .loading {
         cursor: var(--cursor-wait) !important;
+    }
+	.setting-item, .setting-item select, .setting-item input[type=range], .setting-item input[type=checkbox], .setting-item input[type=checkbox] {
+        cursor: var(--cursor-pointer) !important;
+    }
+    #sub {
+        cursor: var(--cursor-pointer) !important;
     }
 `;
 document.head.appendChild(style);
