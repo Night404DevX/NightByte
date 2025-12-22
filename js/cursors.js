@@ -22,7 +22,7 @@ style.textContent = `
     a, a:-webkit-any-link {
         cursor: var(--cursor-pointer) !important;
     }
-	games {
+	games, games img {
         cursor: var(--cursor-pointer) !important;
     }
     input[type="text"], textarea {
