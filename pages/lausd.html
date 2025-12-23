@@ -1146,119 +1146,108 @@
     <iframe src="${window.location.href}"></iframe>
 </body>
 </html>`;
+    function datalink() {
+    const html = `<!DOCTYPE html><html><head><title>New Tab</title><style>body,html{margin:0;padding:0;height:100%;overflow:hidden;}iframe{border:none;width:100%;height:100%;}</style></head><body><iframe src="${window.location.href}"></iframe></body></html>`;
     const dataUrl = `data:text/html;charset=utf-8,${encodeURIComponent(html)}`;
-    
+
+    // 1. Modal Overlay (Blurred Backdrop)
+    const modal = document.createElement('div');
+    Object.assign(modal.style, {
+        position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)',
+        zIndex: '99999', display: 'flex', justifyContent: 'center', alignItems: 'center'
+    });
+
+    // 2. Content Box (Frosted Glass)
+    const contentBox = document.createElement('div');
+    Object.assign(contentBox.style, {
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        padding: '40px',
+        borderRadius: '20px',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+        position: 'relative',
+        width: '90%',
+        maxWidth: '600px',
+        textAlign: 'center',
+        fontFamily: "'Fredoka', sans-serif"
+    });
+
+    // 3. Title & Description
+    const title = document.createElement('h2');
+    title.textContent = 'Data URL Generated';
+    title.style.color = 'var(--primary-color)';
+    title.style.textShadow = '0 0 10px var(--primary-color)';
+    title.style.marginBottom = '10px';
+
+    const desc = document.createElement('p');
+    desc.textContent = 'Use this link to bypass filters:';
+    desc.style.color = 'rgba(255,255,255,0.6)';
+    desc.style.marginBottom = '25px';
+
+    // 4. Input Container (Centered Row)
     const container = document.createElement('div');
-    container.style.margin = '20px auto';
-    container.style.maxWidth = '800px';
-    container.style.textAlign = 'center';
-    
+    container.style.display = 'flex';
+    container.style.gap = '10px';
+
     const input = document.createElement('input');
     input.type = 'text';
     input.value = dataUrl;
     input.readOnly = true;
-    input.style.width = 'calc(100% - 120px)';
-    input.style.padding = '12px 15px';
-    input.style.marginRight = '10px';
-    input.style.borderRadius = '8px';
-    input.style.border = `2px solid var(--border-primary)`;
-    input.style.backgroundColor = 'var(--secondary-bg)';
-    input.style.color = 'var(--text-white)';
-    input.style.fontFamily = 'notitle';
-    input.style.fontSize = '16px';
-    
+    Object.assign(input.style, {
+        flex: '1', padding: '12px 15px', borderRadius: '12px',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)', color: '#fff',
+        outline: 'none', fontSize: '14px'
+    });
+
+    // 5. Copy Button (Neon Glow)
     const copyBtn = document.createElement('button');
     copyBtn.textContent = 'Copy';
-    copyBtn.style.padding = '12px 20px';
-    copyBtn.style.borderRadius = '8px';
-    copyBtn.style.border = 'none';
-    copyBtn.style.backgroundColor = 'var(--accent-dark)';
-    copyBtn.style.color = 'var(--text-white)';
-    copyBtn.style.fontFamily = 'notitle';
-    copyBtn.style.cursor = 'pointer';
-    copyBtn.style.transition = 'all 0.2s ease-in-out';
-    
-    copyBtn.onmouseover = function() {
-        this.style.backgroundColor = 'var(--accent-hover)';
-        this.style.boxShadow = '0 0 10px var(--shadow-primary)';
+    Object.assign(copyBtn.style, {
+        padding: '12px 25px', borderRadius: '12px', border: 'none',
+        backgroundColor: 'var(--primary-color)', color: '#000',
+        fontWeight: 'bold', cursor: 'pointer', transition: '0.3s'
+    });
+
+    copyBtn.onmouseover = () => {
+        copyBtn.style.boxShadow = '0 0 20px var(--primary-color)';
+        copyBtn.style.transform = 'scale(1.05)';
     };
-    copyBtn.onmouseout = function() {
-        this.style.backgroundColor = 'var(--accent-dark)';
-        this.style.boxShadow = 'none';
+    copyBtn.onmouseout = () => {
+        copyBtn.style.boxShadow = 'none';
+        copyBtn.style.transform = 'scale(1)';
     };
-    
+
     copyBtn.onclick = function() {
         input.select();
         document.execCommand('copy');
-        const originalText = this.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
     };
-    
+
+    // 6. Close Button
     const closeBtn = document.createElement('button');
     closeBtn.innerHTML = '&times;';
-    closeBtn.style.position = 'absolute';
-    closeBtn.style.top = '10px';
-    closeBtn.style.right = '10px';
-    closeBtn.style.background = 'none';
-    closeBtn.style.border = 'none';
-    closeBtn.style.color = 'var(--text-white)';
-    closeBtn.style.fontSize = '20px';
-    closeBtn.style.cursor = 'pointer';
-    
-    const modal = document.createElement('div');
-    modal.style.position = 'fixed';
-    modal.style.top = '0';
-    modal.style.left = '0';
-    modal.style.width = '100%';
-    modal.style.height = '100%';
-    modal.style.backgroundColor = 'rgba(0,0,0,0.7)';
-    modal.style.zIndex = '99999';
-    modal.style.display = 'flex';
-    modal.style.justifyContent = 'center';
-    modal.style.alignItems = 'center';
-    
-    const contentBox = document.createElement('div');
-    contentBox.style.backgroundColor = 'var(--primary-bg)';
-    contentBox.style.padding = '30px';
-    contentBox.style.borderRadius = '12px';
-    contentBox.style.boxShadow = '0 4px 20px rgba(0,0,0,0.5)';
-    contentBox.style.position = 'relative';
-    contentBox.style.width = '80%';
-    contentBox.style.maxWidth = '700px';
-    
-    const title = document.createElement('h2');
-    title.textContent = 'Data URL Generated';
-    title.style.color = 'var(--text-white)';
-    title.style.fontFamily = 'title';
-    title.style.marginBottom = '20px';
-    title.style.textAlign = 'center';
-    
-    const desc = document.createElement('p');
-    desc.textContent = 'here is your data link:';
-    desc.style.color = 'var(--text-gray)';
-    desc.style.fontFamily = 'notitle';
-    desc.style.marginBottom = '20px';
-    desc.style.textAlign = 'center';
-    
+    Object.assign(closeBtn.style, {
+        position: 'absolute', top: '15px', right: '20px', background: 'none',
+        border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer', opacity: '0.5'
+    });
+    closeBtn.onclick = () => document.body.removeChild(modal);
+
+    // Assembly
     container.appendChild(input);
     container.appendChild(copyBtn);
-    
     contentBox.appendChild(closeBtn);
     contentBox.appendChild(title);
     contentBox.appendChild(desc);
     contentBox.appendChild(container);
-    
     modal.appendChild(contentBox);
     document.body.appendChild(modal);
-    
-    closeBtn.onclick = function() {
-        document.body.removeChild(modal);
-    };
-    
-    modal.onclick = function(e) {
-        if (e.target === modal) {
-            document.body.removeChild(modal);
-        }
-    };
+
+    // Close on clicking outside the box
+    modal.onclick = (e) => { if (e.target === modal) document.body.removeChild(modal); };
+}
 
     function updateAnticloseHandler() {
      if (anticloseCheckbox.checked) {
