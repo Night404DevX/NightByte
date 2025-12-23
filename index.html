@@ -278,9 +278,9 @@
     input.style.marginRight = '10px';
     input.style.borderRadius = '8px';
     input.style.border = `2px solid var(--border-primary)`;
-    input.style.backgroundColor = 'var(--secondary-bg)';
-    input.style.color = 'var(--text-white)';
-    input.style.fontFamily = 'notitle';
+    input.style.backgroundColor = 'var()';
+    input.style.color = '#e6e6f0';
+    input.style.fontFamily = 'Fredoka';
     input.style.fontSize = '16px';
     
     const copyBtn = document.createElement('button');
@@ -289,8 +289,8 @@
     copyBtn.style.borderRadius = '8px';
     copyBtn.style.border = 'none';
     copyBtn.style.backgroundColor = 'var(--accent-dark)';
-    copyBtn.style.color = 'var(--text-white)';
-    copyBtn.style.fontFamily = 'notitle';
+    copyBtn.style.color = '#e6e6f0';
+    copyBtn.style.fontFamily = 'Fredoka';
     copyBtn.style.cursor = 'pointer';
     copyBtn.style.transition = 'all 0.2s ease-in-out';
     
@@ -316,7 +316,7 @@
     closeBtn.style.right = '10px';
     closeBtn.style.background = 'none';
     closeBtn.style.border = 'none';
-    closeBtn.style.color = 'var(--text-white)';
+    closeBtn.style.color = '#FFFFFF';
     closeBtn.style.fontSize = '20px';
     closeBtn.style.cursor = 'pointer';
     
@@ -333,7 +333,7 @@
     modal.style.alignItems = 'center';
     
     const contentBox = document.createElement('div');
-    contentBox.style.backgroundColor = 'var(--primary-bg)';
+    contentBox.style.backgroundColor = 'var(--primary-color);
     contentBox.style.padding = '30px';
     contentBox.style.borderRadius = '12px';
     contentBox.style.boxShadow = '0 4px 20px rgba(0,0,0,0.5)';
@@ -343,15 +343,15 @@
     
     const title = document.createElement('h2');
     title.textContent = 'Data URL Generated';
-    title.style.color = 'var(--text-white)';
-    title.style.fontFamily = 'title';
+    title.style.color = '#e6e6f0';
+    title.style.fontFamily = 'Fredoka';
     title.style.marginBottom = '20px';
     title.style.textAlign = 'center';
     
     const desc = document.createElement('p');
     desc.textContent = 'here is your data link:';
     desc.style.color = 'var(--text-gray)';
-    desc.style.fontFamily = 'notitle';
+    desc.style.fontFamily = 'Fredoka';
     desc.style.marginBottom = '20px';
     desc.style.textAlign = 'center';
     
@@ -402,6 +402,7 @@
 
 </body>
 </html>
+
 
 
 
