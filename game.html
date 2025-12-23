@@ -111,7 +111,6 @@
   
 
   
-  <script src="/js/nightbyte.js"></script>
 
   <script>
   const iframe = document.getElementById('game-frame');
@@ -150,6 +149,297 @@
       }
     }
 </script>
+
+  
+<!-- Settings Panel -->
+<div id="settings-panel">
+  <h2>Settings</h2>
+  <div class="setting-item">
+    <label for="theme-selector">Choose Theme:</label>
+    <select id="theme-selector">
+  <!-- Default -->
+  <option value="#ffffff,#000000,#2a2a2a"> Night Black (Default)</option>
+
+  <!-- Bright -->
+  <option value="#ff3fa8,#1a001a,#330033">Pink</option>
+  <option value="#00d0ff,#001a1a,#003333">Blue</option>
+  <option value="#00ff00,#001a00,#003300">Green</option>
+  <option value="#ffff00,#1a1a00,#333300">Yellow</option>
+  <option value="#ff6600,#1a0d00,#331a00">Orange</option>
+  <option value="#ff0000,#1a0000,#330000">Red</option>
+  <option value="#ffffff,#000000,#2a2a2a">Black</option>
+
+  <!-- Neon / Cyber -->
+  <option value="#ff00ff,#1a001a,#330033">Magenta</option>
+  <option value="#00ffff,#001a1a,#003333">Cyan</option>
+  <option value="#ffcc00,#1a1400,#332800">Cyber Gold</option>
+  <option value="#ffa500,#000000,#1a0d00">CornHub</option>
+  <option value="#39ff14,#001a00,#003300">Neon Lime</option>
+  <option value="#00ffcc,#001a1a,#003333">Vaporwave</option>
+
+  <!-- Dark / Night -->
+  <option value="#7f5cff,#0b061a,#241133">Night Purple</option>
+  <option value="#5c7cff,#050b1a,#121e33">Midnight Blue</option>
+  <option value="#00ff41,#000f05,#00330f">Matrix</option>
+  <option value="#8b0000,#120000,#2b0000">Blood Red</option>
+  <option value="#4fd1c5,#061a1a,#0f3333">Ocean Dark</option>
+
+</select>
+
+  </div>
+  <div class="setting-item">
+    <label for="particles-toggle">Enable Particle Effects:</label>
+    <input type="checkbox" id="particles-toggle" checked>
+  </div>
+  <div class="setting-item">
+    <label for="particle-speed">Particle Animation Speed:</label>
+    <input type="range" id="particle-speed" min="1" max="20" value="9">
+  </div>
+  <div class="setting-item">
+        <label>Privacy Tools</label>
+        <button id="abcloak" style="background: #333; color: white; border: none;">Open in about:blank</button>
+        <button onclick="datalink()" style="background: #333; color: white; border: none;">Data Link</button>
+    </div>
+
+    <div class="setting-item">
+        <label>Tab Disguise</label>
+        <select id="faviconDropdown">
+            <option disabled selected>Select Disguise</option>
+        </select>
+    </div>
+
+    <div class="setting-item">
+        <label>Panic Redirect</label>
+        <select id="tabselect">
+            <option value="https://lms.lausd.net">Schoology</option>
+            <option value="https://classroom.google.com">Google Classroom</option>
+            <option value="https://clever.com">Clever</option>
+            <option value="https://canvas.instructure.com">Canvas</option>
+            <option value="https://google.com">Google</option>
+        </select>
+        <button onclick="confirmtab()" style="background: var(--primary-color); color: black; border: none; font-weight: bold;">Confirm Panic Site</button>
+    </div>
+
+    <div class="setting-item">
+        <label>Panic Keybind</label>
+        <button id="setkeybind" style="background: #444; color: white; border: none;">Set Keybind</button>
+        <div id="output" style="color: #aaa; font-size: 12px; margin-top: 5px; text-align: center;">Current key: none</div>
+    </div>
+  <button id="reset-settings">Reset to Default</button>
+</div>
+
+<!-- Small Settings Button -->
+<button id="open-settings"><i class="fas fa-cog"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="/js/nightbyte.js"></script>
+       <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const setkeybind = document.getElementById('setkeybind');
+            const output = document.getElementById('output');
+            let keybind = localStorage.getItem('keybind') || 'none'; 
+    
+            output.textContent = `Current key: ${keybind}`;
+    
+            setkeybind.addEventListener('click', () => {
+                output.textContent = 'Listening...';
+                document.removeEventListener('keydown', keydownHandler);
+                document.addEventListener('keydown', keydownHandler);
+            });
+    
+            function keydownHandler(event) {
+                keybind = event.key;
+                localStorage.setItem('keybind', keybind);
+                output.textContent = `Selected Key: ${keybind}`;
+                document.removeEventListener('keydown', keydownHandler);
+                location.reload()
+            }
+        });
+    </script>
+    
+    <script>
+        var urlObj = new window.URL(window.location.href);
+        var url = window.location.href;
+        if (url) {
+            var win;
+    
+            document.querySelector('#abcloak').onclick = function() {
+                if (win) {
+                    win.focus();
+                } else {
+                    win = window.open();
+                    win.document.body.style.margin = '0';
+                    win.document.body.style.height = '100vh';
+                    var iframe = win.document.createElement('iframe');
+                    iframe.style.border = 'none';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.margin = '0';
+                    iframe.src = url;
+                    win.document.body.appendChild(iframe);
+                    window.location.replace("https://www.khanacademy.org");
+                }
+            };
+    
+            function datalink() {
+    const html = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Tab</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="${window.location.href}"></iframe>
+</body>
+</html>`;
+    const dataUrl = `data:text/html;charset=utf-8,${encodeURIComponent(html)}`;
+    
+    const container = document.createElement('div');
+    container.style.margin = '20px auto';
+    container.style.maxWidth = '800px';
+    container.style.textAlign = 'center';
+    
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = dataUrl;
+    input.readOnly = true;
+    input.style.width = 'calc(100% - 120px)';
+    input.style.padding = '12px 15px';
+    input.style.marginRight = '10px';
+    input.style.borderRadius = '8px';
+    input.style.border = `2px solid var(--border-primary)`;
+    input.style.backgroundColor = 'var(--secondary-bg)';
+    input.style.color = 'var(--text-white)';
+    input.style.fontFamily = 'notitle';
+    input.style.fontSize = '16px';
+    
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = 'Copy';
+    copyBtn.style.padding = '12px 20px';
+    copyBtn.style.borderRadius = '8px';
+    copyBtn.style.border = 'none';
+    copyBtn.style.backgroundColor = 'var(--accent-dark)';
+    copyBtn.style.color = 'var(--text-white)';
+    copyBtn.style.fontFamily = 'notitle';
+    copyBtn.style.cursor = 'pointer';
+    copyBtn.style.transition = 'all 0.2s ease-in-out';
+    
+    copyBtn.onmouseover = function() {
+        this.style.backgroundColor = 'var(--accent-hover)';
+        this.style.boxShadow = '0 0 10px var(--shadow-primary)';
+    };
+    copyBtn.onmouseout = function() {
+        this.style.backgroundColor = 'var(--accent-dark)';
+        this.style.boxShadow = 'none';
+    };
+    
+    copyBtn.onclick = function() {
+        input.select();
+        document.execCommand('copy');
+        const originalText = this.textContent;
+    };
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = '10px';
+    closeBtn.style.right = '10px';
+    closeBtn.style.background = 'none';
+    closeBtn.style.border = 'none';
+    closeBtn.style.color = 'var(--text-white)';
+    closeBtn.style.fontSize = '20px';
+    closeBtn.style.cursor = 'pointer';
+    
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    modal.style.zIndex = '99999';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    
+    const contentBox = document.createElement('div');
+    contentBox.style.backgroundColor = 'var(--primary-bg)';
+    contentBox.style.padding = '30px';
+    contentBox.style.borderRadius = '12px';
+    contentBox.style.boxShadow = '0 4px 20px rgba(0,0,0,0.5)';
+    contentBox.style.position = 'relative';
+    contentBox.style.width = '80%';
+    contentBox.style.maxWidth = '700px';
+    
+    const title = document.createElement('h2');
+    title.textContent = 'Data URL Generated';
+    title.style.color = 'var(--text-white)';
+    title.style.fontFamily = 'title';
+    title.style.marginBottom = '20px';
+    title.style.textAlign = 'center';
+    
+    const desc = document.createElement('p');
+    desc.textContent = 'here is your data link:';
+    desc.style.color = 'var(--text-gray)';
+    desc.style.fontFamily = 'notitle';
+    desc.style.marginBottom = '20px';
+    desc.style.textAlign = 'center';
+    
+    container.appendChild(input);
+    container.appendChild(copyBtn);
+    
+    contentBox.appendChild(closeBtn);
+    contentBox.appendChild(title);
+    contentBox.appendChild(desc);
+    contentBox.appendChild(container);
+    
+    modal.appendChild(contentBox);
+    document.body.appendChild(modal);
+    
+    closeBtn.onclick = function() {
+        document.body.removeChild(modal);
+    };
+    
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    };
+
+    function updateAnticloseHandler() {
+     if (anticloseCheckbox.checked) {
+       window.addEventListener('beforeunload', handleBeforeUnload);
+     } else {
+       window.removeEventListener('beforeunload', handleBeforeUnload);
+     }
+   }
+
+    updateAnticloseHandler();
+ 
+   anticloseCheckbox.addEventListener('change', () => {
+     localStorage.setItem(ANTICLOSE_STORAGE_KEY, anticloseCheckbox.checked.toString());
+     updateAnticloseHandler();
+   });
+ 
+   function handleBeforeUnload(e) {
+     e.preventDefault();
+     e.returnValue = 'test';
+     return e.returnValue;
+   }
+}}
+    </script>
 
   
 </body>
