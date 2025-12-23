@@ -1,4 +1,3 @@
-  <script>
         document.addEventListener('DOMContentLoaded', function() {
             const setkeybind = document.getElementById('setkeybind');
             const output = document.getElementById('output');
@@ -20,9 +19,7 @@
                 location.reload()
             }
         });
-    </script>
-    
-    <script>
+
         var urlObj = new window.URL(window.location.href);
         var url = window.location.href;
         if (url) {
@@ -184,4 +181,4 @@
         }
     };
 }}
-    </script>
+    
