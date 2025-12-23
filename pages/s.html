@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Home | Schoology</title>
+<link rel="icon" type="image/x-icon" href="https://www.powerschool.com/favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/silent.css">
+  <script src="/js/randomSentence.js"></script>
+  <script src="/js/cursors.js"></script>
+  <script src="/js/index.js"></script>
+   <script src="/js/tabcloak.js"></script>
+  <script src="/js/panic.js"></script>
+  <script src="/js/tabconfirm.js"></script>
+  <script src="/js/usesettings.js"></script>
+  <script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <header>
+    <nav>
+      <div class="logo"><div class="mark">SG</div>Silent Games</div>
+    <div class="nav-links">
+        <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/pages/lausd.html"><i class="fa-solid fa-gamepad"></i> Games</a>
+        <a href="/pages/c.html"><i class="fa-solid fa-circle-user"></i> Credits</a>
+        <a href="/pages/u.html"><i class="fa-solid fa-list"></i> Updates</a>
+        <a href=""><i class="fa-solid fa-envelope"></i> Contact</a>
+      <div class="dropdown">
+        <a href="#" class="dropbtn"><i class="fa-solid fa-ellipsis-vertical"></i> More</a>
+       <div class="dropdown-content">
+          <a href="/pages/chat.html"><i class="fa-solid fa-message"></i> Chat (Discontinued)</a>
+         <a href="/pages/faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+    </div>
+  </div>
+        <button id="theme-toggle" class="theme-toggle"><i class="fa-solid fa-palette"></i></button>
+        <div id="theme-menu" class="theme-menu">
+        <div class="theme-option" data-color="#64d2ff" data-bg="#05060a"><div class="color-circle" style="background:#64d2ff;"></div>Blue</div>
+      <div class="theme-option" data-color="#ff66cc" data-bg="#1a001a"><div class="color-circle" style="background:#ff66cc;"></div>Pink</div>
+      <div class="theme-option" data-color="#00ffaa" data-bg="#001a10"><div class="color-circle" style="background:#00ffaa;"></div>Green</div>
+      <div class="theme-option" data-color="#ffa500" data-bg="#1a0f00"><div class="color-circle" style="background:#ffa500;"></div>Orange</div>
+      <div class="theme-option" data-color="#a78bfa" data-bg="#0f001a"><div class="color-circle" style="background:#a78bfa;"></div>Purple</div>
+      <div class="theme-option" data-color="#ff0000" data-bg="#1a0000"><div class="color-circle" style="background:#ff0000;"></div>Red</div>
+      <div class="theme-option" data-color="#00ccff" data-bg="#00111a"><div class="color-circle" style="background:#00ccff;"></div>Cyan</div>
+      <div class="theme-option" data-color="#00ffcc" data-bg="#00201a"><div class="color-circle" style="background:#00ffcc;"></div>Teal</div>
+      <div class="theme-option" data-color="#ffff00" data-bg="#1a1a00"><div class="color-circle" style="background:#ffff00;"></div>Yellow</div>
+      <div class="theme-option" data-color="#ff00ff" data-bg="#1a001a"><div class="color-circle" style="background:#ff00ff;"></div>Magenta</div>
+      <div class="theme-option" data-color="#00ff00" data-bg="#001a00"><div class="color-circle" style="background:#00ff00;"></div>Lime</div>
+      <div class="theme-option" data-color="#FFA500" data-bg="#000000"><div class="color-circle" style="background:#FFA500;"></div>CornHub</div>
+      <div class="theme-option" data-color="#ff7f50" data-bg="#1a0a05"><div class="color-circle" style="background:#ff7f50;"></div>Coral</div>
+      <div class="theme-option" data-color="#8a2be2" data-bg="#0f0015"><div class="color-circle" style="background:#8a2be2;"></div>BlueViolet</div>
+      <div class="theme-option" data-color="#1e90ff" data-bg="#00111a"><div class="color-circle" style="background:#1e90ff;"></div>DodgerBlue</div>
+      <div class="theme-option" data-color="#ff1493" data-bg="#1a0010"><div class="color-circle" style="background:#ff1493;"></div>DeepPink</div>
+      <div class="theme-option" data-color="#7fff00" data-bg="#001a05"><div class="color-circle" style="background:#7fff00;"></div>Chartreuse</div>
+      <div class="theme-option" data-color="#00fa9a" data-bg="#001a0a"><div class="color-circle" style="background:#00fa9a;"></div>SpringGreen</div>
+      <div class="theme-option" data-color="#ff4500" data-bg="#1a0500"><div class="color-circle" style="background:#ff4500;"></div>OrangeRed</div>
+      <div class="theme-option" data-color="#adff2f" data-bg="#101a00"><div class="color-circle" style="background:#adff2f;"></div>GreenYellow</div>
+      <div class="theme-option" data-color="#00bfff" data-bg="#00121a"><div class="color-circle" style="background:#00bfff;"></div>DeepSkyBlue</div>
+      <div class="theme-option" data-color="#ff69b4" data-bg="#1a0010"><div class="color-circle" style="background:#ff69b4;"></div>HotPink</div>
+      <div class="theme-option" data-color="#7b68ee" data-bg="#0f0015"><div class="color-circle" style="background:#7b68ee;"></div>MediumSlateBlue</div>
+      <div class="theme-option" data-color="#32cd32" data-bg="#001a05"><div class="color-circle" style="background:#32cd32;"></div>LimeGreen</div>
+      <div class="theme-option" data-color="#ff8c00" data-bg="#1a0500"><div class="color-circle" style="background:#ff8c00;"></div>DarkOrange</div>
+      <div class="theme-option" data-color="#ff6347" data-bg="#1a0500"><div class="color-circle" style="background:#ff6347;"></div>Tomato</div>
+      <div class="theme-option" data-color="#40e0d0" data-bg="#00121a"><div class="color-circle" style="background:#40e0d0;"></div>Turquoise</div>
+      <div class="theme-option" data-color="#ffb6c1" data-bg="#1a0010"><div class="color-circle" style="background:#ffb6c1;"></div>LightPink</div>
+      <div class="theme-option" data-color="#9370db" data-bg="#0f0015"><div class="color-circle" style="background:#9370db;"></div>MediumPurple</div>
+      <div class="theme-option" data-color="#3cb371" data-bg="#001a05"><div class="color-circle" style="background:#3cb371;"></div>MediumSeaGreen</div>
+      <div class="theme-option" data-color="#8b0000" data-bg="#1a0000"><div class="color-circle" style="background:#8b0000;"></div>DarkRed</div>
+      <div class="theme-option" data-color="#006400" data-bg="#001400"><div class="color-circle" style="background:#006400;"></div>DarkGreen</div>
+      <div class="theme-option" data-color="#00008b" data-bg="#00000f"><div class="color-circle" style="background:#00008b;"></div>DarkBlue</div>
+      <div class="theme-option" data-color="#4b0082" data-bg="#0f0010"><div class="color-circle" style="background:#4b0082;"></div>Indigo</div>
+      <div class="theme-option" data-color="#1ca9c9" data-bg="#00111a"><div class="color-circle" style="background:#1ca9c9;"></div>BrightBlue</div>
+      <div class="theme-option" data-color="#daa520" data-bg="#1a1200"><div class="color-circle" style="background:#daa520;"></div>Goldenrod</div>
+      <div class="theme-option" data-color="#7fffd4" data-bg="#00121a"><div class="color-circle" style="background:#7fffd4;"></div>Aquamarine</div>
+      <div class="theme-option" data-color="#f0e68c" data-bg="#1a1a0a"><div class="color-circle" style="background:#f0e68c;"></div>Khaki</div>
+      <div class="theme-option" data-color="#ffdab9" data-bg="#1a0f05"><div class="color-circle" style="background:#ffdab9;"></div>PeachPuff</div>
+      <div class="theme-option" data-color="#ba55d3" data-bg="#0f0015"><div class="color-circle" style="background:#ba55d3;"></div>MediumOrchid</div>
+      <div class="theme-option" data-color="#7cfc00" data-bg="#001a00"><div class="color-circle" style="background:#7cfc00;"></div>LawnGreen</div>
+      <div class="theme-option" data-color="#dc143c" data-bg="#1a000a"><div class="color-circle" style="background:#dc143c;"></div>Crimson</div>
+      <div class="theme-option" data-color="#4682b4" data-bg="#00111a"><div class="color-circle" style="background:#4682b4;"></div>SteelBlue</div>
+      <div class="theme-option" data-color="#dda0dd" data-bg="#0f0015"><div class="color-circle" style="background:#dda0dd;"></div>Plum</div>
+      <div class="theme-option" data-color="#ffd700" data-bg="#1a1500"><div class="color-circle" style="background:#ffd700;"></div>Gold</div>
+      <div class="theme-option" data-color="#00ffff" data-bg="#00111a"><div class="color-circle" style="background:#00ffff;"></div>Aqua</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  </header>
+  
+<div class="settings-page">
+  <h1 class="settings-title">Settings</h1>
+
+  <div class="settings-section">
+    <h2>Privacy</h2>
+    <button class="settings-btn" id="abcloak">
+      Open in about:blank
+    </button>
+    <button class="settings-btn" onclick="datalink()">
+      Open using data link
+    </button>
+  </div>
+
+  <div class="settings-section">
+    <h2>Tab Cloak</h2>
+    <label>Select a site to cloak the tab</label>
+    <select id="faviconDropdown" class="settings-select">
+      <option disabled selected>Select cloak</option>
+    </select>
+  </div>
+
+  <div class="settings-section">
+    <h2>Theme</h2>
+    <label>Select a theme</label>
+    <select id="themee" class="settings-select">
+      <option value="default">Default</option>
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+      <option value="bubblegum">Bubblegum</option>
+      <option value="matrix">Matrix</option>
+      <option value="crimson">Crimson</option>
+    </select>
+  </div>
+
+  <div class="settings-section">
+    <h2>Anti-Close</h2>
+    <label class="checkbox-row">
+      <input type="checkbox" id="anticlose">
+      Prevent teachers from closing the tab
+    </label>
+  </div>
+
+  <div class="settings-section">
+    <h2>Panic Site</h2>
+    <select id="tabselect" class="settings-select">
+      <option value="https://canvas.instructure.com">Canvas</option>
+      <option value="https://classroom.google.com">Google Classroom</option>
+      <option value="https://google.com">Google</option>
+      <option value="https://mail.google.com">Gmail</option>
+    </select>
+    <button class="settings-btn" onclick="confirmtab()">Confirm</button>
+  </div>
+
+  <div class="settings-section">
+    <h2>Panic Key</h2>
+    <button class="settings-btn" id="setkeybind">Set Keybind</button>
+    <div class="keybind-output" id="output">Current key: none</div>
+  </div>
+</div>
+
+  <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const setkeybind = document.getElementById('setkeybind');
+            const output = document.getElementById('output');
+            let keybind = localStorage.getItem('keybind') || 'none'; 
+    
+            output.textContent = `Current key: ${keybind}`;
+    
+            setkeybind.addEventListener('click', () => {
+                output.textContent = 'Listening...';
+                document.removeEventListener('keydown', keydownHandler);
+                document.addEventListener('keydown', keydownHandler);
+            });
+    
+            function keydownHandler(event) {
+                keybind = event.key;
+                localStorage.setItem('keybind', keybind);
+                output.textContent = `Selected Key: ${keybind}`;
+                document.removeEventListener('keydown', keydownHandler);
+                location.reload()
+            }
+        });
+    </script>
+    
+    <script>
+        var urlObj = new window.URL(window.location.href);
+        var url = window.location.href;
+        if (url) {
+            var win;
+    
+            document.querySelector('#abcloak').onclick = function() {
+                if (win) {
+                    win.focus();
+                } else {
+                    win = window.open();
+                    win.document.body.style.margin = '0';
+                    win.document.body.style.height = '100vh';
+                    var iframe = win.document.createElement('iframe');
+                    iframe.style.border = 'none';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.margin = '0';
+                    iframe.src = url;
+                    win.document.body.appendChild(iframe);
+                    window.location.replace("https://www.khanacademy.org");
+                }
+            };
+    
+            function datalink() {
+    const html = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Tab</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="${window.location.href}"></iframe>
+</body>
+</html>`;
+    const dataUrl = `data:text/html;charset=utf-8,${encodeURIComponent(html)}`;
+    
+    const container = document.createElement('div');
+    container.style.margin = '20px auto';
+    container.style.maxWidth = '800px';
+    container.style.textAlign = 'center';
+    
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = dataUrl;
+    input.readOnly = true;
+    input.style.width = 'calc(100% - 120px)';
+    input.style.padding = '12px 15px';
+    input.style.marginRight = '10px';
+    input.style.borderRadius = '8px';
+    input.style.border = `2px solid var(--border-primary)`;
+    input.style.backgroundColor = 'var(--secondary-bg)';
+    input.style.color = 'var(--text-white)';
+    input.style.fontFamily = 'notitle';
+    input.style.fontSize = '16px';
+    
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = 'Copy';
+    copyBtn.style.padding = '12px 20px';
+    copyBtn.style.borderRadius = '8px';
+    copyBtn.style.border = 'none';
+    copyBtn.style.backgroundColor = 'var(--accent-dark)';
+    copyBtn.style.color = 'var(--text-white)';
+    copyBtn.style.fontFamily = 'notitle';
+    copyBtn.style.cursor = 'pointer';
+    copyBtn.style.transition = 'all 0.2s ease-in-out';
+    
+    copyBtn.onmouseover = function() {
+        this.style.backgroundColor = 'var(--accent-hover)';
+        this.style.boxShadow = '0 0 10px var(--shadow-primary)';
+    };
+    copyBtn.onmouseout = function() {
+        this.style.backgroundColor = 'var(--accent-dark)';
+        this.style.boxShadow = 'none';
+    };
+    
+    copyBtn.onclick = function() {
+        input.select();
+        document.execCommand('copy');
+        const originalText = this.textContent;
+    };
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = '10px';
+    closeBtn.style.right = '10px';
+    closeBtn.style.background = 'none';
+    closeBtn.style.border = 'none';
+    closeBtn.style.color = 'var(--text-white)';
+    closeBtn.style.fontSize = '20px';
+    closeBtn.style.cursor = 'pointer';
+    
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    modal.style.zIndex = '99999';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    
+    const contentBox = document.createElement('div');
+    contentBox.style.backgroundColor = 'var(--primary-bg)';
+    contentBox.style.padding = '30px';
+    contentBox.style.borderRadius = '12px';
+    contentBox.style.boxShadow = '0 4px 20px rgba(0,0,0,0.5)';
+    contentBox.style.position = 'relative';
+    contentBox.style.width = '80%';
+    contentBox.style.maxWidth = '700px';
+    
+    const title = document.createElement('h2');
+    title.textContent = 'Data URL Generated';
+    title.style.color = 'var(--text-white)';
+    title.style.fontFamily = 'title';
+    title.style.marginBottom = '20px';
+    title.style.textAlign = 'center';
+    
+    const desc = document.createElement('p');
+    desc.textContent = 'here is your data link:';
+    desc.style.color = 'var(--text-gray)';
+    desc.style.fontFamily = 'notitle';
+    desc.style.marginBottom = '20px';
+    desc.style.textAlign = 'center';
+    
+    container.appendChild(input);
+    container.appendChild(copyBtn);
+    
+    contentBox.appendChild(closeBtn);
+    contentBox.appendChild(title);
+    contentBox.appendChild(desc);
+    contentBox.appendChild(container);
+    
+    modal.appendChild(contentBox);
+    document.body.appendChild(modal);
+    
+    closeBtn.onclick = function() {
+        document.body.removeChild(modal);
+    };
+    
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    };
+
+    function updateAnticloseHandler() {
+     if (anticloseCheckbox.checked) {
+       window.addEventListener('beforeunload', handleBeforeUnload);
+     } else {
+       window.removeEventListener('beforeunload', handleBeforeUnload);
+     }
+   }
+
+    updateAnticloseHandler();
+ 
+   anticloseCheckbox.addEventListener('change', () => {
+     localStorage.setItem(ANTICLOSE_STORAGE_KEY, anticloseCheckbox.checked.toString());
+     updateAnticloseHandler();
+   });
+ 
+   function handleBeforeUnload(e) {
+     e.preventDefault();
+     e.returnValue = 'test';
+     return e.returnValue;
+   }
+}}
+    </script>
+
+
+        
+  <script src="/js/silent.js"></script>
+        <script src="../js/loading.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
