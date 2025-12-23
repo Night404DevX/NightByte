@@ -997,6 +997,73 @@ cursor: url('/assets/select.cur'), auto;
   text-shadow: 0 0 10px var(--accent-1);
 }
 
+.settings-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: var(--text, #fff);
+}
+
+.settings-title {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.settings-section {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.settings-section h2 {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.settings-btn {
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent-1, #64d2ff);
+  color: #000;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.settings-btn:hover {
+  opacity: 0.9;
+}
+
+.settings-select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.keybind-output {
+  margin-top: 10px;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+
 @keyframes pulseGlow {
   0% { box-shadow: 0 0 8px var(--accent-1); }
   50% { box-shadow: 0 0 20px var(--accent-1); }
