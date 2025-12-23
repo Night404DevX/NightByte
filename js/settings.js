@@ -19,7 +19,7 @@
                 location.reload()
             }
         });
-
+    
         var urlObj = new window.URL(window.location.href);
         var url = window.location.href;
         if (url) {
@@ -67,6 +67,7 @@
     <iframe src="${window.location.href}"></iframe>
 </body>
 </html>`;
+                    
     const dataUrl = `data:text/html;charset=utf-8,${encodeURIComponent(html)}`;
     
     const container = document.createElement('div');
@@ -180,5 +181,25 @@
             document.body.removeChild(modal);
         }
     };
+
+    function updateAnticloseHandler() {
+     if (anticloseCheckbox.checked) {
+       window.addEventListener('beforeunload', handleBeforeUnload);
+     } else {
+       window.removeEventListener('beforeunload', handleBeforeUnload);
+     }
+   }
+
+    updateAnticloseHandler();
+ 
+   anticloseCheckbox.addEventListener('change', () => {
+     localStorage.setItem(ANTICLOSE_STORAGE_KEY, anticloseCheckbox.checked.toString());
+     updateAnticloseHandler();
+   });
+ 
+   function handleBeforeUnload(e) {
+     e.preventDefault();
+     e.returnValue = 'test';
+     return e.returnValue;
+   }
 }}
-    
