@@ -1247,28 +1247,6 @@
     // Close on clicking outside the box
     modal.onclick = (e) => { if (e.target === modal) document.body.removeChild(modal); };
 }
-
-    function updateAnticloseHandler() {
-     if (anticloseCheckbox.checked) {
-       window.addEventListener('beforeunload', handleBeforeUnload);
-     } else {
-       window.removeEventListener('beforeunload', handleBeforeUnload);
-     }
-   }
-
-    updateAnticloseHandler();
- 
-   anticloseCheckbox.addEventListener('change', () => {
-     localStorage.setItem(ANTICLOSE_STORAGE_KEY, anticloseCheckbox.checked.toString());
-     updateAnticloseHandler();
-   });
- 
-   function handleBeforeUnload(e) {
-     e.preventDefault();
-     e.returnValue = 'test';
-     return e.returnValue;
-   }
-}}
     </script>
 
 
