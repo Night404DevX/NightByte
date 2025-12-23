@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const faviconDropdown = document.getElementById('faviconDropdown');
     const presets = {
-      'Fake Google Search (default)': { title: 'calculator - Google Search', favicon: 'https://www.google.com/favicon.ico' },
+      'Fake Google Search': { title: 'calculator - Google Search', favicon: 'https://www.google.com/favicon.ico' },
       'Fake Google Doc': { title: 'Untitled document - Google Docs', favicon: 'https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico' },
       'Fake Google Slides': { title: 'Untitled Presentation - Google Slides', favicon: 'https://ssl.gstatic.com/docs/presentations/images/favicon-2023q4.ico' },
       'Fake Powerpoint': { title: 'Presentation.pptx - Microsoft PowerPoint Online', favicon: 'https://res-1.cdn.office.net/officeonline/pods/s/h25FD28BFF140E152_resources/1033/FavIcon_Ppt.ico' },
       'Fake Word Document': { title: 'Document.docx - Microsoft Word Online', favicon: 'https://res-1.cdn.office.net/officeonline/wv/s/h4FBD8CC4075E1795_resources/1033/FavIcon_Word.ico' },
+      'Schoology': { title: 'Home | Schoology', favicon: 'https://www.powerschool.com/favicon.ico' },
       'Google': { title: 'Google', favicon: 'https://www.google.com/favicon.ico' },
       'Google Classroom': { title: 'Home', favicon: 'https://ssl.gstatic.com//classroom//favicon.png' },
       'Gmail': { title: 'Gmail', favicon: 'https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico' },
