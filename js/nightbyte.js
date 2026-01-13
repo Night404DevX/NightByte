@@ -77,10 +77,9 @@ function updateParticlesColorSmooth(colorHex) {
   const pJS = window.pJSDom[0].pJS;
   const target = hexToRgb(colorHex);
 
-  // Update base config (IMPORTANT)
+  // Update base config
   pJS.particles.color.value = colorHex;
 
-  // Smoothly update existing particles
   pJS.particles.array.forEach(p => {
     if (!p.color || !p.color.rgb) return;
 
@@ -101,19 +100,13 @@ function updateParticlesColorSmooth(colorHex) {
       }
     }, 16);
   });
+
+  // 🔥 After animation finishes, lock it in
+  setTimeout(() => {
+    forceParticlesColor(colorHex);
+  }, 450);
 }
 
-
-let resizeTimeout;
-
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimeout);
-
-  resizeTimeout = setTimeout(() => {
-    const currentColor = getCurrentPrimaryColor();
-    updateParticlesColorSmooth(currentColor);
-  }, 150);
-});
 
 
 // Settings
@@ -154,7 +147,10 @@ if (localStorage.getItem('nightbyte-theme')) {
   document.documentElement.style.setProperty('--bg-color', saved[1]);
   document.documentElement.style.setProperty('--header-bg', saved[2]);
   themeSelector.value = localStorage.getItem('nightbyte-theme');
-  updateParticlesColorSmooth(saved[0]);
+  setTimeout(() => {
+  forceParticlesColor(saved[0]);
+}, 100);
+
 }
 if (localStorage.getItem('nightbyte-particles')) {
   particlesToggle.checked = localStorage.getItem('nightbyte-particles') === 'true';
@@ -234,6 +230,26 @@ document.getElementById('reset-settings').addEventListener('click', () => {
   // Reset header instantly
   root.style.setProperty('--header-bg', defaultHeader);
 
+  function forceParticlesColor(colorHex) {
+  if (!window.pJSDom || !window.pJSDom.length) return;
+
+  const pJS = window.pJSDom[0].pJS;
+  const rgb = hexToRgb(colorHex);
+
+  // Update base config (for NEW particles)
+  pJS.particles.color.value = colorHex;
+
+  // Update ALL existing particles
+  pJS.particles.array.forEach(p => {
+    p.color.value = colorHex;
+    p.color.rgb.r = rgb.r;
+    p.color.rgb.g = rgb.g;
+    p.color.rgb.b = rgb.b;
+  });
+
+  // 🔥 FORCE particles.js to re-apply config
+  pJS.fn.particlesRefresh();
+}
   // Update inputs and localStorage
   themeSelector.value = `${defaultPrimary},${defaultBg},${defaultHeader}`;
   particlesToggle.checked = defaultParticles;
