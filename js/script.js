@@ -11,3 +11,10 @@ input.addEventListener('input', () => {
     }
   });
 });
+
+// Clear Search functionality
+clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input'));
+    searchInput.focus();
+});
